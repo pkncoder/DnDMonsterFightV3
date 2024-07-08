@@ -4,9 +4,9 @@ Hello, I am <a href="https://github.com/pkncoder/">pkncoder</a>, and this is a D
 
 Currently this is version 3 of DnD Monster Fight, and here's the run down of the other versions:
 1. Made in python
-   1. Make two enemies to watch them fight. 
-   2. Also had connection to the DnD Api to pull pre-made monster data.
-   3. Was my first larger project I ever made.
+   1. Make two enemies to watch them fight
+   2. Also had connection to the DnD Api to pull pre-made monster data
+   3. Was my first larger project I ever made
 2. Made in Java
    1. Could make two parties, one for players and one for enemies
    2. No API conection
@@ -25,6 +25,11 @@ Currently this is version 3 of DnD Monster Fight, and here's the run down of the
 ## Current Capabilities
 
 Can create, remove, and view parties, players, and enemies
+
+
+## Running
+
+Running DnDMonsterFight.java will run the program
 
 
 ## Future Notes
