@@ -56,6 +56,7 @@ This is a list of possible future notes on things that I may add (not necisairly
 - [ ] Backstories and all that other lore stuff for characters / enemies / parties etc.
 - [ ] Don't clamp the party types to just players / enemies
   - [ ] Maybe don't even have party types
+- [ ] Name duplicates don't matter
 
 
 ## Todo in code
@@ -63,11 +64,13 @@ This is a list of possible future notes on things that I may add (not necisairly
 ### Naming / Decitions
 
 - [x] Better consistancy of naming conventions (ex. character / player)
-- [ ] Better way to choose the command / more intuition
 - [x] Redo the switch statement area for commands to not make 1 million different variables and re-init them
-- [ ] Decide for the better on case sensitivity or no
-- [ ] Figure out what to do with name duplicates
-- [ ] Decide on how to select bases (party & name, or just name)
+- [ ] Decide for the better on case sensitivity or no 
+- [x] Figure out what to do with name duplicates
+   - When Re-writing GetPlayerCharacter.java don't allow any overlaps of names in any of the PartyColections
+- [x] Decide on how to select bases (party & name, or just name)
+  - Just by name for viewing, since there won't be any duplicates
+  - For now party & name for removing
 
 
 ### Code re-writing
@@ -83,6 +86,7 @@ This is a list of possible future notes on things that I may add (not necisairly
     - [ ] Or using the input like an enum
 - [ ] And basically the same for player / enemy parties (shoving them in a array like thing and using an index / enum like thing to choose which one to do magic with)
 - [ ] Re-write GetHelperMethods.GetArmor() & GetHelperMethods.GetWeapon() to have better input validation
+  - [ ] Also don't allow any name overlaps
 
 
 ### New code
