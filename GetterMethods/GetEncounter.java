@@ -158,10 +158,10 @@ public class GetEncounter
                         playerParties.printFullParties();
 
                         // Then ask what party the base is from
-                        String playerRemovingParty = Simple.getStringInput("What party is the character from: ", playerParties.getPartyNames(), "Invalid Input", false);
+                        String playerRemovingParty = Simple.getStringInput("What party is the character from: ", playerParties.getPartyNames(), "Invalid Input", true);
 
                         // Then ask what base's name is
-                        String removedPlayer = Simple.getStringInput("What character are you removing: ", playerParties.getBaseNames(), "Invalid Input", false);
+                        String removedPlayer = Simple.getStringInput("What character are you removing: ", playerParties.getBaseNames(), "Invalid Input", true);
 
                         // Remove it
                         playerParties.removeBase(playerRemovingParty, removedPlayer);
@@ -188,10 +188,10 @@ public class GetEncounter
                         enemyParties.printFullParties();
 
                         // Then ask what party the base is from
-                        String enemyRemovingParty = Simple.getStringInput("What party is the enemy from: ", enemyParties.getPartyNames(), "Invalid Input", false);
+                        String enemyRemovingParty = Simple.getStringInput("What party is the enemy from: ", enemyParties.getPartyNames(), "Invalid Input", true);
 
                         // Then ask what base's name is
-                        String removedEnemy = Simple.getStringInput("What enemy are you removing: ", enemyParties.getBaseNames(), "Invalid Input", false);
+                        String removedEnemy = Simple.getStringInput("What enemy are you removing: ", enemyParties.getBaseNames(), "Invalid Input", true);
 
                         // Remove it
                         enemyParties.removeBase(enemyRemovingParty, removedEnemy);
@@ -216,19 +216,19 @@ public class GetEncounter
 
                         // Test to see if there is a choice in the matter on where to remove a party from
                         if (playerParties.getPartyList().size() == 0) {partyTypeSelectionRemove = "ENEMY"; }
-                        else if (enemyParties.getPartyList().size() == 0) {partyTypeSelectionRemove = "CHARACTER"; }
-                        else {partyTypeSelectionRemove = Simple.getStringInput("Would you like to remove a Character, or Enemy party: ", new String[] {"character", "enemy"}, "Invalid Input", false);}
+                        else if (enemyParties.getPartyList().size() == 0) {partyTypeSelectionRemove = "Player"; }
+                        else {partyTypeSelectionRemove = Simple.getStringInput("Would you like to remove a Player, or Enemy party: ", new String[] {"player", "enemy"}, "Invalid Input", false);}
 
                         // Switch either character or enemy
                         switch (partyTypeSelectionRemove) {
 
-                            case "CHARACTER":
+                            case "Player":
 
                                 // Print out all of the posible parties
                                 Simple.printArray(playerParties.getPartyNames());
 
                                 // Ask for which one
-                                String removedPlayerParty = Simple.getStringInput("What party would you like to remove: ", playerParties.getPartyNames(), "Invalid Input", false);
+                                String removedPlayerParty = Simple.getStringInput("What party would you like to remove: ", playerParties.getPartyNames(), "Invalid Input", true);
 
                                 // Remove it
                                 playerParties.removeParty(removedPlayerParty);
@@ -242,7 +242,7 @@ public class GetEncounter
                                 Simple.printArray(enemyParties.getPartyNames());
 
                                 // Ask for which one
-                                String removedEnemyParty = Simple.getStringInput("What party would you like to remove: ", playerParties.getPartyNames(), "Invalid Input", false);
+                                String removedEnemyParty = Simple.getStringInput("What party would you like to remove: ", playerParties.getPartyNames(), "Invalid Input", true);
 
                                 // Remove it
                                 enemyParties.removeParty(removedEnemyParty);
@@ -329,7 +329,7 @@ public class GetEncounter
                         // Test to see if there is a choice in the matter on where to view a party from
                         if (playerParties.getPartyList().size() == 0) {partyTypeSelectionView = "ENEMY"; }
                         else if (enemyParties.getPartyList().size() == 0) {partyTypeSelectionView = "CHARACTER"; }
-                        else {partyTypeSelectionView = Simple.getStringInput("Would you like to view a Character, or Enemy party: ", new String[] {"character", "enemy"}, "Invalid Input", false);}
+                        else {partyTypeSelectionView = Simple.getStringInput("Would you like to view a Player, or Enemy party: ", new String[] {"player", "enemy"}, "Invalid Input", false);}
 
                         // Switch either character or enemy
                         switch (partyTypeSelectionView) {
