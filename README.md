@@ -81,14 +81,14 @@ This is a list of possible future notes on things that I may add (not necisairly
     - [ ] Removing ArmorColection.java
     - [ ] Removing WeaponColection.java
     - [ ] Removing ClassType.java
-- [ ] Rewright GetPlayerCharacter.java
+- [x] Rewright GetPlayerCharacter.java
 - [ ] Same code for players / enemies
     - [ ] Only difference being an array or something to choose what to use
     - [ ] Like an index that gets changed when player or enemy is used
     - [ ] Or using the input like an enum
 - [ ] And basically the same for player / enemy parties (shoving them in a array like thing and using an index / enum like thing to choose which one to do magic with)
-- [ ] Re-write GetHelperMethods.GetArmor() & GetHelperMethods.GetWeapon() to have better input validation
-  - [ ] Also don't allow any name overlaps
+- [ ] Re-write GetHelperMethods.GetArmor() & GetHelperMethods.GetWeapon() to use better input validation
+- [ ] Don't allow name overlaps for Parties or characters
 - [ ] Update / make better querries & just output in general
 
 

@@ -3,9 +3,10 @@ package GetterMethods;
 
 // Other classes used in enemy
 import Classes.Armor;
+import Classes.ArmorColection;
 import Classes.Enemy;
 import Classes.Weapon;
-
+import Classes.WeaponColection;
 // The usual use case methods
 import CustomMethods.Simple;
 
@@ -36,13 +37,13 @@ public class GetEnemy {
         Simple.clearTerminal();
 
         // Get our weapon
-        Weapon weapon = GetHelperMethods.getWeapon();
+        Weapon weapon = GetHelperMethods.getWeapon(WeaponColection.getAllWeapons());
 
         // Clear
         Simple.clearTerminal();
         
         // Get our armor
-        Armor armor = GetHelperMethods.getArmor(abilityScores[0][0]);
+        Armor armor = GetHelperMethods.getArmor(abilityScores[0][0], ArmorColection.getAllArmors());
 
         // Return our final enemy
         return new Enemy(name, hp, abilityScores[0], abilityScores[1], abilityScores[2], abilityScores[3], abilityScores[4], abilityScores[5], armor, weapon);

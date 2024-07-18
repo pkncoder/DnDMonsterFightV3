@@ -1,10 +1,9 @@
 package GetterMethods;
 
+
 import Classes.Armor;
-import Classes.ArmorColection;
 import Classes.Party;
 import Classes.Weapon;
-import Classes.WeaponColection;
 import CustomMethods.Simple;
 
 public class GetHelperMethods {
@@ -40,10 +39,11 @@ public class GetHelperMethods {
     }
 
     // Used to get the weapon with no spesific class binds
-    public static Weapon getWeapon() {
+    public static Weapon getWeapon(Weapon[][] allowedWeapons) {
+
         // Loop every weapon and print it out
         // Each sub-arr
-        for (Weapon[] weaponLevel: WeaponColection.getAllWeapons())
+        for (Weapon[] weaponLevel: allowedWeapons)
         {
             // Each weapon
             for (Weapon weapon: weaponLevel)
@@ -62,7 +62,7 @@ public class GetHelperMethods {
 
             // Loop every weapon to see if the name matches
             // Each sub-arr
-            for (Weapon[] weaponLevel: WeaponColection.getAllWeapons())
+            for (Weapon[] weaponLevel: allowedWeapons)
             {
                 // Each weapon
                 for (Weapon weapon: weaponLevel)
@@ -81,11 +81,11 @@ public class GetHelperMethods {
     }
 
     // Used to get the armor with no spesific class binds
-    public static Armor getArmor(int strengthScore) {
+    public static Armor getArmor(int strengthScore, Armor[][] allowedArmors) {
 
         // Loop every armor and print it out
         // Each sub-arr
-        for (Armor[] armorLevel: ArmorColection.getAllArmors())
+        for (Armor[] armorLevel: allowedArmors)
         {
             // Each armor
             for (Armor armor: armorLevel)
@@ -104,7 +104,7 @@ public class GetHelperMethods {
 
             // Loop every armor to see if the name matches
             // Each sub-arr
-            for (Armor[] armorLevel: ArmorColection.getAllArmors())
+            for (Armor[] armorLevel: allowedArmors)
             {
                 // Each armor
                 for (Armor armor: armorLevel)
