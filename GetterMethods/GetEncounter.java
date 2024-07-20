@@ -300,13 +300,16 @@ public class GetEncounter
                         Simple.clearTerminal();
 
                         // Print out all of the choices of parties + enemies
-                        playerParties.printFullParties();
+                        enemyParties.printFullParties();
 
                         // Ask what enemy
                         String viewedEnemy = Simple.getStringInput("What enemy are you viewing: ", enemyParties.getBaseNames(), "Invalid Input", true);
 
                         // Finally get that enemy and print it out
                         Simple.println(enemyParties.findBaseByName(viewedEnemy));
+
+                        // Wait until the user is done viewing
+                        Simple.getStringInput("Press ENTER to continue: ");
 
                         break;
 
@@ -322,31 +325,18 @@ public class GetEncounter
                         // Clear terminal
                         Simple.clearTerminal();
 
-                        // Figure out if they want to see the character or enemy parties
-                        // Hold a new string
-                        String partyTypeSelectionView = "";
-
                         // Test to see if there is a choice in the matter on where to view a party from
-                        if (playerParties.getPartyList().size() == 0) {partyTypeSelectionView = "ENEMY"; }
-                        else if (enemyParties.getPartyList().size() == 0) {partyTypeSelectionView = "CHARACTER"; }
-                        else {partyTypeSelectionView = Simple.getStringInput("Would you like to view a Player, or Enemy party: ", new String[] {"player", "enemy"}, "Invalid Input", false);}
+                        if (playerParties.getPartyList().size() > 0) {
+                            Simple.println("-- Player Parties --");
+                            Simple.printArray(playerParties.getPartyNames());
 
-                        // Switch either character or enemy
-                        switch (partyTypeSelectionView) {
+                            Simple.println("");
+                        }
 
-                            case "CHARACTER":
-
-                                // Print out everything for players
-                                Simple.printArray(playerParties.getPartyNames());
-                                
-                                break;
-
-                            case "ENEMY":
-
-                                // Print out everything for enemies
-                                Simple.printArray(enemyParties.getPartyNames());
-
-                                break;
+                        if (enemyParties.getPartyList().size() > 0) {
+                            Simple.println("-- Enemy Parties --");
+                            Simple.printArray(enemyParties.getPartyNames());
+                            Simple.println("");
                         }
 
                         // Let them choose when they are done viewing
