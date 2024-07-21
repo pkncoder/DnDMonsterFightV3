@@ -1,0 +1,1 @@
+package pkner.pkncoder;import pkner.pkncoder.GetterMethods.GetEncounter;public class DnDMonsterFight{public static void main(String[] args){GetEncounter.getEncounter();}}

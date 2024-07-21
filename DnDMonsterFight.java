@@ -1,1 +1,0 @@
-public class DnDMonsterFight{public static void main(String[] args){GetterMethods.GetEncounter.getEncounter();}}
