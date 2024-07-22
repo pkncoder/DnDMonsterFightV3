@@ -33,9 +33,8 @@ public class Weapon {
         return dice;
     }
 
-    // To-string - returns just the name
     @Override
     public String toString() {
-        return name;
+        return "Name: " + name + "\nCose: " + cost + "\nDamage: " + dice;
     }
 }

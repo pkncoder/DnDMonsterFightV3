@@ -1,38 +1,21 @@
 package pkner.pkncoder.ApiTests;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.JsonElement;
 
-import pkner.pkncoder.CustomMethods.Simple;
+import pkner.pkncoder.Classes.Weapon;
+import pkner.pkncoder.CustomMethods.Api;
 
 public class mainTest {
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        HttpClient client = HttpClient.newHttpClient();
+        Api json = new Api();
 
-        HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create("https://www.dnd5eapi.co/api/monsters/"))
-            .GET()
-            .build();
+        json.sendGetRequest("https://www.dnd5eapi.co/api/equipment/longsword");
 
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        Weapon weapon = new Weapon(json.get("name").getAsString(), 0, null);
 
-        JsonObject json = JsonParser.parseString(response.body()).getAsJsonObject();
-
-        Gson gson = new GsonBuilder()
-				.setPrettyPrinting()
-				.create();
-
-        String jsonOutput = gson.toJson(json);
-
-        Simple.println(jsonOutput);
+        System.out.println(weapon);
     }
 }
