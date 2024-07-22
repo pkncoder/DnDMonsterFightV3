@@ -35,6 +35,6 @@ public class Weapon {
 
     @Override
     public String toString() {
-        return "Name: " + name + "\nCose: " + cost + "\nDamage: " + dice;
+        return "Name: " + name + "\nCose: " + cost + "\nDamage: " + dice[0] + "d" + dice[1];
     }
 }
