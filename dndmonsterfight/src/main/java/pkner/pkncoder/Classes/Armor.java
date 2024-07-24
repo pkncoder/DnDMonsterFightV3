@@ -13,11 +13,11 @@ public class Armor {
 
     // Used to add extra ac from their dex
     boolean addDex; // If you add the dex or not
-    boolean maxOfTwoAddDex; // If the dex is capped at 2
+    int maxDexBonus; // If the dex is capped at 2
 
     // Constructors
     // Used if there is no strength min
-    public Armor(String name, int armorClass, boolean addDex, boolean maxOfTwoAddDex) {
+    public Armor(String name, int armorClass, boolean addDex, int maxDexBonus) {
 
         // Name & armor class
         this.name = name;
@@ -28,11 +28,11 @@ public class Armor {
 
         // Setting the dexterity items
         this.addDex = addDex;
-        this.maxOfTwoAddDex = maxOfTwoAddDex;
+        this.maxDexBonus = maxDexBonus;
     }
 
     // Used if there is a strength min
-    public Armor(String name, int armorClass, int minimumStrengthToWear, boolean addDex, boolean maxOfTwoAddDex)  {
+    public Armor(String name, int armorClass, int minimumStrengthToWear, boolean addDex, int maxDexBonus)  {
 
         // Name & armor class
         this.name = name;
@@ -43,7 +43,7 @@ public class Armor {
 
         // Set the dexterity stuff
         this.addDex = addDex;
-        this.maxOfTwoAddDex = maxOfTwoAddDex;
+        this.maxDexBonus = maxDexBonus;
     }
 
     // Getters
@@ -60,15 +60,9 @@ public class Armor {
             // Return the armor class with no mod
             return armorClass;
         }
-
-        // If there is no dex mod cap
-        if (!maxOfTwoAddDex) {
-            // Return the armor class plus the dex mod
-            return armorClass + dexMod;
-        }
         
         // If there is a dex cap, return the minimum between 2 (the cap) and the dex mod
-        return armorClass + Math.min(2, dexMod);
+        return armorClass + Math.min(maxDexBonus, dexMod);
     }
 
     // Returns the name
@@ -82,9 +76,8 @@ public class Armor {
     }
 
     // ToString
-    // Returns the name for now
     @Override
     public String toString() {
-        return name;
+        return "Name: " + name + "\nAC: " + armorClass + "\nMin Str to wear: " + minimumStrengthToWear + "\nAdd Dex? " + addDex + "\nMaxDexBonus: " + maxDexBonus;
     }
 }
