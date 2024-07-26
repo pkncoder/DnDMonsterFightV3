@@ -11,15 +11,23 @@ import pkner.pkncoder.CustomMethods.Simple;
 public class mainTest {
     public static void main(String[] args) throws IOException, InterruptedException {
 
+        String baseUrl = "https://www.dnd5eapi.co";
+
         // Clear the terminal
         Simple.clearTerminal();
 
         // Create our api accsess point
         Api json = new Api();
 
-        // Send our get request for a longsword and print that api call one is finished after
-        json.sendGetRequest("https://www.dnd5eapi.co/api/equipment/longsword");
+        json.sendGetRequest(baseUrl + "/api/classes/bard");
         Simple.println("Api call one done.");
+
+        Simple.println(json.get("proficiencies").getAsJsonArray().get(0).getAsJsonObject().get("url").getAsString());
+        // json.prettyPrintJson();
+
+        // Send our get request for a longsword and print that api call one is finished after
+        json.sendGetRequest(baseUrl + "/api/equipment/longsword");
+        Simple.println("Api call two done.");
 
         // Create our weapon
         Weapon weapon = new Weapon(
@@ -32,8 +40,8 @@ public class mainTest {
         );
 
         // Send our get request for studded leather armor and print that the api call two is finished after
-        json.sendGetRequest("https://www.dnd5eapi.co/api/equipment/hide-armor");
-        Simple.println("Api call two done.\n");
+        json.sendGetRequest(baseUrl + "/api/equipment/studded-leather-armor");
+        Simple.println("Api call three done.\n");
 
         // Create our armor
         Armor armor = new Armor(
@@ -41,7 +49,7 @@ public class mainTest {
             json.get("armor_class").getAsJsonObject().get("base").getAsInt(), // {armor_class: {base: ""}}
             json.get("str_minimum").getAsInt(), // {str_minimum: ""}
             json.get("armor_class").getAsJsonObject().get("dex_bonus").getAsBoolean(), // {armor_class: {dex_bonus: ""}}
-            json.get("armor_class").getAsJsonObject().get("max_bonus").isJsonNull() ? Integer.MAX_VALUE : json.get("armor_class").getAsJsonObject().get("max_bonus").getAsInt()
+            json.get("armor_class").getAsJsonObject().get("max_bonus") == null ? Integer.MAX_VALUE : json.get("armor_class").getAsJsonObject().get("max_bonus").getAsInt()
         );
 
         Simple.println(weapon);
