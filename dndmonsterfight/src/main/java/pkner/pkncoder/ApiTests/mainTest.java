@@ -22,8 +22,13 @@ public class mainTest {
         json.sendGetRequest(baseUrl + "/api/classes/bard");
         Simple.println("Api call one done.");
 
-        Simple.println(json.get("proficiencies").getAsJsonArray().get(0).getAsJsonObject().get("url").getAsString());
-        // json.prettyPrintJson();
+        String proficiency = json.get("proficiencies").getAsJsonArray().get(0).getAsJsonObject().get("url").getAsString();
+        json.sendGetRequest(baseUrl + proficiency);
+
+        json.sendGetRequest(baseUrl + json.get("reference").getAsJsonObject().get("url").getAsString());
+        json.sendGetRequest(baseUrl + json.get("equipment").getAsJsonArray().get(0).getAsJsonObject().get("url").getAsString());
+
+        json.prettyPrintJson();
 
         // Send our get request for a longsword and print that api call one is finished after
         json.sendGetRequest(baseUrl + "/api/equipment/longsword");
