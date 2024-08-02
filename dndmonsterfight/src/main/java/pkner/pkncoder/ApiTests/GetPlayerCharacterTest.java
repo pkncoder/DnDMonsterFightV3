@@ -1,6 +1,7 @@
 package pkner.pkncoder.ApiTests;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.google.gson.JsonElement;
 
@@ -19,6 +20,7 @@ public class GetPlayerCharacterTest {
 
     private static String[] classes = {"barbarian", "bard", "cleric", "druid", "fighter", "monk", "paladin", "ranger", "rogue", "sorcerer", "warlock", "wizard"};
 
+    private static ArrayList<String> armorIndexBuffer = new ArrayList<String>();
     public static void main(String[] args) throws IOException, InterruptedException {
         json = new Api(); // Initialize our API object
 
@@ -27,6 +29,7 @@ public class GetPlayerCharacterTest {
         PlayerClass userClass = getPlayerClass();
 
         // Get the player's weapon
+        Simple.clearTerminal();
         getPlayerWeapon();
     }
 
@@ -35,7 +38,7 @@ public class GetPlayerCharacterTest {
         Simple.space();
 
         // Get the user's chosen class
-        String userClassChoice = Simple.getStringInput("What class would you like to choose: ", classes, baseUrl, false);
+        String userClassChoice = Simple.getStringInput("What class would you like to choose: ", classes, "Invalid Input", false);
 
         // Send a request with the base url and the addition of /api/classes/ to filter for the classes and add on the user's chosen class (lower cased)
         json.sendGetRequest(baseUrl + "/api/classes/" + userClassChoice.toLowerCase());
@@ -44,51 +47,69 @@ public class GetPlayerCharacterTest {
     }
 
     public static void getPlayerWeapon() throws IOException, InterruptedException {
-        Simple.clearTerminal();
-        // Print out all the allowed weapons
+
+        // Hold a variable that will be used as an addition onto our proficiency name
+        String addition;
+
+        // Hold a variable that will store all of the names of the weapons
+        ArrayList<String> weaponNameBuffer = new ArrayList<String>();
+        
+        // Loop each proficiency in the proficiencies of the class
         for (JsonElement proficiency: json.get("proficiencies").getAsJsonArray().asList()) {
+
+            // Send a get request to the proficiencies url
             json.sendGetRequest(baseUrl + proficiency.getAsJsonObject().get("url").getAsString());
 
+            // Send a get request to the refrences's url
             json.sendGetRequest(baseUrl + json.get("reference").getAsJsonObject().get("url").getAsString());
 
+            // Check to see if it is a shield
+            if (json.get("url").getAsString().equals("/api/equipment/shield")) {
+
+                // If it is, then continue and skip it
+                continue;
+            }
+
+            // Get a split url to test the url for patterns
             String[] splitUrl = json.get("url").getAsString().split("/");
 
+            // If this is a collection of equipment items
             if (splitUrl[2].equals("equipment-categories")) {
 
+                // Loop each equipment item in the list
                 for (JsonElement equipment: json.get("equipment").getAsJsonArray().asList()) {
+
+                    // Send a request to the equipment's url
                     json.sendGetRequest(baseUrl + equipment.getAsJsonObject().get("url").getAsString());
 
+                    // Test to see if there is an armor aspect to it
                     if (json.get("armor_class") != null) {
-                        Simple.println(json.get("name").getAsString() + " | ARMOR");
+
+                        // Add this to the armor index buffer
+                        armorIndexBuffer.add(json.get("index").getAsString());
+                        break;
                     }
 
-                    else {
-                        
-                        if (json.get("url").getAsString().split("/")[2].equals("magic-items")) {
-                            Simple.println(json.get("name").getAsString() + " | ITEM");
-                        }
-
-                        else {
-                            Simple.println(json.get("name").getAsString() + " | WEAPON");
-                        }
-                    }
+                    // Else, set the addition to weapon
+                    Simple.println(json.get("name").getAsString());
+                    weaponNameBuffer.add(json.get("name").getAsString());
                 }
+
+                // Continue to the next loop to stop any other tests below
                 continue;
             }
 
-            else if (splitUrl[2].equals("ability-scores")) {
-                Simple.println(json.get("name").getAsString() + " | ABILITY-SCORE");
-                continue;
+            // If there is a damage component
+            else if (json.get("damage") != null) {
+
+                //  Set the addition to weapon
+                Simple.println(json.get("name").getAsString());
+                weaponNameBuffer.add(json.get("name").getAsString());
             }
 
-            if (json.get("url").getAsString().split("/")[2].equals("magic-items")) {
-                Simple.println(json.get("name").getAsString() + " | ITEM");
-            }
-
-            else {
-                Simple.println(json.get("name").getAsString() + " | WEAPON");
-            }
         }
+
+        Simple.getStringInput("\nWhat weapon would you like: ", weaponNameBuffer.toArray(new String[weaponNameBuffer.size()]), "Invalid Input", false);
     }
 
 }
