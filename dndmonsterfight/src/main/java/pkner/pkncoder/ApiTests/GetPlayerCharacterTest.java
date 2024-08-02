@@ -2,6 +2,8 @@ package pkner.pkncoder.ApiTests;
 
 import java.io.IOException;
 
+import com.google.gson.JsonElement;
+
 import pkner.pkncoder.Classes.PlayerClass;
 // import pkner.pkncoder.Classes.Weapon;
 // import pkner.pkncoder.Classes.Armor;
@@ -20,18 +22,15 @@ public class GetPlayerCharacterTest {
     public static void main(String[] args) throws IOException, InterruptedException {
         json = new Api(); // Initialize our API object
 
-        // Clear the terminal and send the player's class
+        // Get the players class
         Simple.clearTerminal();
-        getPlayerClass();
+        PlayerClass userClass = getPlayerClass();
 
-        // Create the class
-        PlayerClass userClass = new PlayerClass(json.get("name").getAsString(), json.get("hit_die").getAsInt());
-
-        // Print out the class
-        Simple.println(userClass);
+        // Get the player's weapon
+        getPlayerWeapon();
     }
 
-    public static void getPlayerClass() throws IOException, InterruptedException {
+    public static PlayerClass getPlayerClass() throws IOException, InterruptedException {
         Simple.printArray(classes); // Print the classes that can be chosen from
         Simple.space();
 
@@ -40,6 +39,56 @@ public class GetPlayerCharacterTest {
 
         // Send a request with the base url and the addition of /api/classes/ to filter for the classes and add on the user's chosen class (lower cased)
         json.sendGetRequest(baseUrl + "/api/classes/" + userClassChoice.toLowerCase());
+
+        return new PlayerClass(json.get("name").getAsString(), json.get("hit_die").getAsInt());
+    }
+
+    public static void getPlayerWeapon() throws IOException, InterruptedException {
+        Simple.clearTerminal();
+        // Print out all the allowed weapons
+        for (JsonElement proficiency: json.get("proficiencies").getAsJsonArray().asList()) {
+            json.sendGetRequest(baseUrl + proficiency.getAsJsonObject().get("url").getAsString());
+
+            json.sendGetRequest(baseUrl + json.get("reference").getAsJsonObject().get("url").getAsString());
+
+            String[] splitUrl = json.get("url").getAsString().split("/");
+
+            if (splitUrl[2].equals("equipment-categories")) {
+
+                for (JsonElement equipment: json.get("equipment").getAsJsonArray().asList()) {
+                    json.sendGetRequest(baseUrl + equipment.getAsJsonObject().get("url").getAsString());
+
+                    if (json.get("armor_class") != null) {
+                        Simple.println(json.get("name").getAsString() + " | ARMOR");
+                    }
+
+                    else {
+                        
+                        if (json.get("url").getAsString().split("/")[2].equals("magic-items")) {
+                            Simple.println(json.get("name").getAsString() + " | ITEM");
+                        }
+
+                        else {
+                            Simple.println(json.get("name").getAsString() + " | WEAPON");
+                        }
+                    }
+                }
+                continue;
+            }
+
+            else if (splitUrl[2].equals("ability-scores")) {
+                Simple.println(json.get("name").getAsString() + " | ABILITY-SCORE");
+                continue;
+            }
+
+            if (json.get("url").getAsString().split("/")[2].equals("magic-items")) {
+                Simple.println(json.get("name").getAsString() + " | ITEM");
+            }
+
+            else {
+                Simple.println(json.get("name").getAsString() + " | WEAPON");
+            }
+        }
     }
 
 }
