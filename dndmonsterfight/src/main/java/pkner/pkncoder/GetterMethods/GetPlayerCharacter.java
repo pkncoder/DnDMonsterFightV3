@@ -54,7 +54,7 @@ public class GetPlayerCharacter {
         return new PlayerCharacter(name, abilities[0], abilities[1], abilities[2], abilities[3], abilities[4], abilities[5], level, userClass, weapon, armor);
     }
 
-    public static PlayerClass getPlayerClass() throws IOException, InterruptedException {
+    private static PlayerClass getPlayerClass() throws IOException, InterruptedException {
         Simple.printArray(classes); // Print the classes that can be chosen from
         Simple.space();
 
@@ -68,7 +68,7 @@ public class GetPlayerCharacter {
         return new PlayerClass(json.get("name").getAsString(), json.get("hit_die").getAsInt());
     }
 
-    public static Weapon getPlayerWeapon() throws IOException, InterruptedException {
+    private static Weapon getPlayerWeapon() throws IOException, InterruptedException {
 
         // Hold a variable that will store all of the names of the weapons
         ArrayList<String> weaponNameBuffer = new ArrayList<String>();
@@ -145,7 +145,10 @@ public class GetPlayerCharacter {
         );
     }
 
-    public static Armor getPlayerArmor() throws IOException, InterruptedException {
+    private static Armor getPlayerArmor() throws IOException, InterruptedException {
+
+        // Add the No-Armor option to the armor buffer
+        armorNameBuffer.add("No Armor");
         
         // Get the armor's name in a string[]
         String[] armorArray = armorNameBuffer.toArray(new String[armorNameBuffer.size()]);
@@ -155,6 +158,18 @@ public class GetPlayerCharacter {
         
         // Get the user's armor
         String userArmor = Simple.getStringInput("\nWhat armor would you like: ", armorArray, "Invalid Input", false);
+
+        // Check to see if the user chose no armor
+        if (userArmor.toLowerCase().equals("no armor")) {
+
+            // If the user did then return the no armor object
+            return new Armor(
+                "No Armor",
+                10,
+                true,
+                Integer.MAX_VALUE
+            );
+        }
 
         // Send the request of that armor
         json.sendGetRequest(baseUrl + "/api/equipment/" + userArmor.toLowerCase().replaceAll(" ", "-"));
