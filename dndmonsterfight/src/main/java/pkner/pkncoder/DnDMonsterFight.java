@@ -1,1 +1,1 @@
-package pkner.pkncoder;import java.io.IOException;import pkner.pkncoder.GetterMethods.GetEncounter;public class DnDMonsterFight{public static void main(String[] args) throws IOException, InterruptedException{GetEncounter.getEncounter();}}
+package pkner.pkncoder;import java.io.IOException;import pkner.pkncoder.GetterMethods.GetEncounter;public class DnDMonsterFight{public static void main(String[] args) throws IOException, InterruptedException{GetEncounter.getEncounter();}} 
