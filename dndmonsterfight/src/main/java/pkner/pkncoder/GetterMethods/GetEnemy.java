@@ -3,10 +3,8 @@ package pkner.pkncoder.GetterMethods;
 
 // Other classes used in enemy
 import pkner.pkncoder.Classes.Armor;
-import pkner.pkncoder.Classes.ArmorColection;
 import pkner.pkncoder.Classes.Enemy;
 import pkner.pkncoder.Classes.Weapon;
-import pkner.pkncoder.Classes.WeaponColection;
 // The usual use case methods
 import pkner.pkncoder.CustomMethods.Simple;
 

@@ -37,7 +37,7 @@ public class GetPlayerCharacterTest {
         int[][] abilities = GetHelperMethods.getAbilityScores();
 
         // Get the player's level
-        int level = Simple.getIntInput("Level: ", "[1-9][0-9]+");
+        int level = Simple.getIntInput("Level: ", "[1-9][0-9]*");
 
         // Get the players class
         Simple.clearTerminal();

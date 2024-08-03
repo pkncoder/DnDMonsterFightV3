@@ -77,10 +77,10 @@ This is a list of possible future notes on things that I may add (not necisairly
 
 ### Code re-writing
 
-- [ ] <a href="http://www.dnd5eapi.co/">DnD API</a> usage to get stats for items / armors etc. (probably fetched before running) and plopped in a json
-    - [ ] Removing ArmorColection.java
-    - [ ] Removing WeaponColection.java
-    - [ ] Removing ClassType.java
+- [x] <a href="http://www.dnd5eapi.co/">DnD API</a> usage to get stats for items / armors etc.
+    - [x] Removing ArmorColection.java
+    - [x] Removing WeaponColection.java
+    - [x] Removing ClassType.java
 - [x] Rewright GetPlayerCharacter.java
 - [ ] Same code for players / enemies
     - [ ] Only difference being an array or something to choose what to use
@@ -89,15 +89,10 @@ This is a list of possible future notes on things that I may add (not necisairly
 - [ ] And basically the same for player / enemy parties (shoving them in a array like thing and using an index / enum like thing to choose which one to do magic with)
 - [ ] Re-write GetHelperMethods.GetArmor() & GetHelperMethods.GetWeapon() to use better input validation
 - [ ] Don't allow name overlaps for Parties or characters
-- [ ] Update / make better querries & just output in general
-
-
-### New code
-
-- [ ] A menu class to hold the outputed text in the terminal and makes it more intuitive on how / when the terminal has to clear
 
 
 ### Always Alive
 
 - Error testing on CRACK
 - Updating comments to be true after re-writes & to have java docs
+- New text output to make it more intuitive for the user
