@@ -89,6 +89,14 @@ This is a list of possible future notes on things that I may add (not necisairly
 - [ ] And basically the same for player / enemy parties (shoving them in a array like thing and using an index / enum like thing to choose which one to do magic with)
 - [ ] Re-write GetHelperMethods.GetArmor() & GetHelperMethods.GetWeapon() to use better input validation
 - [ ] Don't allow name overlaps for Parties or characters
+- [ ] Api class
+  - [ ] Rename the class to make more sense
+  - [ ] Change the way you use the .get() method so you don't have to use gson's .toJsonObject().get() after the first use
+  - [ ] Make JsonArrays easier to use
+  - [ ] Make some shortcut so you don't have to for loop over every item in the JsonArray to get the same key 
+    - [ ] Ex. array full of name and index keys. Method that will get every name key
+  - [ ] Make an optional base url attribute that will be added onto every api call at the start
+  - [ ] After all this re-write GetEnemy and GetPlayerCharacter
 
 
 ### Always Alive
