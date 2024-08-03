@@ -11,7 +11,7 @@ public class PlayerCharacter extends Base {
     private int[] charisma;
 
     // Hold our character's class
-    private ClassType userClass;
+    private PlayerClass userClass;
 
     // Hold our character's level
     private int level;
@@ -27,7 +27,7 @@ public class PlayerCharacter extends Base {
         String name,
         int[] strength, int[] dexterity, int[] constitution, int[] wisdom, int[] intelligence, int[] charisma,
         int level,
-        ClassType userClass,
+        PlayerClass userClass,
         Weapon weapon,
         Armor armor
     ) {
@@ -36,7 +36,7 @@ public class PlayerCharacter extends Base {
         // Hp - half of the hp die (rounded up) times one less than the level plus the con mod per level plus the hit die
         super(
             name,  
-            ( ( ((userClass.getHpDie()[1] / 2) + 1) * (level - 1) ) + (level * constitution[1]) ) + userClass.getHpDie()[1], 
+            ( ( ((userClass.getHpDie() / 2) + 1) * (level - 1) ) + (level * constitution[1]) ) + userClass.getHpDie(), 
             armor.getAc(strength[0], dexterity[1]),
             0,
             weapon.getDice(), 
@@ -66,7 +66,7 @@ public class PlayerCharacter extends Base {
         String finalString =
             "Name: " + super.getName() + "\n\n" +
 
-            "Class: " + userClass.getUserClass() + "\n" +
+            "Class: " + userClass.getClassName() + "\n" +
             "Level: " + level + "\n\n" +
 
             "Hp: " + super.getHp() + "\n\n" +

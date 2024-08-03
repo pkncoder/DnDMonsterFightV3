@@ -15,7 +15,7 @@ public class PlayerClass {
         return className;
     }
 
-    public int hpDie() {
+    public int getHpDie() {
         return hpDie;
     }
 

@@ -5,11 +5,10 @@ import java.util.ArrayList;
 
 import com.google.gson.JsonElement;
 
+import pkner.pkncoder.Classes.Armor;
+import pkner.pkncoder.Classes.PlayerCharacter;
 import pkner.pkncoder.Classes.PlayerClass;
-// import pkner.pkncoder.Classes.Weapon;
-// import pkner.pkncoder.Classes.Armor;
-// import pkner.pkncoder.Classes.PlayerCharacter;
-
+import pkner.pkncoder.Classes.Weapon;
 import pkner.pkncoder.CustomMethods.Simple;
 import pkner.pkncoder.CustomMethods.Api;
 
@@ -20,8 +19,16 @@ public class GetPlayerCharacterTest {
 
     private static String[] classes = {"barbarian", "bard", "cleric", "druid", "fighter", "monk", "paladin", "ranger", "rogue", "sorcerer", "warlock", "wizard"};
 
-    private static ArrayList<String> armorIndexBuffer = new ArrayList<String>();
+    private static ArrayList<String> armorNameBuffer = new ArrayList<String>();
+
     public static void main(String[] args) throws IOException, InterruptedException {
+        PlayerCharacter player = getPlayerCharacter();
+
+        Simple.clearTerminal();
+        Simple.println(player);
+    }
+
+    public static PlayerCharacter getPlayerCharacter() throws IOException, InterruptedException {
         json = new Api(); // Initialize our API object
 
         // Get the players class
@@ -30,7 +37,14 @@ public class GetPlayerCharacterTest {
 
         // Get the player's weapon
         Simple.clearTerminal();
-        getPlayerWeapon();
+        Weapon weapon = getPlayerWeapon();
+
+        // Get the players armor
+        Simple.clearTerminal();
+        Armor armor = getPlayerArmor();
+
+        // Create the player
+        return new PlayerCharacter("", new int[] {1,1}, new int[] {1,1}, new int[] {1,1}, new int[] {1,1}, new int[] {1,1}, new int[] {1,1}, 1, userClass, weapon, armor);
     }
 
     public static PlayerClass getPlayerClass() throws IOException, InterruptedException {
@@ -46,10 +60,7 @@ public class GetPlayerCharacterTest {
         return new PlayerClass(json.get("name").getAsString(), json.get("hit_die").getAsInt());
     }
 
-    public static void getPlayerWeapon() throws IOException, InterruptedException {
-
-        // Hold a variable that will be used as an addition onto our proficiency name
-        String addition;
+    public static Weapon getPlayerWeapon() throws IOException, InterruptedException {
 
         // Hold a variable that will store all of the names of the weapons
         ArrayList<String> weaponNameBuffer = new ArrayList<String>();
@@ -85,9 +96,9 @@ public class GetPlayerCharacterTest {
                     // Test to see if there is an armor aspect to it
                     if (json.get("armor_class") != null) {
 
-                        // Add this to the armor index buffer
-                        armorIndexBuffer.add(json.get("index").getAsString());
-                        break;
+                        // Add this to the armor name buffer
+                        armorNameBuffer.add(json.get("name").getAsString());
+                        continue;
                     }
 
                     // Else, set the addition to weapon
@@ -109,7 +120,37 @@ public class GetPlayerCharacterTest {
 
         }
 
-        Simple.getStringInput("\nWhat weapon would you like: ", weaponNameBuffer.toArray(new String[weaponNameBuffer.size()]), "Invalid Input", false);
+        String userWeapon = Simple.getStringInput("\nWhat weapon would you like: ", weaponNameBuffer.toArray(new String[weaponNameBuffer.size()]), "Invalid Input", false);
+
+        json.sendGetRequest(baseUrl + "/api/equipment/" + userWeapon.toLowerCase().replaceAll(" ", "-"));
+
+        return new Weapon(
+            json.get("name").getAsString(), // {name: ""}
+            json.get("cost").getAsJsonObject().get("quantity").getAsInt(),  // {cost:{quantity: ""}}
+            new int[] {
+                Integer.parseInt(json.get("damage").getAsJsonObject().get("damage_dice").getAsString().split("d")[0]), // {damage:{damage_dice: ""}}
+                Integer.parseInt(json.get("damage").getAsJsonObject().get("damage_dice").getAsString().split("d")[1]) // {damage:{damage_dice: ""}}
+            }
+        );
+    }
+
+    public static Armor getPlayerArmor() throws IOException, InterruptedException {
+        
+        String[] armorArray = armorNameBuffer.toArray(new String[armorNameBuffer.size()]);
+
+        Simple.printArray(armorArray);
+        
+        String userArmor = Simple.getStringInput("\nWhat armor would you like: ", armorArray, "Invalid Input", false);
+
+        json.sendGetRequest(baseUrl + "/api/equipment/" + userArmor.toLowerCase().replaceAll(" ", "-"));
+
+        return new Armor(
+            json.get("name").getAsString(), // {name: ""}
+            json.get("armor_class").getAsJsonObject().get("base").getAsInt(), // {armor_class: {base: ""}}
+            json.get("str_minimum").getAsInt(), // {str_minimum: ""}
+            json.get("armor_class").getAsJsonObject().get("dex_bonus").getAsBoolean(), // {armor_class: {dex_bonus: ""}}
+            json.get("armor_class").getAsJsonObject().get("max_bonus") == null ? Integer.MAX_VALUE : json.get("armor_class").getAsJsonObject().get("max_bonus").getAsInt()
+        );
     }
 
 }
