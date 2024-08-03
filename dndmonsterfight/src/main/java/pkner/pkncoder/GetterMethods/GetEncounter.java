@@ -1,5 +1,7 @@
 package pkner.pkncoder.GetterMethods;
 
+import java.io.IOException;
+
 import pkner.pkncoder.Classes.Enemy;
 import pkner.pkncoder.Classes.Party;
 import pkner.pkncoder.Classes.PartyColection;
@@ -12,7 +14,7 @@ public class GetEncounter
     private static PartyColection playerParties = new PartyColection("Players");
     private static PartyColection enemyParties = new PartyColection("Enemies");
 
-    public static void getEncounter() 
+    public static void getEncounter() throws IOException, InterruptedException 
     {
         /*
          * Gameplan:

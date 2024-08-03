@@ -10,26 +10,34 @@ import pkner.pkncoder.Classes.PlayerCharacter;
 import pkner.pkncoder.Classes.PlayerClass;
 import pkner.pkncoder.Classes.Weapon;
 import pkner.pkncoder.CustomMethods.Simple;
+import pkner.pkncoder.GetterMethods.GetHelperMethods;
 import pkner.pkncoder.CustomMethods.Api;
 
 public class GetPlayerCharacterTest {
 
-    private static String baseUrl = "https://www.dnd5eapi.co";
+    // Hold our json api connection object
     private static Api json;
 
+    // Hold a base url that will be always repeated
+    private static String baseUrl = "https://www.dnd5eapi.co";
+
+    // Hold a list of the classes (can be retrieved through the api, however that's another call that we already know)
     private static String[] classes = {"barbarian", "bard", "cleric", "druid", "fighter", "monk", "paladin", "ranger", "rogue", "sorcerer", "warlock", "wizard"};
 
+    // Hold an array list of armor names as a buffer since we see them anyways
     private static ArrayList<String> armorNameBuffer = new ArrayList<String>();
-
-    public static void main(String[] args) throws IOException, InterruptedException {
-        PlayerCharacter player = getPlayerCharacter();
-
-        Simple.clearTerminal();
-        Simple.println(player);
-    }
 
     public static PlayerCharacter getPlayerCharacter() throws IOException, InterruptedException {
         json = new Api(); // Initialize our API object
+
+        // Get the player's name
+        String name = Simple.getStringInput("Name: ");
+
+        // Get the abilities
+        int[][] abilities = GetHelperMethods.getAbilityScores();
+
+        // Get the player's level
+        int level = Simple.getIntInput("Level: ", "[1-9][0-9]+");
 
         // Get the players class
         Simple.clearTerminal();
@@ -44,7 +52,7 @@ public class GetPlayerCharacterTest {
         Armor armor = getPlayerArmor();
 
         // Create the player
-        return new PlayerCharacter("", new int[] {1,1}, new int[] {1,1}, new int[] {1,1}, new int[] {1,1}, new int[] {1,1}, new int[] {1,1}, 1, userClass, weapon, armor);
+        return new PlayerCharacter(name, abilities[0], abilities[1], abilities[2], abilities[3], abilities[4], abilities[5], level, userClass, weapon, armor);
     }
 
     public static PlayerClass getPlayerClass() throws IOException, InterruptedException {
@@ -57,6 +65,7 @@ public class GetPlayerCharacterTest {
         // Send a request with the base url and the addition of /api/classes/ to filter for the classes and add on the user's chosen class (lower cased)
         json.sendGetRequest(baseUrl + "/api/classes/" + userClassChoice.toLowerCase());
 
+        // Create and return the object
         return new PlayerClass(json.get("name").getAsString(), json.get("hit_die").getAsInt());
     }
 
@@ -120,10 +129,13 @@ public class GetPlayerCharacterTest {
 
         }
 
+        // Get the user's weapon
         String userWeapon = Simple.getStringInput("\nWhat weapon would you like: ", weaponNameBuffer.toArray(new String[weaponNameBuffer.size()]), "Invalid Input", false);
 
+        // Send the request based and formatted on the user's weapon
         json.sendGetRequest(baseUrl + "/api/equipment/" + userWeapon.toLowerCase().replaceAll(" ", "-"));
 
+        // Create and return the weapon
         return new Weapon(
             json.get("name").getAsString(), // {name: ""}
             json.get("cost").getAsJsonObject().get("quantity").getAsInt(),  // {cost:{quantity: ""}}
@@ -136,14 +148,19 @@ public class GetPlayerCharacterTest {
 
     public static Armor getPlayerArmor() throws IOException, InterruptedException {
         
+        // Get the armor's name in a string[]
         String[] armorArray = armorNameBuffer.toArray(new String[armorNameBuffer.size()]);
 
+        // Print the array our
         Simple.printArray(armorArray);
         
+        // Get the user's armor
         String userArmor = Simple.getStringInput("\nWhat armor would you like: ", armorArray, "Invalid Input", false);
 
+        // Send the request of that armor
         json.sendGetRequest(baseUrl + "/api/equipment/" + userArmor.toLowerCase().replaceAll(" ", "-"));
 
+        // Create and return the object
         return new Armor(
             json.get("name").getAsString(), // {name: ""}
             json.get("armor_class").getAsJsonObject().get("base").getAsInt(), // {armor_class: {base: ""}}

@@ -33,7 +33,7 @@ public class GetHelperMethods {
     }
 
     // Used to calculate ability score modifiers
-    public static int calculateAbilityMod(int score) {
+    private static int calculateAbilityMod(int score) {
         // For every 2 after 10, you get +1 to your ability mod (ex. 10 is +0 and 12 is +1)
         return ((score - 10) / 2);
     }
