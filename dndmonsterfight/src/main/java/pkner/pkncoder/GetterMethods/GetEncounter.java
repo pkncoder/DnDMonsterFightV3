@@ -2,6 +2,7 @@ package pkner.pkncoder.GetterMethods;
 
 import java.io.IOException;
 
+import pkner.pkncoder.Classes.Encounter;
 import pkner.pkncoder.Classes.Enemy;
 import pkner.pkncoder.Classes.Party;
 import pkner.pkncoder.Classes.PartyColection;
@@ -14,7 +15,7 @@ public class GetEncounter
     private static PartyColection playerParties = new PartyColection("Players");
     private static PartyColection enemyParties = new PartyColection("Enemies");
 
-    public static void getEncounter() throws IOException, InterruptedException 
+    public static Encounter getEncounter() throws IOException, InterruptedException 
     {
         /*
          * Gameplan:
@@ -307,6 +308,9 @@ public class GetEncounter
                         // Ask what enemy
                         String viewedEnemy = Simple.getStringInput("What enemy are you viewing: ", enemyParties.getBaseNames(), "Invalid Input", true);
 
+                        // Clear the terminal
+                        Simple.clearTerminal();
+                        
                         // Finally get that enemy and print it out
                         Simple.println(enemyParties.findBaseByName(viewedEnemy));
 
@@ -351,12 +355,15 @@ public class GetEncounter
 
                         // Print that an error has occoured and return
                         Simple.println("An error has occoured.");
-                        return;
+                        break;
                 }
 
                 break;
             }
         }
+        
+        // Return our final encounter
+        return new Encounter(playerParties, enemyParties);
     }
 
     public static void findPartyPlacement(Party party) {
