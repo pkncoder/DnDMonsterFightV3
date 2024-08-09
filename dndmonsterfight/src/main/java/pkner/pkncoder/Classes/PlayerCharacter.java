@@ -1,5 +1,7 @@
 package pkner.pkncoder.Classes;
 
+import pkner.pkncoder.CustomMethods.Simple;
+
 public class PlayerCharacter extends Base {
 
     // Hold our abilities in arrays [ability score] | [ability mod]
@@ -58,6 +60,34 @@ public class PlayerCharacter extends Base {
         this.armor = armor;
 
         this.level = level;
+    }
+
+    @Override
+    public void rollInititave()
+    {
+        // Clear the terminal
+        Simple.clearTerminal();
+
+        // Ask for what the user want's to do
+        Simple.println("How would " + super.getName() + " like to do initiative?");
+        Simple.space();; // Empty space
+        Simple.println("Roll own Inititave - 1");
+        Simple.println("Random Number for Inititave - 2");
+        Simple.space();; // Empty space
+
+        // Prompt the user
+        int choice = Simple.getIntInput("What would you like to do: ", "[12]");
+
+        // If the number is simply random
+        if (choice == 2) {
+
+            // Roll the initiative by the super class and exit out of the method
+            super.rollInititave();
+            return;
+        }
+
+        // Set the initiative as the user's input
+        super.setInitiative(Simple.getIntInput("Rolled Initiative: ", "[1-9][0-9]*"));
     }
 
     @Override

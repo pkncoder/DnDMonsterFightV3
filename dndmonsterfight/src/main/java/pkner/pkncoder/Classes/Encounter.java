@@ -1,6 +1,7 @@
 package pkner.pkncoder.Classes;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Encounter {
     
@@ -29,7 +30,23 @@ public class Encounter {
     }
 
     // Helper command to Encounter
-    private void setInitiatives() {}
+    private void setInitiatives() {
+
+        // Loop for every base in all our parties
+        for (Party party: players.getPartyList()) {
+            for (Base base: party.getParty()) {
+
+                // Roll the base's initiative
+                base.rollInititave();
+
+                // Add it into the list
+                initiativeList.add(base);
+            }
+        }
+
+        // After everything sort using collections
+        Collections.sort(initiativeList);
+    }
 
     // Takes a single turn
     public void takeTurn() {}

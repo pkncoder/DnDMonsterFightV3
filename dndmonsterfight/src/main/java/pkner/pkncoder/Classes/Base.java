@@ -1,6 +1,6 @@
 package pkner.pkncoder.Classes;
 
-public class Base {
+public class Base implements Comparable<Base> {
     
     // Name of the base
     private String name;
@@ -117,5 +117,13 @@ public class Base {
             "\n\nAttack: " + "+" + attackStr + " to hit  " +
             "\nDamage: " + attackDmgRoll[0] + "d" + attackDmgRoll[1] + " + " + attackDmgMod + " damage"
         );
+    }
+
+    // Compare to from Comparable's interface
+    @Override
+    public int compareTo(Base other)
+    {
+        // The other one minus this one's initiative for decending order
+        return other.getInitiative() - this.initiative;
     }
 }
