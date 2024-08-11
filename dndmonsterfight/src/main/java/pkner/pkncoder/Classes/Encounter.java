@@ -10,7 +10,10 @@ public class Encounter {
     private PartyColection enemies;
 
     // List of every base in initiative order
-    private ArrayList<Base> initiativeList;
+    private ArrayList<Base> initiativeList = new ArrayList<Base>();
+
+    // List of every base's party in initiative order
+    private ArrayList<Party> partiesInitiativeList = new ArrayList<Party>();
 
     // The current turn number
     private int turnNum;
@@ -41,18 +44,52 @@ public class Encounter {
 
                 // Add it into the list
                 initiativeList.add(base);
+                partiesInitiativeList.add(party);
+
             }
         }
 
-        // After everything sort using collections
-        Collections.sort(initiativeList);
+        // // After everything sort using collections
+        // Collections.sort(initiativeList);
+
+        // TODO: Find a better way of pairing Parties and Players, or find a better alg
+        for (int i = 0; i < initiativeList.size(); i++) {
+
+            Base key = initiativeList.get(i);
+            int j = i - 1;
+
+            while (j >= 0 && initiativeList.get(j).getInitiative() > key.getInitiative()) {
+                initiativeList.set(j + 1, initiativeList.get(j));
+                j = j + 1;
+            }
+            initiativeList.set(j + 1, key);
+
+        }
     }
 
     // Takes a single turn
     public void takeTurn() {}
 
     // Prints out all the information for an action
-    private void printAttackTable() {}
+    public void printAttackTable() {
+
+        /*
+         * 
+         * < = turn
+         * o = teamate
+         * + = ally
+         * 
+         * 1 | l2 (hp) | +
+         * 2 | d1 (hp) |
+         * > | m1 (hp) | <
+         * x | m2 xxxx | o
+         * 3 | d3 (hp) |
+         * 
+         */
+
+
+
+    }
 
     // Enact an attack against another base
     private void attack() {}
