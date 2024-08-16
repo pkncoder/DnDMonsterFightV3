@@ -8,6 +8,7 @@ import pkner.pkncoder.Classes.PartyColection;
 import pkner.pkncoder.Classes.PlayerCharacter;
 import pkner.pkncoder.Classes.PlayerClass;
 import pkner.pkncoder.Classes.Weapon;
+import pkner.pkncoder.CustomMethods.Simple;
 
 public class EncounterTest {
     
@@ -29,6 +30,18 @@ public class EncounterTest {
 
         Enemy frank = new Enemy(
             "Frank",
+            0,
+            new int[] {13, 1},
+            new int[] {14, 2},
+            new int[] {18, 4},
+            new int[] {8, -1},
+            new int[] {20, 5},
+            new int[] {10, 0},
+            new Armor("No Armor", 10, true, Integer.MAX_VALUE),
+            new Weapon("Gun.", 10, new int[] {10, 12})
+        );
+        Enemy frank2 = new Enemy(
+            "Frank2",
             47,
             new int[] {13, 1},
             new int[] {14, 2},
@@ -44,6 +57,7 @@ public class EncounterTest {
         jhons.addPartyMember(jhon);
         Party franks = new Party("Franks", "ENEMIES");
         franks.addPartyMember(frank);
+        franks.addPartyMember(frank2);
         
         PartyColection players = new PartyColection("players");
         players.addParty(jhons);
@@ -52,7 +66,12 @@ public class EncounterTest {
 
         Encounter encounter = new Encounter(players, enemies);
 
-        encounter.printAttackTable();
+        while (true) {
+            Simple.clearTerminal();
+            encounter.printAttackTable();
+
+            Simple.getStringInput("");
+        }
     }
 
 }

@@ -3,6 +3,8 @@ package pkner.pkncoder.Classes;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import pkner.pkncoder.CustomMethods.Simple;
+
 public class Encounter {
     
     // The two alliences
@@ -16,7 +18,13 @@ public class Encounter {
     private ArrayList<Party> partiesInitiativeList = new ArrayList<Party>();
 
     // The current turn number
-    private int turnNum;
+    private int turnNum = 0;
+
+    // The amount of bases dead (used as a limit for the recursive nature of printAttackTable() and used to check for a win or not)
+    private int basesDead = 0;
+
+    // If a win has been found
+    private boolean win = false;
 
     /*
      * Setup everything to start taking turns
@@ -35,8 +43,37 @@ public class Encounter {
     // Helper command to Encounter
     private void setInitiatives() {
 
-        // Loop for every base in all our parties
-        for (Party party: players.getPartyList()) {
+        // Add the bases to the initiative parties
+        addBasesToInitiativeParties(players);
+        addBasesToInitiativeParties(enemies);
+        
+
+        // TODO: Find a better way of pairing Parties and Players, or find a better alg
+        for (int i = 1; i < initiativeList.size(); i++) {
+
+            Base key = initiativeList.get(i);
+            Party partyKey = partiesInitiativeList.get(i);
+            int j = i - 1;
+
+            while (j >= 0 && initiativeList.get(j).getInitiative() < key.getInitiative()) {
+                initiativeList.set(j + 1, initiativeList.get(j));
+                partiesInitiativeList.set(j + 1, partiesInitiativeList.get(j));
+                j = j - 1;
+            }
+            initiativeList.set(j + 1, key);
+            partiesInitiativeList.set(j + 1, partyKey);
+
+        }
+    }
+
+    /*
+     * Helper Method for setInitiatives() that adds the base and party to their respective initiative list
+     * 
+     * @param partyColection Party colection ig (idk what else to say)
+     */
+    private void addBasesToInitiativeParties(PartyColection partyColection) {
+        // Loop over every base in our party
+        for (Party party: partyColection.getPartyList()) {
             for (Base base: party.getParty()) {
 
                 // Roll the base's initiative
@@ -48,58 +85,146 @@ public class Encounter {
 
             }
         }
-
-        // // After everything sort using collections
-        // Collections.sort(initiativeList);
-
-        // TODO: Find a better way of pairing Parties and Players, or find a better alg
-        for (int i = 0; i < initiativeList.size(); i++) {
-
-            Base key = initiativeList.get(i);
-            int j = i - 1;
-
-            while (j >= 0 && initiativeList.get(j).getInitiative() > key.getInitiative()) {
-                initiativeList.set(j + 1, initiativeList.get(j));
-                j = j + 1;
-            }
-            initiativeList.set(j + 1, key);
-
-        }
     }
 
     // Takes a single turn
     public void takeTurn() {}
-
+    private int deadBasesHit = 0;
     // Prints out all the information for an action
     public void printAttackTable() {
 
         /*
+         * > | m1 (hp) | {PARTY}
          * 
-         * < = turn
-         * o = teamate
-         * + = ally
+         * 1 | l2 (hp) | {PARTY}
+         * 2 | d1 (hp) | {PARTY}
+         * ---------------------
+         * x | m2 xxxx | {PARTY}
+         * 3 | d3 (hp) | {PARTY}
          * 
-         * 1 | l2 (hp) | +
-         * 2 | d1 (hp) |
-         * > | m1 (hp) | <
-         * x | m2 xxxx | o
-         * 3 | d3 (hp) |
-         * 
-         */
+        */
+
+        // Check to see if enough players are dead or not (all except one of the bases are dead)
+        if (basesDead == initiativeList.size() - 1) {
+            
+            // If that win condition is met set win as true and return out of the function;
+            win = true;
+            return;
+        }
 
 
+        // Save a clone of initiative lists so we can remove bases from it as needed without affecting the full lists
+        ArrayList<Base> initiativeListClone = (ArrayList<Base>) initiativeList.clone();
+        ArrayList<Party> partiesInitiativeListClone = (ArrayList<Party>) partiesInitiativeList.clone();
 
+        // Save a varaible that will keep how many dead bases there are
+        
+        
+        // Three parts to this
+        // {index} | {middle} | {additions}
+        String index;
+        String middle;
+        String additions;
+
+        // First, get the attacker
+        Base attacker = initiativeListClone.remove(turnNum);
+        Party attackerParty = partiesInitiativeListClone.remove(turnNum);
+
+        // Check and make sure that the attacker is alive
+        if (attacker.getHp() <= 0) {
+            
+            // If it isn't then increase the amount of bases dead
+            basesDead++;
+
+            // Increase the turn number
+            turnNum++;
+
+            // Re-call this function
+            printAttackTable();
+
+            // After the function finishes re-set basesDead and return out of the function
+            basesDead = 0;
+            return;
+        }
+
+        // Else, if the attacker isn't dead
+
+        // Set the three parts
+        index = ">";
+        middle = attacker.getName() + " (" + attacker.getHp() + ")";
+        additions = partiesInitiativeListClone.get(turnNum).getName();
+
+        // Print out the three parts
+        Simple.println(index + " | " + middle + " | " + additions);
+        Simple.space();
+
+        // Save the length of what we printed out to use later in the form of dashes
+        int dashesLength = (index + " | " + middle + " | " + additions).length();
+        
+        // Loop every base
+        for (int i = 0; i < initiativeList.size(); i++) {
+
+            Simple.println(i);
+
+            // Check to see if the current base is the attacker
+            if (i + deadBasesHit == turnNum) {
+                // If it is then print out the number of dashes we found earlier
+                Simple.println("-".repeat(dashesLength));
+
+                // Then continue on to the next itteration
+                continue;
+            }
+            
+            // Check to see if the current base is dead
+            if (initiativeListClone.get(i - deadBasesHit).getHp() <= 0) {
+
+                // If it is, then set the parts as such 
+                index = "x";
+                middle = initiativeListClone.get(i).getName() + " (" + initiativeListClone.get(i).getHp() + ")";
+                additions = partiesInitiativeListClone.get(i).getName();
+
+                // Print the final output
+                Simple.println(index + " | " + middle + " | " + additions);
+
+                // REMOVE THE EVIDENCE
+                // initiativeListClone.remove(i);
+                // partiesInitiativeListClone.remove(i);
+
+                // Add one to the amount of dead bases hit
+                deadBasesHit++;
+
+                // Back up i so the indicies can work and we don't skip anyone and continue on
+                i--;
+                continue;
+            }
+
+            // If it isn't dead or the attacker
+
+            // Set the three parts
+            index = String.valueOf(i);
+            middle = initiativeListClone.get(i).getName() + " (" + initiativeListClone.get(i).getHp() + ")";
+            additions = partiesInitiativeListClone.get(i).getName();
+
+            // Print the final output
+            Simple.println(index + " | " + middle + " | " + additions);
+        }
+
+        Simple.println(turnNum);
+
+        // After all that, check to make sure that we don't need to loop turnNum by checking to see if it is the same as the size of initiative list
+        if (turnNum == initiativeList.size()) {
+            // If we do then just set it back to 1
+            turnNum = 1; 
+
+            // Return out of the function
+            return;
+        }
+
+        // If it didn't need resetting increase turn num
+        turnNum++;
     }
 
     // Enact an attack against another base
     private void attack() {}
-
-    /*
-     * Checks to see if all win conditions are met
-     * 
-     * @returns true if all win conditions are met if not, then returns false
-     */
-    public boolean checkWin() {return true;}
-
 
 }
