@@ -42,7 +42,7 @@ public class EncounterTest {
         );
         Enemy frank2 = new Enemy(
             "Frank2",
-            47,
+            78,
             new int[] {13, 1},
             new int[] {14, 2},
             new int[] {18, 4},

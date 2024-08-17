@@ -89,7 +89,6 @@ public class Encounter {
 
     // Takes a single turn
     public void takeTurn() {}
-    private int deadBasesHit = 0;
     // Prints out all the information for an action
     public void printAttackTable() {
 
@@ -136,13 +135,21 @@ public class Encounter {
             // If it isn't then increase the amount of bases dead
             basesDead++;
 
-            // Increase the turn number
-            turnNum++;
+            // If turn number is at the end of the init list
+            if (turnNum == initiativeList.size() - 1) {
+
+                // Reset the turn num
+                turnNum = 0;
+            }
+            
+            // If were not at the end of the list
+            else {
+                // Increase the turn number
+                turnNum++;
+            }
 
             // Re-call this function
             printAttackTable();
-
-            // After the function finishes re-set basesDead and return out of the function
             basesDead = 0;
             return;
         }
@@ -152,7 +159,7 @@ public class Encounter {
         // Set the three parts
         index = ">";
         middle = attacker.getName() + " (" + attacker.getHp() + ")";
-        additions = partiesInitiativeListClone.get(turnNum).getName();
+        additions = attackerParty.getName();
 
         // Print out the three parts
         Simple.println(index + " | " + middle + " | " + additions);
@@ -160,23 +167,20 @@ public class Encounter {
 
         // Save the length of what we printed out to use later in the form of dashes
         int dashesLength = (index + " | " + middle + " | " + additions).length();
+
+        int deadBasesHit = 0;
         
         // Loop every base
-        for (int i = 0; i < initiativeList.size(); i++) {
-
-            Simple.println(i);
+        for (int i = 0; i < initiativeListClone.size(); i++) {
 
             // Check to see if the current base is the attacker
             if (i + deadBasesHit == turnNum) {
                 // If it is then print out the number of dashes we found earlier
                 Simple.println("-".repeat(dashesLength));
-
-                // Then continue on to the next itteration
-                continue;
             }
             
             // Check to see if the current base is dead
-            if (initiativeListClone.get(i - deadBasesHit).getHp() <= 0) {
+            if (initiativeListClone.get(i).getHp() <= 0) {
 
                 // If it is, then set the parts as such 
                 index = "x";
@@ -187,10 +191,10 @@ public class Encounter {
                 Simple.println(index + " | " + middle + " | " + additions);
 
                 // REMOVE THE EVIDENCE
-                // initiativeListClone.remove(i);
-                // partiesInitiativeListClone.remove(i);
+                initiativeListClone.remove(i);
+                partiesInitiativeListClone.remove(i);
 
-                // Add one to the amount of dead bases hit
+                // Increase the amount of dead bases 
                 deadBasesHit++;
 
                 // Back up i so the indicies can work and we don't skip anyone and continue on
@@ -198,8 +202,7 @@ public class Encounter {
                 continue;
             }
 
-            // If it isn't dead or the attacker
-
+            // If the current base isn't dead
             // Set the three parts
             index = String.valueOf(i);
             middle = initiativeListClone.get(i).getName() + " (" + initiativeListClone.get(i).getHp() + ")";
@@ -207,14 +210,17 @@ public class Encounter {
 
             // Print the final output
             Simple.println(index + " | " + middle + " | " + additions);
+            
         }
 
-        Simple.println(turnNum);
-
         // After all that, check to make sure that we don't need to loop turnNum by checking to see if it is the same as the size of initiative list
-        if (turnNum == initiativeList.size()) {
+        // Also, on the last turn the attacker's dashes don't get caught, so print them here
+        if (turnNum == initiativeList.size() - 1) {
+            // Print the attacker's dashes
+            Simple.println("-".repeat(dashesLength));
+
             // If we do then just set it back to 1
-            turnNum = 1; 
+            turnNum = 0; 
 
             // Return out of the function
             return;
