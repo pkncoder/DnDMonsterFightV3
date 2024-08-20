@@ -91,15 +91,23 @@ public class Encounter {
 
     // Takes a single turn
     public void takeTurn() {
+
+        // Clear the terminal and print out the attack table
         Simple.clearTerminal();
         printAttackTable();
 
+        // If win is false and checkWin returns false
         if (!(win || checkWin())) {
+
+            // Enact an attack
             Simple.space();
             attack();
         }
 
+        // Else, if those both return true, then a win has been detected
         else {
+
+            // Set win to true
             win = true;
         }
     }
@@ -130,9 +138,6 @@ public class Encounter {
         // Save a clone of initiative lists so we can remove bases from it as needed without affecting the full lists
         ArrayList<Base> initiativeListClone = (ArrayList<Base>) initiativeList.clone();
         ArrayList<Party> partiesInitiativeListClone = (ArrayList<Party>) partiesInitiativeList.clone();
-
-        // Save a varaible that will keep how many dead bases there are
-        
         
         // Three parts to this
         // {index} | {middle} | {additions}
@@ -257,25 +262,41 @@ public class Encounter {
         initiativeList.get(turnNum).attack(preyBases.get(attackerIndex - 1));
     }
 
+    /*
+     * @returns true if the win condition is met, false if not
+     */
     public boolean checkWin() {
+
+        // Set a variable that holds the number of alive bases (starts at one so it can include the attacker)
         int aliveBases = 1;
 
+        // For each base in the prey bases
         for (Base base: preyBases) {
+
+            // If it's alive increase the alive counter
             if (base.getHp() > 0) {
                 aliveBases++;
             }
         }
 
+        // At the end, return the result of alive bases being less than two
         return aliveBases < 2;
     }
 
+    /*
+     * @returns the win variable
+     */
     public boolean getWin() {
         return win;
     }
 
+    // Print the win statements
     public void printWinStatements() {
+
+        // Print the attack table
         printAttackTable();
 
+        // Print out the party at the turn number's slot
         Simple.println("Party: '" + partiesInitiativeList.get(turnNum).getName() + "' wins!");
     }
 }

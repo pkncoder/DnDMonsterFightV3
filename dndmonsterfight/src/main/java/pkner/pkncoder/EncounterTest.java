@@ -8,7 +8,6 @@ import pkner.pkncoder.Classes.PartyColection;
 import pkner.pkncoder.Classes.PlayerCharacter;
 import pkner.pkncoder.Classes.PlayerClass;
 import pkner.pkncoder.Classes.Weapon;
-import pkner.pkncoder.CustomMethods.Simple;
 
 public class EncounterTest {
     

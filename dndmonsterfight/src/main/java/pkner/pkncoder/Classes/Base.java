@@ -1,7 +1,4 @@
 package pkner.pkncoder.Classes;
-
-import pkner.pkncoder.CustomMethods.Simple;
-
 public class Base implements Comparable<Base> {
     
     // Name of the base
