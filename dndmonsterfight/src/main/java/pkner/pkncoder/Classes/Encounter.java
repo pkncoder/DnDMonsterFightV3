@@ -1,7 +1,6 @@
 package pkner.pkncoder.Classes;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import pkner.pkncoder.CustomMethods.Simple;
 
@@ -16,6 +15,9 @@ public class Encounter {
 
     // List of every base's party in initiative order
     private ArrayList<Party> partiesInitiativeList = new ArrayList<Party>();
+
+    // The array list of not dead bases (set during printAttackTable())
+    private ArrayList<Base> preyBases;
 
     // The current turn number
     private int turnNum = 0;
@@ -88,7 +90,20 @@ public class Encounter {
     }
 
     // Takes a single turn
-    public void takeTurn() {}
+    public void takeTurn() {
+        Simple.clearTerminal();
+        printAttackTable();
+
+        if (!(win || checkWin())) {
+            Simple.space();
+            attack();
+        }
+
+        else {
+            win = true;
+        }
+    }
+
     // Prints out all the information for an action
     public void printAttackTable() {
 
@@ -106,7 +121,7 @@ public class Encounter {
         // Check to see if enough players are dead or not (all except one of the bases are dead)
         if (basesDead == initiativeList.size() - 1) {
             
-            // If that win condition is met set win as true and return out of the function;
+            // If the amount of bases dead hits a win condition, set win to true and return out
             win = true;
             return;
         }
@@ -168,6 +183,7 @@ public class Encounter {
         // Save the length of what we printed out to use later in the form of dashes
         int dashesLength = (index + " | " + middle + " | " + additions).length();
 
+        // Save a variable to keep how many dead bases we hit
         int deadBasesHit = 0;
         
         // Loop every base
@@ -204,7 +220,7 @@ public class Encounter {
 
             // If the current base isn't dead
             // Set the three parts
-            index = String.valueOf(i);
+            index = String.valueOf(i + 1);
             middle = initiativeListClone.get(i).getName() + " (" + initiativeListClone.get(i).getHp() + ")";
             additions = partiesInitiativeListClone.get(i).getName();
 
@@ -213,13 +229,16 @@ public class Encounter {
             
         }
 
+        // After the attack tabling set the remaining bases
+        preyBases = initiativeListClone;
+
         // After all that, check to make sure that we don't need to loop turnNum by checking to see if it is the same as the size of initiative list
         // Also, on the last turn the attacker's dashes don't get caught, so print them here
         if (turnNum == initiativeList.size() - 1) {
             // Print the attacker's dashes
             Simple.println("-".repeat(dashesLength));
 
-            // If we do then just set it back to 1
+            // If we do then just set it back to 0
             turnNum = 0; 
 
             // Return out of the function
@@ -231,6 +250,32 @@ public class Encounter {
     }
 
     // Enact an attack against another base
-    private void attack() {}
+    private void attack() {
+        // Querry who their attacking
+        int attackerIndex = Simple.getIntInput("Who are you attacking (ex. Harry or 2): ", "[1-" + preyBases.size() + "]");
 
+        initiativeList.get(turnNum).attack(preyBases.get(attackerIndex - 1));
+    }
+
+    public boolean checkWin() {
+        int aliveBases = 1;
+
+        for (Base base: preyBases) {
+            if (base.getHp() > 0) {
+                aliveBases++;
+            }
+        }
+
+        return aliveBases < 2;
+    }
+
+    public boolean getWin() {
+        return win;
+    }
+
+    public void printWinStatements() {
+        printAttackTable();
+
+        Simple.println("Party: '" + partiesInitiativeList.get(turnNum).getName() + "' wins!");
+    }
 }

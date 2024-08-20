@@ -1,5 +1,7 @@
 package pkner.pkncoder.Classes;
 
+import pkner.pkncoder.CustomMethods.Simple;
+
 public class Base implements Comparable<Base> {
     
     // Name of the base
@@ -64,7 +66,7 @@ public class Base implements Comparable<Base> {
     }
 
     // This will attack a givin monster and use it's ac to get the total damage
-    public int attack(Base other) {
+    public void attack(Base other) {
 
         // Hold a value, holding any damage done
         int currentTotalDamage = 0;
@@ -89,11 +91,8 @@ public class Base implements Comparable<Base> {
             }
 
             // Finally, return the total damage we did with the mod
-            return currentTotalDamage + attackDmgMod;
+            other.hp -= currentTotalDamage + attackDmgMod;
         }
-
-        // If it didn't get hit, return 0
-        return 0;
     }
 
     public void rollInititave() {

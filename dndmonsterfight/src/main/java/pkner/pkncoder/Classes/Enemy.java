@@ -17,7 +17,7 @@ public class Enemy extends Base {
     private Weapon weapon;
 
     // Constructor
-    public Enemy(String name, int hp, int[] strength, int[] dexterity, int[] constitution, int[] wisdom, int[] intelligence, int[] charisma, Armor armor, Weapon weapon) {
+    public Enemy(String name, int hp, int[] strength, int[] dexterity, int[] constitution, int[] wisdom, int[] intelligence, int[] charisma, Weapon weapon, Armor armor) {
         // Super the constructor
         super(
             name,  

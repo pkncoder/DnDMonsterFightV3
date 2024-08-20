@@ -14,6 +14,7 @@ public class EncounterTest {
     
     public static void main(String[] args) {
 
+        // Player - jhon
         PlayerCharacter jhon = new PlayerCharacter(
             "Jhon",
             new int[] {13, 1},
@@ -28,18 +29,21 @@ public class EncounterTest {
             new Armor("Plank", 11, false, 0)
         );
 
+        // Enemy - Frank
         Enemy frank = new Enemy(
             "Frank",
-            0,
+            10,
             new int[] {13, 1},
             new int[] {14, 2},
             new int[] {18, 4},
             new int[] {8, -1},
             new int[] {20, 5},
             new int[] {10, 0},
-            new Armor("No Armor", 10, true, Integer.MAX_VALUE),
-            new Weapon("Gun.", 10, new int[] {10, 12})
+            new Weapon("Gun.", 10, new int[] {10, 12}),
+            new Armor("No Armor", 10, true, Integer.MAX_VALUE)
         );
+
+        // Enemy - Frank 2 (because everyone needs a sequal)
         Enemy frank2 = new Enemy(
             "Frank2",
             78,
@@ -49,29 +53,43 @@ public class EncounterTest {
             new int[] {8, -1},
             new int[] {20, 5},
             new int[] {10, 0},
-            new Armor("No Armor", 10, true, Integer.MAX_VALUE),
-            new Weapon("Gun.", 10, new int[] {10, 12})
+            new Weapon("Gun.", 10, new int[] {10, 12}),
+            new Armor("No Armor", 10, true, Integer.MAX_VALUE)
         );
 
-        Party jhons = new Party("Jhons", "PLAYERS");
+        // Parties
+        // Players (jhon)
+        Party jhons = new Party("jhon", "PLAYERS");
         jhons.addPartyMember(jhon);
-        Party franks = new Party("Franks", "ENEMIES");
+
+        // Parties
+        // Enemies
+        Party franks = new Party("because everyone needs a sequal", "ENEMIES");
         franks.addPartyMember(frank);
         franks.addPartyMember(frank2);
         
+        // Party collection
+        // Players (john)
         PartyColection players = new PartyColection("players");
         players.addParty(jhons);
+
+        // Party collection
+        // Enemies
         PartyColection enemies = new PartyColection("enemies");
         enemies.addParty(franks);
 
+        // Create the encounter
         Encounter encounter = new Encounter(players, enemies);
 
-        while (true) {
-            Simple.clearTerminal();
-            encounter.printAttackTable();
+        // While win is still false
+        while (!encounter.getWin()) {
 
-            Simple.getStringInput("");
+            // Take a turn
+            encounter.takeTurn();
         }
+
+        // Print the win statements at the end
+        encounter.printWinStatements();
     }
 
 }

@@ -20,11 +20,6 @@ public class GetEnemy {
 
     private static String baseUrl = "https://www.dnd5eapi.co";
 
-    public static void main(String[] args) throws IOException, InterruptedException {
-        Simple.clearTerminal();
-        getEnemy();
-    }
-
     // The main method
     public static Enemy getEnemy() throws IOException, InterruptedException {
         /*
@@ -58,7 +53,7 @@ public class GetEnemy {
         Armor armor = getArmor();
 
         // Return our final enemy
-        return new Enemy(name, hp, abilityScores[0], abilityScores[1], abilityScores[2], abilityScores[3], abilityScores[4], abilityScores[5], armor, weapon);
+        return new Enemy(name, hp, abilityScores[0], abilityScores[1], abilityScores[2], abilityScores[3], abilityScores[4], abilityScores[5], weapon, armor);
     }
 
     private static Weapon getWeapon() throws IOException, InterruptedException {
