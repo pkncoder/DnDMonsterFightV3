@@ -19,12 +19,16 @@ Currently this is version 3 of DnD Monster Fight, and here's the run down of the
    3. Made as a finalle to my AP CSA class for what I have actually learned (because v2 was just embarrassing)
    4. Object Orientated I am pretty sure (still transfering from how not-very OOP python is)
    5. Tried to follow as much of java docs as I know and that I caught
-4. Made in Javascript (ooo the future)
+4. Next version - Made in Javascript (Probally JQuerry for ease and knowing how to read / write it)
+   1. Most of the data in the Future Notes will be in this version (V4), and not the current version (V3)
+   2. Lots of point and click, so full UI use
+   3. Lots of customization and nice save features
 
 
 ## Current Capabilities
 
-Can create, remove, and view parties, players, and enemies
+Enables you to make as many parties as you want, each either being an enemy or player party.<br>
+Create enemies or players and add them to your parties for them to fight to a last man standing battle.
 
 
 ## Running
@@ -45,10 +49,10 @@ This is a list of possible future notes on things that I may add (not necisairly
 - [ ] Adding inventory controls
 - [ ] Adding healing
 - [ ] Save Feature
-- [ ] Homebrew all that I can
+- [ ] Homebrew possibilites on all that I can
 - [ ] Items
 - [ ] Spells
-- [ ] No weapon / armor when creating enemies / players
+- [x] No armor when creating enemies / players
 - [ ] Using pre-made enemies / templates
   - [ ] Pre-made enemies from the DnD Api
   - [ ] Pre-made enemies from a homebrew
@@ -57,6 +61,9 @@ This is a list of possible future notes on things that I may add (not necisairly
 - [ ] Don't clamp the party types to just players / enemies
   - [ ] Maybe don't even have party types
 - [ ] Name duplicates don't matter
+- [ ] More than just last-man standing win conditions
+  - [ ] Last party standing
+  - [ ] Player parties vs. Enemy parties
 
 
 ## Todo in code
@@ -75,7 +82,7 @@ This is a list of possible future notes on things that I may add (not necisairly
   - For now party & name for removing
 
 
-### Code re-writing
+### Code Re-Writing
 
 - [x] <a href="http://www.dnd5eapi.co/">DnD API</a> usage to get stats for items / armors etc.
     - [x] Removing ArmorColection.java
@@ -87,9 +94,13 @@ This is a list of possible future notes on things that I may add (not necisairly
     - [ ] Like an index that gets changed when player or enemy is used
     - [ ] Or using the input like an enum
 - [ ] And basically the same for player / enemy parties (shoving them in a array like thing and using an index / enum like thing to choose which one to do magic with)
-- [ ] Re-write GetHelperMethods.GetArmor() & GetHelperMethods.GetWeapon() to use better input validation
+- [x] Re-write GetHelperMethods.GetArmor() & GetHelperMethods.GetWeapon() to use better input validation
+  - Its all in the api now and seems good
 - [ ] Don't allow name overlaps for Parties or characters
-- [ ] Api class
+- [ ] Check all user output and make sure it is still intuitive and makes sense (and looks good)
+
+### Api Re-Writing
+- Api class
   - [ ] Rename the class to make more sense
   - [ ] Change the way you use the .get() method so you don't have to use gson's .toJsonObject().get() after the first use
   - [ ] Make JsonArrays easier to use
@@ -105,5 +116,4 @@ This is a list of possible future notes on things that I may add (not necisairly
 ### Always Alive
 
 - Error testing on CRACK
-- Updating comments to be true after re-writes & to have java docs
-- New text output to make it more intuitive for the user
+- Updating comments to be true after re-writes & to have java doc

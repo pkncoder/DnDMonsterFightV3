@@ -59,7 +59,7 @@ public class GetPlayerCharacter {
         Simple.space();
 
         // Get the user's chosen class
-        String userClassChoice = Simple.getStringInput("What class would you like to choose: ", classes, "Invalid Input", false);
+        String userClassChoice = Simple.getStringInput("What class would you like to choose: ", classes.clone(), "Invalid Input", false);
 
         // Send a request with the base url and the addition of /api/classes/ to filter for the classes and add on the user's chosen class (lower cased)
         json.sendGetRequest(baseUrl + "/api/classes/" + userClassChoice.toLowerCase());
@@ -125,8 +125,10 @@ public class GetPlayerCharacter {
                 Simple.println(json.get("name").getAsString());
                 weaponNameBuffer.add(json.get("name").getAsString());
             }
-
         }
+
+        // At the end of everything, add a "No Armor choice"
+        armorNameBuffer.add("No Armor");
 
         // Get the user's weapon
         String userWeapon = Simple.getStringInput("\nWhat weapon would you like: ", weaponNameBuffer.toArray(new String[weaponNameBuffer.size()]), "Invalid Input", false);
@@ -146,12 +148,12 @@ public class GetPlayerCharacter {
     }
 
     private static Armor getPlayerArmor() throws IOException, InterruptedException {
-
-        // Add the No-Armor option to the armor buffer
-        armorNameBuffer.add("No Armor");
         
         // Get the armor's name in a string[]
         String[] armorArray = armorNameBuffer.toArray(new String[armorNameBuffer.size()]);
+
+        // Wipe the Armor Name Buffer after so we can have a clean slate for next time
+        armorNameBuffer.clear();
 
         // Print the array our
         Simple.printArray(armorArray);
@@ -172,7 +174,7 @@ public class GetPlayerCharacter {
         }
 
         // Send the request of that armor
-        json.sendGetRequest(baseUrl + "/api/equipment/" + userArmor.toLowerCase().replaceAll(" ", "-"));
+        json.sendGetRequest(baseUrl + "/api/equipment/" + userArmor.toLowerCase().replaceAll(",", "").replaceAll(" ", "-"));
 
         // Create and return the object
         return new Armor(

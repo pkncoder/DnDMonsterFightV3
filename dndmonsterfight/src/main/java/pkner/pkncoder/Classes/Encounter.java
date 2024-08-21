@@ -29,12 +29,16 @@ public class Encounter {
     private boolean win = false;
 
     /*
-     * Setup everything to start taking turns
+     * Class constructor
      * 
-     * @param players   The Party Collection that holds all of the player parties
-     * @param enemies   The Party Collection that holds all of the enemy parties
+     * Sets everything up to start taking turns
+     * 
+     * @param   players   The Party Collection that holds all of the player parties
+     * @param   enemies   The Party Collection that holds all of the enemy parties
      */
     public Encounter(PartyColection players, PartyColection enemies) {
+
+        // Set the party collections
         this.players = players;
         this.enemies = enemies;
 
@@ -51,6 +55,7 @@ public class Encounter {
         
 
         // TODO: Find a better way of pairing Parties and Players, or find a better alg
+        // Insertion sort
         for (int i = 1; i < initiativeList.size(); i++) {
 
             Base key = initiativeList.get(i);
@@ -71,7 +76,7 @@ public class Encounter {
     /*
      * Helper Method for setInitiatives() that adds the base and party to their respective initiative list
      * 
-     * @param partyColection Party colection ig (idk what else to say)
+     * @param   partyColection  A party collection to roll initiative's of and add to the list (unsorted)
      */
     private void addBasesToInitiativeParties(PartyColection partyColection) {
         // Loop over every base in our party
@@ -96,23 +101,19 @@ public class Encounter {
         Simple.clearTerminal();
         printAttackTable();
 
-        // If win is false and checkWin returns false
-        if (!(win || checkWin())) {
+        // If win is false then continue with normal turn action(s)
+        if (!win) {
 
             // Enact an attack
             Simple.space();
             attack();
-        }
 
-        // Else, if those both return true, then a win has been detected
-        else {
-
-            // Set win to true
-            win = true;
+            // Forward to the next turn after the attack is finished
+            forwardTurn();
         }
     }
 
-    // Prints out all the information for an action
+    // Prints out the attack table with all the needed info and checks win contitions
     public void printAttackTable() {
 
         /*
@@ -126,51 +127,50 @@ public class Encounter {
          * 
         */
 
-        // Check to see if enough players are dead or not (all except one of the bases are dead)
+        // During the recursion of the attackers being dead, check to see if we have just one base left
         if (basesDead == initiativeList.size() - 1) {
             
-            // If the amount of bases dead hits a win condition, set win to true and return out
+            // If there is, then set win to true and return out
             win = true;
             return;
         }
 
 
+        /* Attacker */
+
         // Save a clone of initiative lists so we can remove bases from it as needed without affecting the full lists
         ArrayList<Base> initiativeListClone = (ArrayList<Base>) initiativeList.clone();
         ArrayList<Party> partiesInitiativeListClone = (ArrayList<Party>) partiesInitiativeList.clone();
         
-        // Three parts to this
+        // Three parts to each base when they get printed out
         // {index} | {middle} | {additions}
         String index;
         String middle;
         String additions;
 
-        // First, get the attacker
+        // First, get the attacker and their party
+        // At the same time remove them from the clones so they are ignored when looping over the rest of the bases
         Base attacker = initiativeListClone.remove(turnNum);
         Party attackerParty = partiesInitiativeListClone.remove(turnNum);
 
         // Check and make sure that the attacker is alive
         if (attacker.getHp() <= 0) {
+
+            /* If the attacker is found dead, then we need to skip to the next turn */
             
-            // If it isn't then increase the amount of bases dead
+            // Increase bases dead
             basesDead++;
 
-            // If turn number is at the end of the init list
-            if (turnNum == initiativeList.size() - 1) {
+            // Go to the next turn
+            forwardTurn();
 
-                // Reset the turn num
-                turnNum = 0;
-            }
-            
-            // If were not at the end of the list
-            else {
-                // Increase the turn number
-                turnNum++;
-            }
-
-            // Re-call this function
+            // Re-call this function so we can check the next attacker, and consiquently print the next turn's attack table (assuming that the next attacker is alive)
             printAttackTable();
+
+            // After the recursion finishes, set basesDead to 0 so the next time this is called it can re-count everything
             basesDead = 0;
+
+            // Return out as the table has been printed already, or returned out as a win condition has been found
             return;
         }
 
@@ -185,10 +185,14 @@ public class Encounter {
         Simple.println(index + " | " + middle + " | " + additions);
         Simple.space();
 
-        // Save the length of what we printed out to use later in the form of dashes
+
+        /* Possible attackees (prey bases) */
+
+        // Save the length of what we printed out to use later in the form of dashes where the attacker usually is in the intiative list
         int dashesLength = (index + " | " + middle + " | " + additions).length();
 
         // Save a variable to keep how many dead bases we hit
+        // This is used for checking where the attacker was
         int deadBasesHit = 0;
         
         // Loop every base
@@ -198,6 +202,8 @@ public class Encounter {
             if (i + deadBasesHit == turnNum) {
                 // If it is then print out the number of dashes we found earlier
                 Simple.println("-".repeat(dashesLength));
+
+                // Don't return out as we have to still print the actual base's info the loop is on
             }
             
             // Check to see if the current base is dead
@@ -211,14 +217,14 @@ public class Encounter {
                 // Print the final output
                 Simple.println(index + " | " + middle + " | " + additions);
 
-                // REMOVE THE EVIDENCE
+                // REMOVE THE EVIDENCE of the dead base so the indicies are still right, and we're not trying to attack a dead base
                 initiativeListClone.remove(i);
                 partiesInitiativeListClone.remove(i);
 
                 // Increase the amount of dead bases 
                 deadBasesHit++;
 
-                // Back up i so the indicies can work and we don't skip anyone and continue on
+                // Back up i so the indicies can work and we don't skip anyone and continue on to the next loop
                 i--;
                 continue;
             }
@@ -234,57 +240,51 @@ public class Encounter {
             
         }
 
-        // After the attack tabling set the remaining bases
+
+        /* Post attack table */
+
+        // Check to see if the turn num is pointing to the last base, as the attacker check to print the dashes doesn't get caught in the loop, so print them here
+        if (turnNum == initiativeList.size() - 1) {
+            Simple.println("-".repeat(dashesLength));
+        }
+
+        // After printing the attack table set the prey bases to the left over bases in the initiative list's clone
         preyBases = initiativeListClone;
 
-        // After all that, check to make sure that we don't need to loop turnNum by checking to see if it is the same as the size of initiative list
-        // Also, on the last turn the attacker's dashes don't get caught, so print them here
+        // Check prey base's size, if it is 0 then it is just the attacker left and a win condition is met
+        if (preyBases.size() == 0) {
+
+            // Set win to true
+            win = true;
+        }
+    }
+
+    // Set turn number to the next index
+    public void forwardTurn() {
+
+        // If the current turn is pointing to the last base, it needs to be reset
         if (turnNum == initiativeList.size() - 1) {
-            // Print the attacker's dashes
-            Simple.println("-".repeat(dashesLength));
 
-            // If we do then just set it back to 0
-            turnNum = 0; 
-
-            // Return out of the function
+            // Set turn number to 0 and return out
+            turnNum = 0;
             return;
         }
 
-        // If it didn't need resetting increase turn num
+        // Else, just increase turn number
         turnNum++;
     }
 
     // Enact an attack against another base
     private void attack() {
         // Querry who their attacking
-        int attackerIndex = Simple.getIntInput("Who are you attacking (ex. Harry or 2): ", "[1-" + preyBases.size() + "]");
+        int attackerIndex = Simple.getIntInput("Who is " + initiativeList.get(turnNum).getName() + " attacking (ex. 1): ", "[1-" + preyBases.size() + "]");
 
+        // Get the turn number of the current base, and attack the chosen base from the prey bases
         initiativeList.get(turnNum).attack(preyBases.get(attackerIndex - 1));
     }
 
     /*
-     * @returns true if the win condition is met, false if not
-     */
-    public boolean checkWin() {
-
-        // Set a variable that holds the number of alive bases (starts at one so it can include the attacker)
-        int aliveBases = 1;
-
-        // For each base in the prey bases
-        for (Base base: preyBases) {
-
-            // If it's alive increase the alive counter
-            if (base.getHp() > 0) {
-                aliveBases++;
-            }
-        }
-
-        // At the end, return the result of alive bases being less than two
-        return aliveBases < 2;
-    }
-
-    /*
-     * @returns the win variable
+     * @return  returns the value of the win variable
      */
     public boolean getWin() {
         return win;
@@ -295,6 +295,9 @@ public class Encounter {
 
         // Print the attack table
         printAttackTable();
+
+        // Seperate the party win statement and the table
+        Simple.space();
 
         // Print out the party at the turn number's slot
         Simple.println("Party: '" + partiesInitiativeList.get(turnNum).getName() + "' wins!");
