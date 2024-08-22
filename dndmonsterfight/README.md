@@ -103,6 +103,7 @@ This is a list of possible future notes on things that I may add (not necisairly
 - [ ] Add a random value function to simple
 - [ ] Check for more things to add GetHelperMethods()
 - [ ] Check ALL input validation (ex. commas in weapons)
+- [ ] Rename the Base class to Character (finally a good name)
 
 ### Api Re-Writing
 - Api class

@@ -58,17 +58,27 @@ public class Encounter {
         // Insertion sort
         for (int i = 1; i < initiativeList.size(); i++) {
 
+            // Get the keys (the items that need sorted)
             Base key = initiativeList.get(i);
             Party partyKey = partiesInitiativeList.get(i);
-            int j = i - 1;
 
-            while (j >= 0 && initiativeList.get(j).getInitiative() < key.getInitiative()) {
-                initiativeList.set(j + 1, initiativeList.get(j));
-                partiesInitiativeList.set(j + 1, partiesInitiativeList.get(j));
-                j = j - 1;
+            // Store a slot which is the spot that is assumed sorted
+            int slot = i - 1;
+
+            // While the slot is greater than 0 and the slot's initiative is less than the key's initiative it needs to move back
+            while (slot >= 0 && initiativeList.get(slot).getInitiative() < key.getInitiative()) {
+                
+                // Move slot back
+                initiativeList.set(slot + 1, initiativeList.get(slot));
+                partiesInitiativeList.set(slot + 1, partiesInitiativeList.get(slot));
+
+                // Set slot back one again
+                slot = slot - 1;
             }
-            initiativeList.set(j + 1, key);
-            partiesInitiativeList.set(j + 1, partyKey);
+
+            // Set the keys where they need to be
+            initiativeList.set(slot + 1, key);
+            partiesInitiativeList.set(slot + 1, partyKey);
 
         }
     }
@@ -143,8 +153,8 @@ public class Encounter {
         ArrayList<Party> partiesInitiativeListClone = (ArrayList<Party>) partiesInitiativeList.clone();
         
         // Three parts to each base when they get printed out
-        // {index} | {middle} | {additions}
-        String index;
+        // {start} | {middle} | {additions}
+        String start;
         String middle;
         String additions;
 
@@ -177,19 +187,19 @@ public class Encounter {
         // Else, if the attacker isn't dead
 
         // Set the three parts
-        index = ">";
+        start = ">";
         middle = attacker.getName() + " (" + attacker.getHp() + ")";
         additions = attackerParty.getName();
 
         // Print out the three parts
-        Simple.println(index + " | " + middle + " | " + additions);
+        Simple.println(start + " | " + middle + " | " + additions);
         Simple.space();
 
 
         /* Possible attackees (prey bases) */
 
         // Save the length of what we printed out to use later in the form of dashes where the attacker usually is in the intiative list
-        int dashesLength = (index + " | " + middle + " | " + additions).length();
+        int dashesLength = (start + " | " + middle + " | " + additions).length();
 
         // Save a variable to keep how many dead bases we hit
         // This is used for checking where the attacker was
@@ -199,6 +209,7 @@ public class Encounter {
         for (int i = 0; i < initiativeListClone.size(); i++) {
 
             // Check to see if the current base is the attacker
+            // We add dead bases hit since they get removed from the list, and i is decreased
             if (i + deadBasesHit == turnNum) {
                 // If it is then print out the number of dashes we found earlier
                 Simple.println("-".repeat(dashesLength));
@@ -210,12 +221,12 @@ public class Encounter {
             if (initiativeListClone.get(i).getHp() <= 0) {
 
                 // If it is, then set the parts as such 
-                index = "x";
+                start = "x";
                 middle = initiativeListClone.get(i).getName() + " (" + initiativeListClone.get(i).getHp() + ")";
                 additions = partiesInitiativeListClone.get(i).getName();
 
                 // Print the final output
-                Simple.println(index + " | " + middle + " | " + additions);
+                Simple.println(start + " | " + middle + " | " + additions);
 
                 // REMOVE THE EVIDENCE of the dead base so the indicies are still right, and we're not trying to attack a dead base
                 initiativeListClone.remove(i);
@@ -231,12 +242,12 @@ public class Encounter {
 
             // If the current base isn't dead
             // Set the three parts
-            index = String.valueOf(i + 1);
+            start = String.valueOf(i + 1);
             middle = initiativeListClone.get(i).getName() + " (" + initiativeListClone.get(i).getHp() + ")";
             additions = partiesInitiativeListClone.get(i).getName();
 
             // Print the final output
-            Simple.println(index + " | " + middle + " | " + additions);
+            Simple.println(start + " | " + middle + " | " + additions);
             
         }
 
@@ -259,7 +270,7 @@ public class Encounter {
         }
     }
 
-    // Set turn number to the next index
+    // Set turn number to the next spot
     public void forwardTurn() {
 
         // If the current turn is pointing to the last base, it needs to be reset
