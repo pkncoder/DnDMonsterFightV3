@@ -1,4 +1,7 @@
 package pkner.pkncoder.Classes;
+
+import pkner.pkncoder.CustomMethods.Simple;
+
 public class Base implements Comparable<Base> {
     
     // Name of the base
@@ -55,8 +58,8 @@ public class Base implements Comparable<Base> {
         // Hold a value, holding any damage done
         int currentTotalDamage = 0;
 
-        // Get a random number ranging between 1 and 20 for the hit die, and add the strength that the monster has
-        int toHit = ((int) ((Math.random() * 20) + 1)) + attackStr;
+        // Get a random number ranging between 1 and 20 for the hit die, and add the strength that the base has
+        int toHit = Simple.randomInt(1, 20) + attackStr;
 
         // If it does hit or get's a nat 20
         if (toHit >= other.getAC() || toHit - attackStr == 20) {
@@ -65,7 +68,7 @@ public class Base implements Comparable<Base> {
             for (int i = 0; i < attackDmgRoll[0]; i++) {
 
                 // Hold a value that holds how much damage we did
-                int damageRoll = ((int) ((Math.random() * attackDmgRoll[1]) + 1));
+                int damageRoll = Simple.randomInt(1, attackDmgRoll[1]);
 
                 // If we got a nat 20 just double the rolled damage
                 if (toHit - attackStr == 20) {damageRoll *= 2;}
@@ -81,8 +84,8 @@ public class Base implements Comparable<Base> {
 
     // Roll a random initiative and set initiative as so
     public void rollInititave() {
-        // Int of 0....0.99 * 20 (max - ((min + 1) cancles out)) plus min
-        initiative = (int) (Math.random() * 20) + 1;
+        // Random number
+        initiative = Simple.randomInt(1, 20);
     }
 
     /*

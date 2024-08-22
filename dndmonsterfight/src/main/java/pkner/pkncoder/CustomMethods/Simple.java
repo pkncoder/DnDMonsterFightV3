@@ -228,4 +228,17 @@ public class Simple
         // Return input
         return input;
     }
+
+    /*
+     * Returns a 'random' int between a min and max
+     * 
+     * @param   min Minimum number
+     * @param   max Maximum number
+     * @return      Random value between min and max
+     */
+    public static int randomInt(int min, int max) {
+        // Return the random number
+        // (int) (Math.Random * (max - min + 1)) + min
+        return (int) ((Math.random() * (max - min + 1)) + min);
+    }
 }

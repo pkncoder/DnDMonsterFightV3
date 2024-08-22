@@ -98,7 +98,7 @@ This is a list of possible future notes on things that I may add (not necisairly
   - [ ] Actually calculate the correct value
 - [ ] Add a random value function to simple
 - [x] Check for more things to add GetHelperMethods()
-- [ ] Check ALL input validation (ex. commas in weapons)
+- [x] Check ALL input validation (ex. commas in weapons)
 - [ ] Rename the Base class to Character (finally a good name)
 - [ ] Rename the PlayerCharacter class to just Player
 - [ ] Add more customization to Simple.java (aka. error messages)
@@ -111,6 +111,9 @@ This is a list of possible future notes on things that I may add (not necisairly
 - [ ] Add viewing of weapons, armors, or classes when choosing them
 - [ ] Add viewing of characters when attacking
 - [ ] Basic custom weapon, armor, and class
+- [x] Check Encounter.java for re-initializing variables that can be put to a larger scope
+  - Wasn't really that bad so I just left it alone
+- [ ] Re-check all comments in Base.java and fix them to use v3 comments (there are still some v2 ones)
 
 ### Hypothetically major re-writing
 - [ ] Same code for players / enemies
