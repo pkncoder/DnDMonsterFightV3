@@ -98,6 +98,8 @@ This is a list of possible future notes on things that I may add (not necisairly
   - Its all in the api now and seems good
 - [ ] Don't allow name overlaps for Parties or characters
 - [ ] Check all user output and make sure it is still intuitive and makes sense (and looks good)
+- [ ] Add a to hit modifier and damage modifier
+  - [ ] Actually calculate the correct value
 
 ### Api Re-Writing
 - Api class

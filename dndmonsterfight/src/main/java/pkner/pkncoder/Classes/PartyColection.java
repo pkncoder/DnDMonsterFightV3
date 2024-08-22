@@ -15,19 +15,32 @@ public class PartyColection {
     // How many current bases there are in all the parties combined
     private int totalBases;
 
-    // Constructor
+    /* 
+     * Class Constructor
+     * 
+     * @param   name    the name of the party collection (usually "Players" or "Enemies")
+    */
     public PartyColection(String name)
     {
+        // Set the party name
         this.name = name;
+
+        // Set total bases to 0
+        totalBases = 0;
     }
 
-    // Find a party based on a string, and return said party
+    /*
+     * Finds a party from the list by the name of it
+     * 
+     * @param   partyName   The name of the party your trying to find
+     * @return              Either the found party, or nothing
+     */
     public Party findPartyByName(String partyName) {
         
         // Loop over every party
         for (Party party: partyList) {
 
-            // If the name of the party equals the strging givin
+            // If the name of the party equals the string given
             if (party.getName().toUpperCase().equals(partyName.toUpperCase())) {
 
                 // Return it
@@ -35,11 +48,16 @@ public class PartyColection {
             }
         }
 
-        // If the loop never returns, exit out
+        // If the loop never returns, exit out and return nothing
         return null;
     }
     
-    // Find a base based on a string, and return said base
+    /*
+     * Finds a base from one of the parties by the name of it
+     * 
+     * @param   baseName    The name of the party your trying to find
+     * @return              Either the found base, or nothing
+     */
     public Base findBaseByName(String baseName) {
         
         // Loop over every party
@@ -50,6 +68,7 @@ public class PartyColection {
                 
                 // Test to see if the names match
                 if (base.getName().toUpperCase().equals(baseName.toUpperCase())) {
+
                     // If they do, then return it
                     return base;
                 }
@@ -58,73 +77,105 @@ public class PartyColection {
             
         }
 
-        // If the loop never returns, exit out
+        // If the loop never returns, exit out and return nothing
         return null;
 
     }
 
-    // Finds the new total num bases to re-calibrate the total bases
-    public int findCurentNumBases() {
-        // Hold a new variable
-        int total = 0;
+    // Re-calibrates the total bases
+    public void findCurentNumBases() {
 
-        // Loop over every base
+        // Loop over every party
         for (Party party: partyList) { // party
-            for (int i = 0; i < party.getParty().size(); i++) { // base
-                total++; // Incriment total
-            }
+            // Add the parties array list of bases size to the total bases
+            totalBases += party.getParty().size();
         }
-
-        // Finally, return total
-        return total;
     }
 
-    // Add a party to our list
+    /*
+     * Add a new party to our list  
+     * 
+     * @param   newParty    the party to add to the collection
+     */
     public void addParty(Party newParty) {
+
+        // Add the party
         partyList.add(newParty);
+
+        // Re-calibrate the total bases
+        findCurentNumBases();
     }
 
-    // Add a base to the party
+    /*
+     * Adds a new base to the party chosen in the method
+     * 
+     * @param   newBase the base that will be added
+     */
     public void addBaseToParty(Base newBase) {
+
         // Get our possible parties to add to
         String[] parties = getPartyNames();
 
         // Print them out
         Simple.printArray(parties);
+        Simple.space();
 
         // Ask which one they would like to add to
         String chosenParty = Simple.getStringInput("Where is this base going to: ", parties, "Invalid Input", true);
 
         // Add that base based on the input
         findPartyByName(chosenParty).getParty().add(newBase);
+
+        // Increase the total bases
         totalBases++;
     }
 
-    // Delete a party from our list
+    /*
+     * Removes a party from the list
+     * 
+     * @param   sadParty    the party to be removed (assuming that it exists, if it doesn't then this does nothing)
+     */
     public void removeParty(Party sadParty) {
         // Remove it
         partyList.remove(sadParty);
         
         // Re-calibrate the total bases
-        totalBases = findCurentNumBases();
+        findCurentNumBases();
     }
 
-    // Delete a party from our list based on a string
+    /*
+     * Removes a party from the list based on a string
+     * 
+     * @param   sadParty    the party to be removed (assuming that it exists, if it doesn't then this does nothing)
+     */
     public void removeParty(String sadParty) {
         // Remove it based on the string
         partyList.remove(findPartyByName(sadParty));
         
         // Re-calibrate the total bases
-        totalBases = findCurentNumBases();
+        findCurentNumBases();
     }
 
-    // Delete a base based on a name
+    /*
+     * Removes a base by a party name and a base name
+     * 
+     * @param   partyName   The name of the party that the base is from
+     * @param   sadBase     The name of the base to be removed
+     */
     public void removeBase(String partyName, String sadBase) {
+
+        // Remove the base
         findPartyByName(partyName).removePartyMember(findBaseByName(sadBase));
+
+        // Decrease totalBases
         totalBases--;
     }
 
-    // Return an array full of each parties name
+    /*
+     * Returns the name of all of the parties
+     * 
+     * @return  Every parties name in a string array
+     */
     public String[] getPartyNames() {
 
         // Hold an array of the same size of each party we have
@@ -141,26 +192,24 @@ public class PartyColection {
         return names; 
     }
 
-    // Returns the name of every base in the party
+    /*
+     * Returns the name of all of the bases
+     * 
+     * @return  Every bases name in a string array
+     */
     public String[] getBaseNames() {
         
         // Hold an array of the total amount of bases in the parties
         String[] names = new String[totalBases];
 
-        // Hold an index to add to the names array
-        int index = 0;
-
         // Loop over every party
         for (Party party: partyList) {
 
             // Loop over every base
-            for (Base base: party.getParty()) {
+            for (int i = 0; i < party.getParty().size(); i++) {
 
-                // Set names at index to the current base's name
-                names[index] = base.getName();
-
-                // Increment index by 1
-                index++;
+                // Set the bases name at the current index in the name array
+                names[i] = party.getParty().get(i).getName();
             }
         }
 
@@ -168,18 +217,24 @@ public class PartyColection {
         return names;
     }
 
-    // Return our parties's name
+    /*
+     * @return  the name of the party collection
+     */
     public String getName()
     {
         return name;
     }
 
-    // Return the number of bases
+    /*
+     * @return  the number of bases
+     */
     public int getNumBases() {
         return totalBases;
     }
     
-    // Return our arraylist
+    /*
+     * @return  the list of parties
+     */
     public ArrayList<Party> getPartyList() {
         return partyList;
     }

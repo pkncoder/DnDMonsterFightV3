@@ -10,15 +10,30 @@ public class Enemy extends Base {
     private int[] intelligence;
     private int[] charisma;
 
-    // Hold the armor type for the player character
-    private Armor armor;
-
     // Hold the weapon type
     private Weapon weapon;
 
-    // Constructor
+    // Hold the armor type for the player character
+    private Armor armor;
+
+    /*
+     * Class constructor
+     * 
+     * Sets all the needed variables and calls the superclass
+     * 
+     * @param   name            Enemy's name
+     * @param   hp              Enemy's hp
+     * @param   strength        [Score] | [Score Modifier]
+     * @param   dexterity       [Score] | [Score Modifier]
+     * @param   constitution    [Score] | [Score Modifier]
+     * @param   wisdom          [Score] | [Score Modifier]
+     * @param   intelligence    [Score] | [Score Modifier]
+     * @param   charisma        [Score] | [Score Modifier]
+     * @param   weapon          The Enemys's weapon
+     * @param   armor           The Enemys's armor
+     */
     public Enemy(String name, int hp, int[] strength, int[] dexterity, int[] constitution, int[] wisdom, int[] intelligence, int[] charisma, Weapon weapon, Armor armor) {
-        // Super the constructor
+        // Call the Super class's constructor (base)
         super(
             name,  
             hp,
@@ -28,6 +43,7 @@ public class Enemy extends Base {
             0
         );
 
+        // Ability scores
         this.strength = strength;
         this.dexterity = dexterity;
         this.constitution = constitution;
@@ -35,11 +51,36 @@ public class Enemy extends Base {
         this.intelligence = intelligence;
         this.charisma = charisma;
 
+        // Weapon / armor
         this.armor = armor;
         this.weapon = weapon;
     }
 
-    // To-string
+    /*
+     * To string method
+     * 
+     * 
+     * Name: {name}
+     * 
+     * Hp: {hp amount}
+     * 
+     * Armor: {armor's name}
+     * Armor Class: {ac}
+     * 
+     * Strength: {score} ({modifier})
+     * Dexterity: {score} ({modifier})
+     * Constitution: {score} ({modifier})
+     * Wisdom: {score} ({modifier})
+     * Intelligence: {score} ({modifier})
+     * Charisma: {score} ({modifier})
+     * 
+     * Weapon: {Weapon name}
+     * To Hit Modifier: +0
+     * Damage Dice: {amount of dice rolled}d{dice type} + 0
+     * 
+     * 
+     * @return  A string formatted as shown above
+     */
     @Override
     public String toString() {
         String finalString =

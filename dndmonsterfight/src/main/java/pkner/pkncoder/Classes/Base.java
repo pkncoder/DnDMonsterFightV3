@@ -18,51 +18,38 @@ public class Base implements Comparable<Base> {
     // Initiative
     private int initiative;
 
-    // Constructor
+    /*
+     * Class Constructor
+     * 
+     * @param   name            name of the base
+     * @param   hp              health of the base
+     * @param   attackStr       bonus to the attack roll
+     * @param   attackDmgRoll   [number of dice] | [dice type]
+     * @param   attackDmgMod    amount of damage added after rolling it
+     */
     public Base(String name, int hp, int ac, int attackStr, int[] attackDmgRoll, int attackDmgMod) {
 
+        // Set the values accordingly
+        // Name
         this.name = name;
 
+        // Stats
         this.hp = hp;
         this.ac = ac;
 
+        // To-hit
         this.attackStr = attackStr;
 
+        // Damage
         this.attackDmgRoll = attackDmgRoll;
         this.attackDmgMod = attackDmgMod;
     }
 
-    // Getters
-    public String getName() {
-        return name;
-    }
-
-    public int getHp() {
-        return hp;
-    }
-
-    public int getAC() {
-        return ac;
-    }
-
-    public int getInitiative() {
-        return initiative;
-    }
-
-    // Hp by how much specified unless more than hp, in which hp is 0
-    public boolean takeDamage(int damage) {
-
-        // Subtract the hp by the damage
-        hp -= damage;
-
-        // If the hp is now in the negatives, turn it to 0
-        if (hp <= 0) {hp = 0;}
-
-        // Return if hp is more than 0 (true if it's still alive)
-        return hp > 0;
-    }
-
-    // This will attack a givin monster and use it's ac to get the total damage
+    /*
+     * Attacks another base
+     * 
+     * @param   other   the other base to attack
+     */
     public void attack(Base other) {
 
         // Hold a value, holding any damage done
@@ -92,16 +79,65 @@ public class Base implements Comparable<Base> {
         }
     }
 
+    // Roll a random initiative and set initiative as so
     public void rollInititave() {
         // Int of 0....0.99 * 20 (max - ((min + 1) cancles out)) plus min
         initiative = (int) (Math.random() * 20) + 1;
     }
 
+    /*
+     * @return  name of the base
+     */
+    public String getName() {
+        return name;
+    }
+
+    /*
+     * @return  hp of the base
+     */
+    public int getHp() {
+        return hp;
+    }
+
+    /*
+     * @return  ac of the base
+     */
+    public int getAC() {
+        return ac;
+    }
+
+    /*
+     * @return  initiative of the base
+     */
+    public int getInitiative() {
+        return initiative;
+    }
+
+
+    /*
+     * Sets the initiative of the base
+     * 
+     * @param   initiativeNum   the new value to be set
+     */
     public void setInitiative(int initiativeNum) {
         initiative = initiativeNum;
     }
 
-    // To-str
+    /*
+     * To string
+     * 
+     * 
+     * Name: {name}
+     * 
+     * HP: {hp}
+     * AC: {ac}
+     * 
+     * Attack: +{attack strength} to hit
+     * Damage: {num dice}d{dice type} + {damage mod} damage
+     * 
+     * 
+     * @return  a string formated as such
+     */
     @Override
     public String toString() {
         return (

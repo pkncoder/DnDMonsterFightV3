@@ -2,10 +2,10 @@ package pkner.pkncoder.Classes;
 
 public class Armor {
     
-    // Holds the title of the armor shown to the player
+    // Holds the name of the armor
     String name;
 
-    // The armor class givin to the player when worn (if able)
+    // The base armor class of the armor
     int armorClass; 
     
     // Used to decide if the player can wear said armor or not
@@ -15,8 +15,14 @@ public class Armor {
     boolean addDex; // If you add the dex or not
     int maxDexBonus; // If the dex is capped at 2
 
-    // Constructors
-    // Used if there is no strength min
+    /*
+     * Class constructor
+     * 
+     * @param   name        the name of the armor
+     * @param   armorClass  the base armor class of the armor
+     * @param   addDex      a boolean decing if the dex is to be added or not
+     * @param   maxDexBonus the max amount of dex to be added to the base's final ac
+     */
     public Armor(String name, int armorClass, boolean addDex, int maxDexBonus) {
 
         // Name & armor class
@@ -31,7 +37,15 @@ public class Armor {
         this.maxDexBonus = maxDexBonus;
     }
 
-    // Used if there is a strength min
+    /*
+     * Class constructor
+     * 
+     * @param   name                    the name of the armor
+     * @param   armorClass              the base armor class of the armor
+     * @param   minimumStrengthToWear   the min amount of strength needed to wear the armor
+     * @param   addDex                  a boolean decing if the dex is to be added or not
+     * @param   maxDexBonus             the max amount of dex to be added to the base's final ac
+     */
     public Armor(String name, int armorClass, int minimumStrengthToWear, boolean addDex, int maxDexBonus)  {
 
         // Name & armor class
@@ -46,13 +60,17 @@ public class Armor {
         this.maxDexBonus = maxDexBonus;
     }
 
-    // Getters
-    // Ac
+    /*
+     * Returns the base's final ac
+     * 
+     * @param   strength    the bases strength score
+     * @param   dexMod      the player's dexterity modifier
+     */
     public int getAc(int strength, int dexMod) {   
         // If the strength is too low
-        if (!(strength >= minimumStrengthToWear)) {
-            // Return -1 
-            return -1;
+        if (strength < minimumStrengthToWear) {
+            // Return the natural armor amount
+            return 10 + dexMod;
         }
 
         // If there isn't a dex mod
@@ -65,19 +83,33 @@ public class Armor {
         return armorClass + Math.min(maxDexBonus, dexMod);
     }
 
-    // Returns the name
+    /*
+     * @return the armor's name
+     */
     public String getName() {
         return name;
     }
 
-    // Returns the minimum strength
+    /*
+     * @return the minimum strength needed to wear
+     */
     public int getMinStr() { 
         return minimumStrengthToWear; 
     }
 
-    // ToString
+    /*
+     * To string
+     * 
+     * Name: {name}
+     * Ac: {base ac}
+     * Min Str to wear: {min strength}
+     * Add Dex? {true / false}
+     * Max Dex Bonus: {max dex bonus}
+     * 
+     * @return a string formatted as above
+     */
     @Override
     public String toString() {
-        return "Name: " + name + "\nAC: " + armorClass + "\nMin Str to wear: " + minimumStrengthToWear + "\nAdd Dex? " + addDex + "\nMaxDexBonus: " + maxDexBonus;
+        return "Name: " + name + "\nAC: " + armorClass + "\nMin Str to wear: " + minimumStrengthToWear + "\nAdd Dex? " + addDex + "\nMax Dex Bonus: " + maxDexBonus;
     }
 }

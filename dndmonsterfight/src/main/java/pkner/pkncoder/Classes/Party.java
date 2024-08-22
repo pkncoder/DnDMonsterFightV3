@@ -7,37 +7,54 @@ public class Party {
     // Hold an arraylist holding all the bases
     private ArrayList<Base> recruitments = new ArrayList<Base>();
 
-    // Hold the name and type of this party
+    // The name and type of this party
     private String name;
     private String type;
 
-    // Constructor
+    /*
+     * Class Constructor
+     * 
+     * @param   name    The name of the party
+     * @param   type    The type of party (usually "PLAYERS" or "ENEMIES")
+     */
     public Party(String name, String type)
     {
+        // Set the values
         this.name = name;
         this.type = type;
     }
 
-    // Adding a new party member
+    /*
+     * Adds a new party member to the list
+     * 
+     * @param   newPartyMember  the base to add to the party
+     */
     public void addPartyMember(Base newPartyMember)
     {
         recruitments.add(newPartyMember);
     }
 
-    // Removing a party member
+    /*
+     * Removes a party member from the list (assuming that it exists, if it doesn't this does nothing)
+     * 
+     * @param   gonePartyMember  the base to remove from the party
+     */
     public void removePartyMember(Base gonePartyMember)
     {
         recruitments.remove(gonePartyMember);
     }
 
-    // Getters
-    // Returning the total party
+    /*
+     * @return  The recruitment bases arraylist
+     */
     public ArrayList<Base> getParty()
     {
         return recruitments;
     }
 
-    // Returning an array with every base name
+    /*
+     * @return  The names of every base in the recruitment list in the form of a string array
+     */
     public String[] getBaseNames() {
 
         // Hold an array with the same len as the amount of bases added to the arrlist
@@ -51,11 +68,18 @@ public class Party {
         // Finally, return names
         return names;
     }
+
+    /*
+     * @return  The party's name
+     */
     public String getName()
     {
         return name;
     }
 
+    /*
+     * @return  The party's type
+     */
     public String getType()
     {
         return type;

@@ -24,7 +24,24 @@ public class PlayerCharacter extends Base {
     // Hold the weapon type
     private Weapon weapon;
 
-    // Constructor
+    /*
+     * Class constructor
+     * 
+     * Sets all the needed variables and calls the superclass
+     * 
+     * @param   name            Player's name
+     * @param   hp              Player's hp
+     * @param   strength        [Score] | [Score Modifier]
+     * @param   dexterity       [Score] | [Score Modifier]
+     * @param   constitution    [Score] | [Score Modifier]
+     * @param   wisdom          [Score] | [Score Modifier]
+     * @param   intelligence    [Score] | [Score Modifier]
+     * @param   charisma        [Score] | [Score Modifier]
+     * @param   level           The Player's level
+     * @param   userClass       The Player's class
+     * @param   weapon          The Player's weapon
+     * @param   armor           The Player's armor
+     */
     public PlayerCharacter(
         String name,
         int[] strength, int[] dexterity, int[] constitution, int[] wisdom, int[] intelligence, int[] charisma,
@@ -34,7 +51,7 @@ public class PlayerCharacter extends Base {
         Armor armor
     ) {
         
-        // Super the constructor
+        // Call the Super class's constructor (base)
         // Hp - half of the hp die (rounded up) times one less than the level plus the con mod per level plus the hit die
         super(
             name,  
@@ -45,9 +62,7 @@ public class PlayerCharacter extends Base {
             0
         );
 
-        
-
-        // Set everything as nedded
+        // Ability scores
         this.strength = strength;
         this.dexterity = dexterity;
         this.constitution = constitution;
@@ -55,27 +70,30 @@ public class PlayerCharacter extends Base {
         this.intelligence = intelligence;
         this.charisma = charisma;
 
+        // Level
+        this.level = level;
+
+        // Class, weapon, armor
         this.userClass = userClass;
         this.weapon = weapon;
         this.armor = armor;
-
-        this.level = level;
     }
 
+    // Override the totally random initiative roll so the player has a chance to *choose* their initiative
     @Override
     public void rollInititave()
     {
         // Clear the terminal
         Simple.clearTerminal();
 
-        // Ask for what the user want's to do
-        Simple.println("How would " + super.getName() + " like to do initiative?");
+        // Ask for what the user want's to roll their initiative
+        Simple.println("How would " + super.getName() + " like to roll initiative?");
         Simple.space();; // Empty space
         Simple.println("Roll own Inititave - 1");
         Simple.println("Random Number for Inititave - 2");
         Simple.space();; // Empty space
 
-        // Prompt the user
+        // Prompt the user for their choice
         int choice = Simple.getIntInput("What would you like to do: ", "[12]");
 
         // If the number is simply random
@@ -86,10 +104,39 @@ public class PlayerCharacter extends Base {
             return;
         }
 
-        // Set the initiative as the user's input
+        // Else, set the initiative as the user's input
+        Simple.clearTerminal();
         super.setInitiative(Simple.getIntInput("Rolled Initiative: ", "[1-9][0-9]*"));
     }
 
+    /*
+     * To string method
+     * 
+     * 
+     * Name: {name}
+     * 
+     * Class: {class name}
+     * Level: {level}
+     * 
+     * Hp: {hp amount}
+     * 
+     * Armor: {armor's name}
+     * Armor Class: {ac}
+     * 
+     * Strength: {score} ({modifier})
+     * Dexterity: {score} ({modifier})
+     * Constitution: {score} ({modifier})
+     * Wisdom: {score} ({modifier})
+     * Intelligence: {score} ({modifier})
+     * Charisma: {score} ({modifier})
+     * 
+     * Weapon: {Weapon name}
+     * To Hit Modifier: +0
+     * Damage Dice: {amount of dice rolled}d{dice type} + 0
+     * 
+     * 
+     * @return  A string formatted as shown above
+     */
     @Override
     public String toString() {
         
