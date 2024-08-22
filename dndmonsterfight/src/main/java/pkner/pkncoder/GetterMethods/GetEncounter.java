@@ -94,7 +94,7 @@ public class GetEncounter
                         // Check if there is just one party
                         if (totalParties == 1) {
                             // If there is then check to see if the user is fine with having only one party (and set it to uppercase so case sensitivity doesn't matter)
-                            String choice = Simple.getStringInput("Are you ok with having only one party? Usually parties don't attack each other. If you choose yes then it will be a single base that wins.\n(y or n): ", "[yYnN]").toUpperCase();
+                            String choice = Simple.getStringInput("Are you ok with having only one party? Usually parties don't attack each other. If you choose yes then it will be a single base that wins.\n(y or n): ", "Invalid Input", "[yYnN]").toUpperCase();
 
                             // Check to see what the user's choice was
                             // If it was yes
@@ -452,7 +452,7 @@ public class GetEncounter
 
             // Get the name of the party
             // Allow any a-z, A-Z, 0-9, or _ character (basically not letting nothing get through)
-            String maybeName = Simple.getStringInput("Party Name: ", "[\\w+]+");
+            String maybeName = Simple.getStringInput("Party Name: ", "Invalid Input", "[\\w+]+");
 
             // Check to see if the name is already taken
             if (playerParties.findPartyByName(maybeName) != null || enemyParties.findPartyByName(maybeName) != null) {

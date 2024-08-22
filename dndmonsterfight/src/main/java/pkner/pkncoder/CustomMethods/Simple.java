@@ -94,11 +94,12 @@ public class Simple
     /*
      * Gets an input with regex input validation
      * 
-     * @param   querry  the data to querry the user with
-     * @param   rule    the regex that the user has to match with
-     * @return  the value gotten by the user
+     * @param   querry          the data to querry the user with
+     * @param   errorMessage    the message presented when the validation doesn't pass
+     * @param   rule            the regex that the user has to match with
+     * @return                  the value gotten by the user
      */
-    public static String getStringInput(String querry, String rule)
+    public static String getStringInput(String querry, String errorMessage, String rule)
     {
         // Empty string as a temp
         String input = "";
@@ -119,7 +120,7 @@ public class Simple
             // If it doesn't then print invalid input
             else
             {            
-                Simple.println("Invalid Input");
+                Simple.println(errorMessage);
             }
         }
 
@@ -184,6 +185,7 @@ public class Simple
      * Gets an int input without any input validation
      * 
      * @param   querry  the querry to ask the user with
+     * @retrurn         The int gotten from the user
      */
     public static int getIntInput(Object querry)
     {
@@ -197,10 +199,12 @@ public class Simple
     /*
      * Gets an int input with a regex input validation rule
      * 
-     * @param   querry  the querry to ask the user with
-     * @param   rule    the rule to match with
+     * @param   querry          the querry to ask the user with
+     * @param   errorMessage    the message presented when the validation doesn't pass
+     * @param   rule            the rule to match with
+     * @return                  The int gotten from the user through the rule
      */
-    public static int getIntInput(String querry, String rule)
+    public static int getIntInput(String querry, String errorMessage, String rule)
     {
         // Set an input value at min value (because I need a default to test)
         int input = Integer.MIN_VALUE;
@@ -221,7 +225,7 @@ public class Simple
             // If it doesn't then print invalid input
             else
             {
-                Simple.println("Invalid Input");
+                Simple.println(errorMessage);
             }
         }
 

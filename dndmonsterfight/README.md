@@ -94,25 +94,28 @@ This is a list of possible future notes on things that I may add (not necisairly
 - [ ] Don't allow name overlaps for players or enemies
 - [x] Don't allow name overlaps for parties
 - [ ] Check all user output and make sure it is still intuitive and makes sense (and looks good)
-- [ ] Add a to hit modifier and damage modifier
-  - [ ] Actually calculate the correct value
+- [x] Add a to hit modifier and damage modifier
+  - [x] Actually calculate the correct value
+  - Everything is a finnesse weapon in the idea of to hit and damage mods bc I can't tell the difference if there is one
 - [x] Add a random value function to simple
 - [x] Check for more things to add GetHelperMethods()
 - [x] Check ALL input validation (ex. commas in weapons)
 - [ ] Rename the PlayerCharacter class to just Player
-- [ ] Add more customization to Simple.java (aka. error messages)
+- [x] Add more customization to Simple.java (aka. error messages)
 - [x] Check for allowed amounts of bases and parties in the 'done' command
 - [ ] Add different win conditions
   - [ ] Players or enemies
   - [ ] Last party standing
   - [ ] Last base standing
-- [ ] Make the get num bases from PartyCollection only increase when we check it
+- [x] Make the get num bases from PartyCollection only increase when we check it
 - [ ] Add viewing of weapons, armors, or classes when choosing them
 - [ ] Add viewing of characters when attacking
 - [ ] Basic custom weapon, armor, and class
 - [x] Check Encounter.java for re-initializing variables that can be put to a larger scope
   - Wasn't really that bad so I just left it alone
-- [ ] Re-check all comments in Base.java and fix them to use v3 comments (there are still some v2 ones)
+- [ ] Rewrite Base.java since it's old and hasn't been changed much to new terms
+- [ ] Make better error messages
+- [ ] Make the to-strings better with a return ();
 
 ### Hypothetically major re-writing
 - [ ] Same code for players / enemies

@@ -101,9 +101,6 @@ public class PartyColection {
 
         // Add the party
         partyList.add(newParty);
-
-        // Re-calibrate the total bases
-        findCurentNumBases();
     }
 
     /*
@@ -138,9 +135,6 @@ public class PartyColection {
     public void removeParty(Party sadParty) {
         // Remove it
         partyList.remove(sadParty);
-        
-        // Re-calibrate the total bases
-        findCurentNumBases();
     }
 
     /*
@@ -151,9 +145,6 @@ public class PartyColection {
     public void removeParty(String sadParty) {
         // Remove it based on the string
         partyList.remove(findPartyByName(sadParty));
-        
-        // Re-calibrate the total bases
-        findCurentNumBases();
     }
 
     /*
@@ -226,9 +217,16 @@ public class PartyColection {
     }
 
     /*
+     * Updates and returns the num of bases
+     * 
      * @return  the number of bases
      */
     public int getNumBases() {
+
+        // Check for the num of current bases
+        findCurentNumBases();
+        
+        // Return the found value
         return totalBases;
     }
     

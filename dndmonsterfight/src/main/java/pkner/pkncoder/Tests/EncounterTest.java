@@ -23,6 +23,7 @@ public class EncounterTest {
             new int[] {20, 5},
             new int[] {10, 0},
             3,
+            2,
             new PlayerClass("barbarian", 12),
             new Weapon("Excaliber", 300000, new int[] {3, 20}),
             new Armor("Plank", 11, false, 0)

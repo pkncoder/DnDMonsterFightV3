@@ -288,7 +288,7 @@ public class Encounter {
     // Enact an attack against another base
     private void attack() {
         // Querry who their attacking
-        int attackerIndex = Simple.getIntInput("Who is " + initiativeList.get(turnNum).getName() + " attacking (ex. 1): ", "[1-" + preyBases.size() + "]");
+        int attackerIndex = Simple.getIntInput("Who is " + initiativeList.get(turnNum).getName() + " attacking (ex. 1): ", "Invalid Input", "[1-" + preyBases.size() + "]");
 
         // Get the turn number of the current base, and attack the chosen base from the prey bases
         initiativeList.get(turnNum).attack(preyBases.get(attackerIndex - 1));

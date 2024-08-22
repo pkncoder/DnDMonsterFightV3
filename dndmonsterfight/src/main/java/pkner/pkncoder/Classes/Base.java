@@ -116,6 +116,20 @@ public class Base implements Comparable<Base> {
         return initiative;
     }
 
+    /*
+     * @return  the to hit modifier
+     */
+    public int getToHitMod() {
+        return attackStr;
+    }
+
+    /*
+     * @return  the damage modifier
+     */
+    public int getDamageMod() {
+        return attackDmgMod;
+    }
+
 
     /*
      * Sets the initiative of the base

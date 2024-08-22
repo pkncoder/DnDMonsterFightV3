@@ -41,7 +41,7 @@ public class GetPlayerCharacter {
         int[][] abilities = GetHelperMethods.getAbilityScores();
 
         // Get the player's level
-        int level = Simple.getIntInput("Level: ", "[1-9][0-9]*");
+        int level = Simple.getIntInput("Level: ", "Invalid Input", "[1-9][0-9]*");
 
         // Get the players class
         Simple.clearTerminal();
@@ -56,7 +56,8 @@ public class GetPlayerCharacter {
         Armor armor = getPlayerArmor();
 
         // Create the player
-        return new PlayerCharacter(name, abilities[0], abilities[1], abilities[2], abilities[3], abilities[4], abilities[5], level, userClass, weapon, armor);
+        // Proficiency bonus is the players level devided by four, rounded up, plus one
+        return new PlayerCharacter(name, abilities[0], abilities[1], abilities[2], abilities[3], abilities[4], abilities[5], level, (int) Math.ceil(level / 4.0) + 1, userClass, weapon, armor);
     }
 
     /*

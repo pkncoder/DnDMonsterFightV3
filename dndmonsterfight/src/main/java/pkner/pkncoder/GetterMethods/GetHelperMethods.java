@@ -15,12 +15,12 @@ public class GetHelperMethods {
     public static int[][] getAbilityScores() {
         
         // Enemy primary stats
-        int strengthScore = Simple.getIntInput("Strength: ", positiveMoreThanOneRegex);
-        int dexterityScore = Simple.getIntInput("Dexterity: ", positiveMoreThanOneRegex);
-        int constitutionScore = Simple.getIntInput("Constitution: ", positiveMoreThanOneRegex);
-        int wisdomScore = Simple.getIntInput("Wisdom: ", positiveMoreThanOneRegex);
-        int intelligenceScore = Simple.getIntInput("Intellegence: ", positiveMoreThanOneRegex);
-        int charismaScore = Simple.getIntInput("Charisma: ", positiveMoreThanOneRegex);
+        int strengthScore = Simple.getIntInput("Strength: ", "Invalid Input", positiveMoreThanOneRegex);
+        int dexterityScore = Simple.getIntInput("Dexterity: ", "Invalid Input", positiveMoreThanOneRegex);
+        int constitutionScore = Simple.getIntInput("Constitution: ", "Invalid Input", positiveMoreThanOneRegex);
+        int wisdomScore = Simple.getIntInput("Wisdom: ", "Invalid Input", positiveMoreThanOneRegex);
+        int intelligenceScore = Simple.getIntInput("Intellegence: ", "Invalid Input", positiveMoreThanOneRegex);
+        int charismaScore = Simple.getIntInput("Charisma: ", "Invalid Input", positiveMoreThanOneRegex);
 
         // Split up the primary stats into [stat] [mod]
         int[] strength = {strengthScore, calculateAbilityMod(strengthScore)};

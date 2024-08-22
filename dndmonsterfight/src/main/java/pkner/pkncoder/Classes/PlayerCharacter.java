@@ -15,8 +15,9 @@ public class PlayerCharacter extends Base {
     // Hold our character's class
     private PlayerClass userClass;
 
-    // Hold our character's level
+    // Hold our character's level and proficiency bonus
     private int level;
+    private int proficiencyBonus;
 
     // Hold the armor type for the player character
     private Armor armor;
@@ -29,23 +30,25 @@ public class PlayerCharacter extends Base {
      * 
      * Sets all the needed variables and calls the superclass
      * 
-     * @param   name            Player's name
-     * @param   hp              Player's hp
-     * @param   strength        [Score] | [Score Modifier]
-     * @param   dexterity       [Score] | [Score Modifier]
-     * @param   constitution    [Score] | [Score Modifier]
-     * @param   wisdom          [Score] | [Score Modifier]
-     * @param   intelligence    [Score] | [Score Modifier]
-     * @param   charisma        [Score] | [Score Modifier]
-     * @param   level           The Player's level
-     * @param   userClass       The Player's class
-     * @param   weapon          The Player's weapon
-     * @param   armor           The Player's armor
+     * @param   name                Player's name
+     * @param   hp                  Player's hp
+     * @param   strength            [Score] | [Score Modifier]
+     * @param   dexterity           [Score] | [Score Modifier]
+     * @param   constitution        [Score] | [Score Modifier]
+     * @param   wisdom              [Score] | [Score Modifier]
+     * @param   intelligence        [Score] | [Score Modifier]
+     * @param   charisma            [Score] | [Score Modifier]
+     * @param   level               The Player's level
+     * @param   proficiencyBonus    The player's proficiency bonus
+     * @param   userClass           The Player's class
+     * @param   weapon              The Player's weapon
+     * @param   armor               The Player's armor
      */
     public PlayerCharacter(
         String name,
         int[] strength, int[] dexterity, int[] constitution, int[] wisdom, int[] intelligence, int[] charisma,
         int level,
+        int proficiencyBonus,
         PlayerClass userClass,
         Weapon weapon,
         Armor armor
@@ -53,13 +56,15 @@ public class PlayerCharacter extends Base {
         
         // Call the Super class's constructor (base)
         // Hp - half of the hp die (rounded up) times one less than the level plus the con mod per level plus the hit die
+        // attackStr - max of dex or strength modifier plus the proficiency bonus
+        // attackDmgMod - max of dex or strength modifier
         super(
             name,  
             ( ( ((userClass.getHpDie() / 2) + 1) * (level - 1) ) + (level * constitution[1]) ) + userClass.getHpDie(), 
             armor.getAc(strength[0], dexterity[1]),
-            0,
+            Math.max(strength[1], dexterity[1]) + proficiencyBonus,
             weapon.getDice(), 
-            0
+            Math.max(strength[1], dexterity[1])
         );
 
         // Ability scores
@@ -94,7 +99,7 @@ public class PlayerCharacter extends Base {
         Simple.space();; // Empty space
 
         // Prompt the user for their choice
-        int choice = Simple.getIntInput("What would you like to do: ", "[12]");
+        int choice = Simple.getIntInput("What would you like to do: ", "Invalid Input", "[12]");
 
         // If the number is simply random
         if (choice == 2) {
@@ -106,7 +111,7 @@ public class PlayerCharacter extends Base {
 
         // Else, set the initiative as the user's input
         Simple.clearTerminal();
-        super.setInitiative(Simple.getIntInput("Rolled Initiative: ", "[1-9][0-9]*"));
+        super.setInitiative(Simple.getIntInput("Rolled Initiative: ", "Invalid Input", "[1-9][0-9]*"));
     }
 
     /*
@@ -131,8 +136,8 @@ public class PlayerCharacter extends Base {
      * Charisma: {score} ({modifier})
      * 
      * Weapon: {Weapon name}
-     * To Hit Modifier: +0
-     * Damage Dice: {amount of dice rolled}d{dice type} + 0
+     * To Hit Modifier: +-{attackMod}
+     * Damage Dice: {amount of dice rolled}d{dice type} +- {damageMod}
      * 
      * 
      * @return  A string formatted as shown above
@@ -157,7 +162,7 @@ public class PlayerCharacter extends Base {
             "Intelligence: " + intelligence[0] + " (" + intelligence[1] + ")\n" +
             "Charisma: " + charisma[0] + " (" + charisma[1] + ")\n\n" +
             
-            "Weapon: " + weapon.getName() + "\nTo Hit Modifier: +0\nDamage Dice: " + weapon.getDice()[0] + "d" + weapon.getDice()[1] + " + 0\n\n"
+            "Weapon: " + weapon.getName() + "\nTo Hit Modifier: " + (super.getToHitMod() > 0 ? ("+" + super.getToHitMod()) : super.getToHitMod()) + "\nDamage Dice: " + weapon.getDice()[0] + "d" + weapon.getDice()[1] + (super.getDamageMod() > 0 ? (" + " + super.getDamageMod()) : (" - " + Math.abs(super.getDamageMod()))) + "\n\n"
             
             ;
 

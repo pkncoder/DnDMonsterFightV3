@@ -42,7 +42,7 @@ public class GetEnemy {
 
         // Get the enemy's hp
         // The regex states that it can only be above (or equal to) 1
-        int hp = Simple.getIntInput("Hit Points: ", "[1-9][0-9]*");
+        int hp = Simple.getIntInput("Hit Points: ", "Invalid Input", "[1-9][0-9]*");
 
         // Get our scores
         int[][] abilityScores = GetHelperMethods.getAbilityScores();
