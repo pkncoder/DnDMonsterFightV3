@@ -113,7 +113,7 @@ This is a list of possible future notes on things that I may add (not necisairly
 - [ ] Basic custom weapon, armor, and class
 - [x] Check Encounter.java for re-initializing variables that can be put to a larger scope
   - Wasn't really that bad so I just left it alone
-- [ ] Rewrite Base.java since it's old and hasn't been changed much to new terms
+- [x] Rewrite Base.java since it's old and hasn't been changed much to new terms
 - [ ] Make better error messages
 - [ ] Make the to-strings better with a return ();
 

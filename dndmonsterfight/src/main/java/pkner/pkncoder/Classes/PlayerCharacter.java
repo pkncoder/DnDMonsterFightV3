@@ -137,7 +137,7 @@ public class PlayerCharacter extends Base {
      * 
      * Weapon: {Weapon name}
      * To Hit Modifier: +-{attackMod}
-     * Damage Dice: {amount of dice rolled}d{dice type} +- {damageMod}
+     * Damage: {amount of dice rolled}d{dice type} +- {damageMod}
      * 
      * 
      * @return  A string formatted as shown above
@@ -162,7 +162,7 @@ public class PlayerCharacter extends Base {
             "Intelligence: " + intelligence[0] + " (" + intelligence[1] + ")\n" +
             "Charisma: " + charisma[0] + " (" + charisma[1] + ")\n\n" +
             
-            "Weapon: " + weapon.getName() + "\nTo Hit Modifier: " + (super.getToHitMod() > 0 ? ("+" + super.getToHitMod()) : super.getToHitMod()) + "\nDamage Dice: " + weapon.getDice()[0] + "d" + weapon.getDice()[1] + (super.getDamageMod() > 0 ? (" + " + super.getDamageMod()) : (" - " + Math.abs(super.getDamageMod()))) + "\n\n"
+            "Weapon: " + weapon.getName() + "\nTo Hit Modifier: " + (super.getToHitMod() > 0 ? ("+" + super.getToHitMod()) : super.getToHitMod()) + "\nDamage: " + weapon.getDice()[0] + "d" + weapon.getDice()[1] + (super.getDamageMod() > 0 ? (" + " + super.getDamageMod()) : (" - " + Math.abs(super.getDamageMod()))) + "\n\n"
             
             ;
 
