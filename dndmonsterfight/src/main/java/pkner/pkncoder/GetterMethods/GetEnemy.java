@@ -86,7 +86,7 @@ public class GetEnemy {
         
 
         // Send the request based and formatted on the user's weapon
-        json.sendGetRequest(baseUrl + "/api/equipment/" + userWeapon.toLowerCase().replaceAll(" ", "-"));
+        json.sendGetRequest(baseUrl + "/api/equipment/" + userWeapon.toLowerCase().replaceAll(",", "").replaceAll(" ", "-"));
 
         // Create and return the weapon
         return new Weapon(
@@ -114,8 +114,9 @@ public class GetEnemy {
         json.sendGetRequest(baseUrl + "/api/equipment-categories/armor");
         printAndSaveApiData(armorNameBuffer, 11);
 
-        // Add a no armor option to the list
+        // Add a no armor option to the list and print out "No Armor" to the screen with the rest
         armorNameBuffer.add("No Armor");
+        Simple.println("No Armor");
 
         // Get the array form of the armor name buffer
         String[] armorNames = armorNameBuffer.toArray(new String[armorNameBuffer.size()]);
@@ -137,7 +138,7 @@ public class GetEnemy {
         }
         
         // Else, send the request based and formatted on the user's armor
-        json.sendGetRequest(baseUrl + "/api/equipment/" + userArmor.toLowerCase().replaceAll(",", "").replaceAll(" ", "-"));
+        json.sendGetRequest(baseUrl + "/api/equipment/" + userArmor.toLowerCase().replaceAll(" ", "-"));
 
         // Create and return the armor
         return new Armor(

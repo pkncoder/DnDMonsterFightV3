@@ -82,28 +82,43 @@ This is a list of possible future notes on things that I may add (not necisairly
   - For now party & name for removing
 
 
-### Code Re-Writing
+### Code Re-Writing or New Code
 
 - [x] <a href="http://www.dnd5eapi.co/">DnD API</a> usage to get stats for items / armors etc.
     - [x] Removing ArmorColection.java
     - [x] Removing WeaponColection.java
     - [x] Removing ClassType.java
 - [x] Rewright GetPlayerCharacter.java
+- [x] Re-write GetHelperMethods.GetArmor() & GetHelperMethods.GetWeapon() to use better input validation
+  - Its all in the api now and seems good
+- [ ] Don't allow name overlaps for players or enemies
+- [x] Don't allow name overlaps for parties
+- [ ] Check all user output and make sure it is still intuitive and makes sense (and looks good)
+- [ ] Add a to hit modifier and damage modifier
+  - [ ] Actually calculate the correct value
+- [ ] Add a random value function to simple
+- [x] Check for more things to add GetHelperMethods()
+- [ ] Check ALL input validation (ex. commas in weapons)
+- [ ] Rename the Base class to Character (finally a good name)
+- [ ] Rename the PlayerCharacter class to just Player
+- [ ] Add more customization to Simple.java (aka. error messages)
+- [x] Check for allowed amounts of bases and parties in the 'done' command
+- [ ] Add different win conditions
+  - [ ] Players or enemies
+  - [ ] Last party standing
+  - [ ] Last base standing
+- [ ] Make the get num bases from PartyCollection only increase when we check it
+- [ ] Add viewing of weapons, armors, or classes when choosing them
+- [ ] Add viewing of characters when attacking
+- [ ] Basic custom weapon, armor, and class
+
+### Hypothetically major re-writing
 - [ ] Same code for players / enemies
     - [ ] Only difference being an array or something to choose what to use
     - [ ] Like an index that gets changed when player or enemy is used
     - [ ] Or using the input like an enum
 - [ ] And basically the same for player / enemy parties (shoving them in a array like thing and using an index / enum like thing to choose which one to do magic with)
-- [x] Re-write GetHelperMethods.GetArmor() & GetHelperMethods.GetWeapon() to use better input validation
-  - Its all in the api now and seems good
-- [ ] Don't allow name overlaps for Parties or characters
-- [ ] Check all user output and make sure it is still intuitive and makes sense (and looks good)
-- [ ] Add a to hit modifier and damage modifier
-  - [ ] Actually calculate the correct value
-- [ ] Add a random value function to simple
-- [ ] Check for more things to add GetHelperMethods()
-- [ ] Check ALL input validation (ex. commas in weapons)
-- [ ] Rename the Base class to Character (finally a good name)
+
 
 ### Api Re-Writing
 - Api class

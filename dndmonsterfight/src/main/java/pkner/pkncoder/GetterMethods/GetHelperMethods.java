@@ -1,6 +1,5 @@
 package pkner.pkncoder.GetterMethods;
 
-import pkner.pkncoder.Classes.Party;
 import pkner.pkncoder.CustomMethods.Simple;
 
 public class GetHelperMethods {
@@ -44,23 +43,6 @@ public class GetHelperMethods {
     private static int calculateAbilityMod(int score) {
         // For every 2 after 10, you get +1 to your ability mod (ex. 10 is +0 and 12 is +1)
         return ((score - 10) / 2);
-    }
-
-    /*
-     * Gets the final made party
-     * 
-     * @return  the final party with name and type
-     */
-    public static Party getParty() {
-
-        // Get the name of the party
-        String name = Simple.getStringInput("Party Name: ");
-
-        // Get the type of the party (character or enemy)
-        String type = Simple.getStringInput("Will this party have Players or Enemies: ", new String[] {"players", "enemies"}, "Invalid Input", false);
-
-        // Now return our party
-        return new Party(name, type);
     }
 
     /*

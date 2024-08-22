@@ -57,9 +57,9 @@ public class GetEncounter
             Simple.printArray(allowedWords);
             Simple.space();
 
-            // Have an inner while loop to handle the commands
-            // It is looped until a command has succseeded, and doesn't re-loop
-            while (true) {
+            // We have another loop so we can type 'continue' to not wipe the terminal and 'break' to check for a win and wipe the terminal
+            // Have the same condition as above so it isn't just a while true loop (I don't like those)
+            while (!done) {
 
                 // Get our command
                 String command = Simple.getStringInput("Command: ", allowedWords.clone(), "Invalid Input", false);
@@ -70,7 +70,54 @@ public class GetEncounter
                     // Done
                     case "DONE":
 
-                        // Set done to true and break to finish the loop
+                        // Save a varaible for checking if there are enough bases or not
+                        int totalBases = playerParties.getNumBases() + enemyParties.getNumBases();
+
+                        // Check to see if there are enough bases (2 or more)
+                        if (totalBases < 2) {
+                            // If there aren't, then print an error message and continue
+                            Simple.println("There must be at least 2 players or enemies combined (You don't have enough).");
+                        }
+
+                        
+                        // Save a variable for checking if there are enough parties or not
+                        int totalParties = playerParties.getPartyList().size() + enemyParties.getPartyList().size();
+
+                        // Check to see if there any parties
+                        if (totalParties < 1) {
+                            // If there aren't then print an error message and continue
+                            Simple.println("There are not enough parties made.");
+                            continue;
+                        }
+
+                        // Check if there is just one party
+                        if (totalParties == 1) {
+                            // If there is then check to see if the user is fine with having only one party
+                            String choice = Simple.getStringInput("Are you ok with having only one party? Usually parties don't attack each other. If you choose yes then it will be a single base that wins.\n(y or n): ", "[yYnN]");
+
+                            // Switch over the user's choice
+                            switch (choice.toUpperCase()) {
+
+                                // If the user chooses yes
+                                case "Y":
+                                    
+                                    // Set done to true and break out
+                                    done = true;
+                                    break;
+
+                                // If the user chooses no
+                                case "N":
+                                    // Break out to re-clear the terminal
+                                    break;
+                            
+                                default:
+                                    // Just in case
+                                    Simple.println("An error has occoured");
+                                    break;
+                            }
+                        }
+
+                        // If none of those checks get set off then set done to true and break out
                         done = true;
                         break;
 
@@ -137,7 +184,7 @@ public class GetEncounter
                         Simple.clearTerminal();
 
                         // Gain our party
-                        Party newParty = GetHelperMethods.getParty();
+                        Party newParty = getParty();
 
                         // Add it to the corresponding party type
                         findPartyPlacement(newParty);
@@ -398,5 +445,41 @@ public class GetEncounter
             default:
                 break;
         }
+    }
+
+    /*
+     * Gets the final made party
+     * 
+     * @return  the final party with name and type
+     */
+    public static Party getParty() {
+
+        // Save a variable that will exit the loop when set
+        // This is used for the name of the party
+        String name = "";
+
+        while (name.equals("")) {
+
+            // Get the name of the party
+            // Allow any a-z, A-Z, 0-9, or _ character (basically not letting nothing get through)
+            String maybeName = Simple.getStringInput("Party Name: ", "[\\w+]+");
+
+            // Check to see if the name is already taken
+            if (playerParties.findPartyByName(maybeName) != null || enemyParties.findPartyByName(maybeName) != null) {
+
+                // If it is print out an error message and continue to re-start the loop
+                Simple.println("Name Already Taken.");
+                continue;
+            }
+
+            // If the if statement doesn't trigger, then set name to something other than "" to end the loop and continue
+            name = maybeName;
+        }
+
+        // Get the type of the party (character or enemy)
+        String type = Simple.getStringInput("Will this party have Players or Enemies: ", new String[] {"players", "enemies"}, "Invalid Input", false);
+
+        // Now return our party
+        return new Party(name, type);
     }
 }
