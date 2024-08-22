@@ -96,10 +96,9 @@ This is a list of possible future notes on things that I may add (not necisairly
 - [ ] Check all user output and make sure it is still intuitive and makes sense (and looks good)
 - [ ] Add a to hit modifier and damage modifier
   - [ ] Actually calculate the correct value
-- [ ] Add a random value function to simple
+- [x] Add a random value function to simple
 - [x] Check for more things to add GetHelperMethods()
 - [x] Check ALL input validation (ex. commas in weapons)
-- [ ] Rename the Base class to Character (finally a good name)
 - [ ] Rename the PlayerCharacter class to just Player
 - [ ] Add more customization to Simple.java (aka. error messages)
 - [x] Check for allowed amounts of bases and parties in the 'done' command
@@ -121,6 +120,7 @@ This is a list of possible future notes on things that I may add (not necisairly
     - [ ] Like an index that gets changed when player or enemy is used
     - [ ] Or using the input like an enum
 - [ ] And basically the same for player / enemy parties (shoving them in a array like thing and using an index / enum like thing to choose which one to do magic with)
+- [ ] Rename the Base class to Character (finally a good name)
 
 
 ### Api Re-Writing
