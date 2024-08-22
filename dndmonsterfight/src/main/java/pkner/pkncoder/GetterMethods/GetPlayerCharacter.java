@@ -26,6 +26,11 @@ public class GetPlayerCharacter {
     // Hold an array list of armor names as a buffer since we see them anyways
     private static ArrayList<String> armorNameBuffer = new ArrayList<String>();
 
+    /*
+     * Main method
+     * 
+     * @returns the final player
+     */
     public static PlayerCharacter getPlayer() throws IOException, InterruptedException {
         json = new Api(); // Initialize our API object
 
@@ -54,6 +59,11 @@ public class GetPlayerCharacter {
         return new PlayerCharacter(name, abilities[0], abilities[1], abilities[2], abilities[3], abilities[4], abilities[5], level, userClass, weapon, armor);
     }
 
+    /*
+     * Gets the player class
+     * 
+     * @return  The final class object
+     */
     private static PlayerClass getPlayerClass() throws IOException, InterruptedException {
         Simple.printArray(classes); // Print the classes that can be chosen from
         Simple.space();
@@ -68,6 +78,11 @@ public class GetPlayerCharacter {
         return new PlayerClass(json.get("name").getAsString(), json.get("hit_die").getAsInt());
     }
 
+    /*
+     * Gets the player's weapon
+     * 
+     * @return  The player's weapon
+     */
     private static Weapon getPlayerWeapon() throws IOException, InterruptedException {
 
         // Hold a variable that will store all of the names of the weapons
@@ -147,6 +162,11 @@ public class GetPlayerCharacter {
         );
     }
 
+    /*
+     * Gets the player's armor
+     * 
+     * @return  The armor finally assembled
+     */
     private static Armor getPlayerArmor() throws IOException, InterruptedException {
         
         // Get the armor's name in a string[]

@@ -1,15 +1,18 @@
 package pkner.pkncoder.GetterMethods;
 
-
-import pkner.pkncoder.Classes.Armor;
 import pkner.pkncoder.Classes.Party;
-import pkner.pkncoder.Classes.Weapon;
 import pkner.pkncoder.CustomMethods.Simple;
 
 public class GetHelperMethods {
 
+    // The regex used for most of the ability scores
     private static String positiveMoreThanOneRegex = "[1-9][0-9]*";
 
+    /*
+     * Gets the ability scores for bases
+     * 
+     * @return  all of the scores in one big 2D array
+     */
     public static int[][] getAbilityScores() {
         
         // Enemy primary stats
@@ -32,96 +35,22 @@ public class GetHelperMethods {
         return new int[][] {strength, dexterity, constitution, wisdom, intelligence, charisma};
     }
 
-    // Used to calculate ability score modifiers
+    /*
+     * Calculate the abilities score modifier
+     * 
+     * @param   score   the ability score
+     * @return          the final ability mod
+     */
     private static int calculateAbilityMod(int score) {
         // For every 2 after 10, you get +1 to your ability mod (ex. 10 is +0 and 12 is +1)
         return ((score - 10) / 2);
     }
 
-    // Used to get the weapon with no spesific class binds
-    public static Weapon getWeapon(Weapon[][] allowedWeapons) {
-
-        // Loop every weapon and print it out
-        // Each sub-arr
-        for (Weapon[] weaponLevel: allowedWeapons)
-        {
-            // Each weapon
-            for (Weapon weapon: weaponLevel)
-            {
-                // Print out each weapon's name
-                Simple.println(weapon.getName());
-            }
-        }
-
-        // Ask the user their perfered weapon
-        // Loop forever since we return during loop
-        while (true) {
-            
-            // Ask for the input and set it to uppercase so we don't have to worry about any case sensitiveness
-            String userInput = Simple.getStringInput("Weapon Choice: ", "[a-zA-Z ]+").toUpperCase();
-
-            // Loop every weapon to see if the name matches
-            // Each sub-arr
-            for (Weapon[] weaponLevel: allowedWeapons)
-            {
-                // Each weapon
-                for (Weapon weapon: weaponLevel)
-                {
-                    // Check if the name matches (to upper so no case sensitive)
-                    if (weapon.getName().toUpperCase().equals(userInput))
-                    {
-                        return weapon;
-                    }
-                }
-            }
-
-            // Print out invalid input if the if statement doesn't go through
-            Simple.println("Invalid Input");
-        }
-    }
-
-    // Used to get the armor with no spesific class binds
-    public static Armor getArmor(int strengthScore, Armor[][] allowedArmors) {
-
-        // Loop every armor and print it out
-        // Each sub-arr
-        for (Armor[] armorLevel: allowedArmors)
-        {
-            // Each armor
-            for (Armor armor: armorLevel)
-            {
-                // Print out each armor's name
-                Simple.println(armor.getName());
-            }
-        }
-
-        // Ask the user their perfered armor
-        // Loop forever since we return during loop
-        while (true) {
-            
-            // Ask for the input and set it to uppercase so we don't have to worry about any case sensitiveness
-            String userInput = Simple.getStringInput("Armor Choice: ", "[a-zA-Z ]+").toUpperCase();
-
-            // Loop every armor to see if the name matches
-            // Each sub-arr
-            for (Armor[] armorLevel: allowedArmors)
-            {
-                // Each armor
-                for (Armor armor: armorLevel)
-                {
-                    // Check if the name matches (to upper so no case sensitive)
-                    if (armor.getName().toUpperCase().equals(userInput))
-                    {
-                        return armor;
-                    }
-                }
-            }
-
-            // Print out invalid input if the if statement doesn't go through
-            Simple.println("Invalid Input");
-        }
-    }
-
+    /*
+     * Gets the final made party
+     * 
+     * @return  the final party with name and type
+     */
     public static Party getParty() {
 
         // Get the name of the party
@@ -134,14 +63,14 @@ public class GetHelperMethods {
         return new Party(name, type);
     }
 
-    // Validate command, used to check the command for correctness
-    public static boolean validateCommand(String[] splitCommand)
-    {
-        return true;
-    }
-
-    // Used to set the allowed words
-    public static String[] getAllowedWords(String[] actions, String[] subjects)
+    /*
+     * Used to get the allowed commands
+     * 
+     * @param   actions     the possible actions
+     * @param   subjects    the possible subjects
+     * @return              A final arary list composing of all the different combos of actinos and subjects (action then subject only)
+     */
+    public static String[] getAllowedCommands(String[] actions, String[] subjects)
     {
         // Next, initialize allowed words
         String[] allowedWords = new String[actions.length * subjects.length + 1];

@@ -20,7 +20,11 @@ public class GetEnemy {
 
     private static String baseUrl = "https://www.dnd5eapi.co";
 
-    // The main method
+    /*
+     * The main method that gets the final put together enemy
+     * 
+     * @return  the final enemy object
+     */
     public static Enemy getEnemy() throws IOException, InterruptedException {
         /*
          * Gameplan:
@@ -56,6 +60,11 @@ public class GetEnemy {
         return new Enemy(name, hp, abilityScores[0], abilityScores[1], abilityScores[2], abilityScores[3], abilityScores[4], abilityScores[5], weapon, armor);
     }
 
+    /*
+     * Get the final found weapon
+     * 
+     * @return  the weapon with the data from the api put into the object
+     */
     private static Weapon getWeapon() throws IOException, InterruptedException {
 
         // Hold an array list full of the weapon names
@@ -92,7 +101,11 @@ public class GetEnemy {
         );
     }
 
-    //https://www.dnd5eapi.co/api/equipment-categories/armor
+    /*
+     * Get the final found armor
+     * 
+     * @return  the armor with the data from the api put into the object
+     */
     private static Armor getArmor() throws IOException, InterruptedException {
         // Hold an array list full of the armor names
         ArrayList<String> armorNameBuffer = new ArrayList<String>();
@@ -136,6 +149,12 @@ public class GetEnemy {
         );
     }
 
+    /*
+     * Prints all the data from the already fetched json and saves any data into a buffer until the maxItterations
+     * 
+     * @param   buffer          buffer to add data to
+     * @param   maxItteration   the max amount of itterations to edit too (-1 if all of them)
+     */
     private static void printAndSaveApiData(ArrayList<String> buffer, int maxItteration) throws IOException, InterruptedException {
         
         // If the maxItterations is equal to -1 (which is the null version of this) then set it to the full json array size

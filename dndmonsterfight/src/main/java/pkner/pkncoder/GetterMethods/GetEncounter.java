@@ -15,6 +15,11 @@ public class GetEncounter
     private static PartyColection playerParties = new PartyColection("Players");
     private static PartyColection enemyParties = new PartyColection("Enemies");
 
+    /*
+     * The main method that controlls all of the player / enemy / party creation process
+     * 
+     * @return  the final put together encounter
+     */
     public static Encounter getEncounter() throws IOException, InterruptedException 
     {
         /*
@@ -36,7 +41,7 @@ public class GetEncounter
         String[] subjects = {"player", "enemy", "party"};
 
         // Then we need to get our allowed words
-        String[] allowedWords = GetHelperMethods.getAllowedWords(actions, subjects);
+        String[] allowedWords = GetHelperMethods.getAllowedCommands(actions, subjects);
 
         // Hold a boolean stating if we are done or not
         boolean done = false;
@@ -366,7 +371,12 @@ public class GetEncounter
         return new Encounter(playerParties, enemyParties);
     }
 
-    public static void findPartyPlacement(Party party) {
+    /*
+     * Finds the placement of our party and adds it to that collection
+     * 
+     * @param   party   the party to test and add too
+     */
+    private static void findPartyPlacement(Party party) {
 
         // Switch over the type of party to see where it will be placed
         switch (party.getType()) {
