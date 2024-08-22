@@ -77,6 +77,7 @@ public class GetEncounter
                         if (totalBases < 2) {
                             // If there aren't, then print an error message and continue
                             Simple.println("There must be at least 2 players or enemies combined (You don't have enough).");
+                            continue;
                         }
 
                         
@@ -92,29 +93,18 @@ public class GetEncounter
 
                         // Check if there is just one party
                         if (totalParties == 1) {
-                            // If there is then check to see if the user is fine with having only one party
-                            String choice = Simple.getStringInput("Are you ok with having only one party? Usually parties don't attack each other. If you choose yes then it will be a single base that wins.\n(y or n): ", "[yYnN]");
+                            // If there is then check to see if the user is fine with having only one party (and set it to uppercase so case sensitivity doesn't matter)
+                            String choice = Simple.getStringInput("Are you ok with having only one party? Usually parties don't attack each other. If you choose yes then it will be a single base that wins.\n(y or n): ", "[yYnN]").toUpperCase();
 
-                            // Switch over the user's choice
-                            switch (choice.toUpperCase()) {
-
-                                // If the user chooses yes
-                                case "Y":
-                                    
-                                    // Set done to true and break out
-                                    done = true;
-                                    break;
-
-                                // If the user chooses no
-                                case "N":
-                                    // Break out to re-clear the terminal
-                                    break;
-                            
-                                default:
-                                    // Just in case
-                                    Simple.println("An error has occoured");
-                                    break;
+                            // Check to see what the user's choice was
+                            // If it was yes
+                            if (choice.equals("Y")) {
+                                // Set done to true and break out
+                                done = true;
                             }
+                            
+                            // Else, just break out
+                            break;
                         }
 
                         // If none of those checks get set off then set done to true and break out

@@ -113,6 +113,19 @@ public class GetPlayerCharacter {
                 // Loop each equipment item in the list
                 for (JsonElement equipment: json.get("equipment").getAsJsonArray().asList()) {
 
+                    // Get a new split url to check for invalid stuff
+                    splitUrl = equipment.getAsJsonObject().get("url").getAsString().split("/");
+
+                    // If there is magic-items in the 2rd url index then we don't want this
+                    if (splitUrl[2].equals("magic-items")) {
+                        continue;
+                    }
+
+                    // Also manually remove net so we don't have to worry about it
+                    if (splitUrl[3].equals("net")) {
+                        continue;
+                    }
+
                     // Send a request to the equipment's url
                     json.sendGetRequest(baseUrl + equipment.getAsJsonObject().get("url").getAsString());
 
@@ -157,7 +170,9 @@ public class GetPlayerCharacter {
             json.get("cost").getAsJsonObject().get("quantity").getAsInt(),  // {cost:{quantity: ""}}
             new int[] {
                 Integer.parseInt(json.get("damage").getAsJsonObject().get("damage_dice").getAsString().split("d")[0]), // {damage:{damage_dice: ""}}
-                Integer.parseInt(json.get("damage").getAsJsonObject().get("damage_dice").getAsString().split("d")[1]) // {damage:{damage_dice: ""}}
+
+                // Sometimes it is just a set 1 or 2 damage, so this acounts for that (no "d" in the string)
+                json.get("damage").getAsJsonObject().get("damage_dice").getAsString().split("d").length == 1 ? 1 : Integer.parseInt(json.get("damage").getAsJsonObject().get("damage_dice").getAsString().split("d")[1])
             }
         );
     }
