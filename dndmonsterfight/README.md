@@ -100,6 +100,8 @@ This is a list of possible future notes on things that I may add (not necisairly
 - [ ] Check all user output and make sure it is still intuitive and makes sense (and looks good)
 - [ ] Add a to hit modifier and damage modifier
   - [ ] Actually calculate the correct value
+- [ ] Add a random value function to simple
+- [ ] Check for more things to add GetHelperMethods()
 
 ### Api Re-Writing
 - Api class

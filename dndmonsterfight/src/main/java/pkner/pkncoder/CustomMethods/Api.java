@@ -21,7 +21,7 @@ public class Api {
     private Gson gson;
     private JsonObject json;
     
-    // Constructor
+    // Constructor - sets all the values needed before making api calls
     public Api() {
 
         // Create our http client
@@ -33,26 +33,11 @@ public class Api {
             .create();
     }
 
-    // Getters
-    // Get the fetched json
-    public JsonObject getJson() {
-        return json;
-    }
-
-    // Get at a key
-    // String[] keys - key by key getting
-    public JsonElement get(String key) {
-        // Return the value at json
-        return json.get(key);   
-    }
-
-    // Setters
-    // Set the new json with a jsonObject
-    public void setJsonObject(JsonObject newJsonObject) {
-        json = newJsonObject;
-    }
-
-    // Send our get request
+    /*
+     * Sends a get request and sets json as the value found
+     * 
+     * @param   url the url to send the request to
+     */
     public void sendGetRequest(String url) throws IOException, InterruptedException {
 
         // Create our request
@@ -71,6 +56,34 @@ public class Api {
         this.json = json;
     }
 
+    /*
+     * Returns the currnet JsonObject fetched
+     */
+    public JsonObject getJson() {
+        return json;
+    }
+
+    /*
+     * Gets a value from the current fetched json data
+     * 
+     * @param   key the key of which to get from
+     * @return  the found key (null if not in the data)
+     */
+    public JsonElement get(String key) {
+        // Return the value at json
+        return json.get(key);   
+    }
+
+    /*
+     * Sets a new JsonObject as our stored json data
+     * 
+     * @param newJsonObject the json object to be set
+     */
+    public void setJsonObject(JsonObject newJsonObject) {
+        json = newJsonObject;
+    }
+
+    // Print out the json with gson's pretty printing
     public void prettyPrintJson() {
         String jsonOutput = gson.toJson(json);
 

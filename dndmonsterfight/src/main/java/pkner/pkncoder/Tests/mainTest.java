@@ -1,4 +1,4 @@
-package pkner.pkncoder.ApiTests;
+package pkner.pkncoder.Tests;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package pkner.pkncoder;
+package pkner.pkncoder.Tests;
 
 import pkner.pkncoder.Classes.Armor;
 import pkner.pkncoder.Classes.Encounter;

@@ -8,41 +8,57 @@ public class Simple
     // Our input object
     private static Scanner input = new Scanner(System.in);
     
-    // Println
-    public static void println(Object text)
+    /*
+     * Prints the data's to string with another line at the end
+     * 
+     * @param   data    the object to be printed out
+     */
+    public static void println(Object data)
     {
-        // Println the givin text
-        System.out.println("" + text);
+        // Println the givin data
+        System.out.println("" + data);
     }
 
-    // Print
-    public static void print(Object text)
+    /*
+     * Prints the data's to string
+     * 
+     * @param   data    the object to be printed out
+     */
+    public static void print(Object data)
     {
-        // Print the givin text
-        System.out.print("" + text);
+        // Print the givin data
+        System.out.print("" + data);
     }
     
-    // Print array
-    // Array
+    /*
+     * Prints every item in a string array
+     * 
+     * @param   array   the array of strings to be printed
+     */
     public static void printArray(String[] array)
     {
+        // Loop every item and print it out
         for (String item: array)
         {
             Simple.println(item);
         }
     }
 
-    // Array List
-    // TODO: Make it so it isn't only String arrlists allowed
+    /*
+     * Prints every item in a string arr list
+     * 
+     * @param   array   the arr list of strings to be printed
+     */
     public static void printArray(ArrayList<String> array)
     {
+        // Loop every item and print it out
         for (String item: array)
         {
             Simple.println(item);
         }
     }
 
-    // Adding a break in the code, thats it im just lazy to add more ""'s
+    // Adding a break in the code, thats it, I'm just lazy to add ""
     public static void space()
     {
         System.out.println();
@@ -55,7 +71,12 @@ public class Simple
         System.out.print("\033[H\033[2J");
     }
 
-    // Get a string input
+    /*
+     * Gets an input without any input validation
+     * 
+     * @param   querry  the data to querry the user with
+     * @return  the value gotten by the user
+     */
     public static String getStringInput(Object querry)
     {
         // If not empty string
@@ -70,7 +91,13 @@ public class Simple
         return input.nextLine();
     }
 
-    // Get the string input with a mathcing rule
+    /*
+     * Gets an input with regex input validation
+     * 
+     * @param   querry  the data to querry the user with
+     * @param   rule    the regex that the user has to match with
+     * @return  the value gotten by the user
+     */
     public static String getStringInput(String querry, String rule)
     {
         // Empty string as a temp
@@ -100,7 +127,15 @@ public class Simple
         return input;
     }
 
-    // Get a string input with a list of allowed words
+    /*
+     * Gets an input with input validation of a string array and a choice of case sensitivity
+     * 
+     * @param   querry  the data to querry the user with
+     * @param   allowedWords    the array of allowed words
+     * @param   errorMessage    the error message printed when the input validation isn't met
+     * @param   caseSensitive   if the validation is case sensitive or not
+     * @return                  the value gotten by the user
+     */
     public static String getStringInput(String querry, String[] allowedWords, String errorMessage, boolean caseSensitive)
     {
         // Check to see if we are not case sensitive
@@ -114,6 +149,7 @@ public class Simple
             }
         }
 
+        // Hold a varaible keeping it empty
         String input = "";
         
         // Create a loop that uses a default input value, and whenever it is set (accepted input), finish
@@ -144,7 +180,11 @@ public class Simple
     }
 
 
-    // Get an int input
+    /*
+     * Gets an int input without any input validation
+     * 
+     * @param   querry  the querry to ask the user with
+     */
     public static int getIntInput(Object querry)
     {
         // Print out the querry
@@ -154,7 +194,12 @@ public class Simple
         return input.nextInt();
     }
 
-    // Get an input that makes sure that it fits the regex rule givin
+    /*
+     * Gets an int input with a regex input validation rule
+     * 
+     * @param   querry  the querry to ask the user with
+     * @param   rule    the rule to match with
+     */
     public static int getIntInput(String querry, String rule)
     {
         // Set an input value at min value (because I need a default to test)
