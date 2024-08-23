@@ -123,7 +123,7 @@ This is a list of possible future notes on things that I may add (not necisairly
     - [ ] Like an index that gets changed when player or enemy is used
     - [ ] Or using the input like an enum
 - [ ] And basically the same for player / enemy parties (shoving them in a array like thing and using an index / enum like thing to choose which one to do magic with)
-- [ ] Rename the Base class to Character (finally a good name)
+- [x] Rename the Base class to Character (finally a good name)
 
 
 ### Api Re-Writing
