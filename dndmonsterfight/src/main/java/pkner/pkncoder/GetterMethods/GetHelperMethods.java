@@ -8,7 +8,7 @@ public class GetHelperMethods {
     private static String positiveMoreThanOneRegex = "[1-9][0-9]*";
 
     /*
-     * Gets the ability scores for bases
+     * Gets the ability scores for characters
      * 
      * @return  all of the scores in one big 2D array
      */

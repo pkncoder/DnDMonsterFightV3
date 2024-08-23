@@ -17,7 +17,7 @@ public class GetPlayerCharacter {
     // Hold our json api connection object
     private static Api json;
 
-    // Hold a base url that will be always repeated
+    // Hold a character url that will be always repeated
     private static String baseUrl = "https://www.dnd5eapi.co";
 
     // Hold a list of the classes (can be retrieved through the api, however that's another call that we already know)

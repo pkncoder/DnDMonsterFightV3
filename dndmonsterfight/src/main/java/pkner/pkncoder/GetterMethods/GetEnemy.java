@@ -18,7 +18,7 @@ public class GetEnemy {
 
     private static Api json;
 
-    private static String baseUrl = "https://www.dnd5eapi.co";
+    private static String characterUrl = "https://www.dnd5eapi.co";
 
     /*
      * The main method that gets the final put together enemy
@@ -71,11 +71,11 @@ public class GetEnemy {
         ArrayList<String> weaponNameBuffer = new ArrayList<String>();
 
         // Print out and save the names of the simple weapons
-        json.sendGetRequest(baseUrl + "/api/equipment-categories/simple-weapons");
+        json.sendGetRequest(characterUrl + "/api/equipment-categories/simple-weapons");
         printAndSaveApiData(weaponNameBuffer, -1);
 
         // Print out and save the names of the martial weapons
-        json.sendGetRequest(baseUrl + "/api/equipment-categories/martial-weapons");
+        json.sendGetRequest(characterUrl + "/api/equipment-categories/martial-weapons");
         printAndSaveApiData(weaponNameBuffer, 21); // Max of 21 to skip the net (idk why it's in there)
 
         // Get the array form of the weapon name buffer
@@ -86,7 +86,7 @@ public class GetEnemy {
         
 
         // Send the request based and formatted on the user's weapon
-        json.sendGetRequest(baseUrl + "/api/equipment/" + userWeapon.toLowerCase().replaceAll(",", "").replaceAll(" ", "-"));
+        json.sendGetRequest(characterUrl + "/api/equipment/" + userWeapon.toLowerCase().replaceAll(",", "").replaceAll(" ", "-"));
 
         // Create and return the weapon
         return new Weapon(
@@ -111,7 +111,7 @@ public class GetEnemy {
         ArrayList<String> armorNameBuffer = new ArrayList<String>();
 
         // Print out and save the names of the armors
-        json.sendGetRequest(baseUrl + "/api/equipment-categories/armor");
+        json.sendGetRequest(characterUrl + "/api/equipment-categories/armor");
         printAndSaveApiData(armorNameBuffer, 11);
 
         // Add a no armor option to the list and print out "No Armor" to the screen with the rest
@@ -138,7 +138,7 @@ public class GetEnemy {
         }
         
         // Else, send the request based and formatted on the user's armor
-        json.sendGetRequest(baseUrl + "/api/equipment/" + userArmor.toLowerCase().replaceAll(" ", "-"));
+        json.sendGetRequest(characterUrl + "/api/equipment/" + userArmor.toLowerCase().replaceAll(" ", "-"));
 
         // Create and return the armor
         return new Armor(

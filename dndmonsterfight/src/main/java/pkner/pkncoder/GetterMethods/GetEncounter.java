@@ -71,10 +71,10 @@ public class GetEncounter
                     case "DONE":
 
                         // Save a varaible for checking if there are enough bases or not
-                        int totalBases = playerParties.getNumBases() + enemyParties.getNumBases();
+                        int totalCharacters = playerParties.getNumCharacters() + enemyParties.getNumCharacters();
 
                         // Check to see if there are enough bases (2 or more)
-                        if (totalBases < 2) {
+                        if (totalCharacters < 2) {
                             // If there aren't, then print an error message and continue
                             Simple.println("There must be at least 2 players or enemies combined (You don't have enough).");
                             continue;
@@ -94,7 +94,7 @@ public class GetEncounter
                         // Check if there is just one party
                         if (totalParties == 1) {
                             // If there is then check to see if the user is fine with having only one party (and set it to uppercase so case sensitivity doesn't matter)
-                            String choice = Simple.getStringInput("Are you ok with having only one party? Usually parties don't attack each other. If you choose yes then it will be a single base that wins.\n(y or n): ", "Invalid Input", "[yYnN]").toUpperCase();
+                            String choice = Simple.getStringInput("Are you ok with having only one party? Usually parties don't attack each other. If you choose yes then it will be a single character that wins.\n(y or n): ", "Invalid Input", "[yYnN]").toUpperCase();
 
                             // Check to see what the user's choice was
                             // If it was yes
@@ -136,7 +136,7 @@ public class GetEncounter
                         Simple.clearTerminal();
 
                         // Add this character to our character parties
-                        playerParties.addBaseToParty(newPlayer);
+                        playerParties.addCharacterToParty(newPlayer);
 
                         break;
 
@@ -163,7 +163,7 @@ public class GetEncounter
                         Simple.clearTerminal();
 
                         // Add this enemy to our enemies parties
-                        enemyParties.addBaseToParty(newEnemy);
+                        enemyParties.addCharacterToParty(newEnemy);
 
                         break;
                     
@@ -188,7 +188,7 @@ public class GetEncounter
                         
                         // At the start, check to see if we even have a party to add too
                         // If we don't then print that there are no parties made
-                        if (playerParties.getNumBases() <= 0)
+                        if (playerParties.getNumCharacters() <= 0)
                         {
                             Simple.println("No players made.");
                             continue;
@@ -202,14 +202,14 @@ public class GetEncounter
                         // Print out all of the info the user needs
                         playerParties.printFullParties();
 
-                        // Then ask what party the base is from
+                        // Then ask what party the character is from
                         String playerRemovingParty = Simple.getStringInput("What party is the character from: ", playerParties.getPartyNames(), "Invalid Input", true);
 
-                        // Then ask what base's name is
-                        String removedPlayer = Simple.getStringInput("What character are you removing: ", playerParties.getBaseNames(), "Invalid Input", true);
+                        // Then ask what character's name is
+                        String removedPlayer = Simple.getStringInput("What character are you removing: ", playerParties.getCharacterNames(), "Invalid Input", true);
 
                         // Remove it
-                        playerParties.removeBase(playerRemovingParty, removedPlayer);
+                        playerParties.removeCharacter(playerRemovingParty, removedPlayer);
 
                         break;
                     
@@ -218,7 +218,7 @@ public class GetEncounter
 
                         // At the start, check to see if we even have a party to add too
                         // If we don't then print that there are no parties made
-                        if (enemyParties.getNumBases() <= 0)
+                        if (enemyParties.getNumCharacters() <= 0)
                         {
                             Simple.println("No enemies made.");
                             continue;
@@ -232,14 +232,14 @@ public class GetEncounter
                         // Print out all of the info the user needs
                         enemyParties.printFullParties();
 
-                        // Then ask what party the base is from
+                        // Then ask what party the character is from
                         String enemyRemovingParty = Simple.getStringInput("What party is the enemy from: ", enemyParties.getPartyNames(), "Invalid Input", true);
 
-                        // Then ask what base's name is
-                        String removedEnemy = Simple.getStringInput("What enemy are you removing: ", enemyParties.getBaseNames(), "Invalid Input", true);
+                        // Then ask what character's name is
+                        String removedEnemy = Simple.getStringInput("What enemy are you removing: ", enemyParties.getCharacterNames(), "Invalid Input", true);
 
                         // Remove it
-                        enemyParties.removeBase(enemyRemovingParty, removedEnemy);
+                        enemyParties.removeCharacter(enemyRemovingParty, removedEnemy);
 
                         break;
 
@@ -304,7 +304,7 @@ public class GetEncounter
 
                         // At the start, check to see if we even have any players made
                         // Test to see if the number of bases is less than or equal to 0 (if less then than there should be an error)
-                        if (playerParties.getNumBases() <= 0)
+                        if (playerParties.getNumCharacters() <= 0)
                         {
                             Simple.println("No players made.");
                             continue;
@@ -317,13 +317,13 @@ public class GetEncounter
                         playerParties.printFullParties();
 
                         // Ask what player
-                        String viewedPlayer = Simple.getStringInput("What player are you viewing: ", playerParties.getBaseNames(), "Invalid Input", true);
+                        String viewedPlayer = Simple.getStringInput("What player are you viewing: ", playerParties.getCharacterNames(), "Invalid Input", true);
 
                         // Clear the terminal
                         Simple.clearTerminal();
 
                         // Finally get that player and print it out
-                        Simple.println(playerParties.findBaseByName(viewedPlayer));
+                        Simple.println(playerParties.findCharacterByName(viewedPlayer));
 
                         // Wait until the user is done viewing
                         Simple.getStringInput("Press ENTER to continue: ");
@@ -335,7 +335,7 @@ public class GetEncounter
 
                         // At the start, check to see if we even have any enemies made
                         // Test to see if the number of bases is less than or equal to 0 (if less then than there should be an error)
-                        if (enemyParties.getNumBases() <= 0)
+                        if (enemyParties.getNumCharacters() <= 0)
                         {
                             Simple.println("No enemies made.");
                             continue;
@@ -348,13 +348,13 @@ public class GetEncounter
                         enemyParties.printFullParties();
 
                         // Ask what enemy
-                        String viewedEnemy = Simple.getStringInput("What enemy are you viewing: ", enemyParties.getBaseNames(), "Invalid Input", true);
+                        String viewedEnemy = Simple.getStringInput("What enemy are you viewing: ", enemyParties.getCharacterNames(), "Invalid Input", true);
 
                         // Clear the terminal
                         Simple.clearTerminal();
                         
                         // Finally get that enemy and print it out
-                        Simple.println(enemyParties.findBaseByName(viewedEnemy));
+                        Simple.println(enemyParties.findCharacterByName(viewedEnemy));
 
                         // Wait until the user is done viewing
                         Simple.getStringInput("Press ENTER to continue: ");

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Party {
     
-    // Hold an arraylist holding all the bases
-    private ArrayList<Base> recruitments = new ArrayList<Base>();
+    // Hold an arraylist holding all the characters
+    private ArrayList<Character> recruitments = new ArrayList<Character>();
 
     // The name and type of this party
     private String name;
@@ -27,9 +27,9 @@ public class Party {
     /*
      * Adds a new party member to the list
      * 
-     * @param   newPartyMember  the base to add to the party
+     * @param   newPartyMember  the character to add to the party
      */
-    public void addPartyMember(Base newPartyMember)
+    public void addPartyMember(Character newPartyMember)
     {
         recruitments.add(newPartyMember);
     }
@@ -37,30 +37,30 @@ public class Party {
     /*
      * Removes a party member from the list (assuming that it exists, if it doesn't this does nothing)
      * 
-     * @param   gonePartyMember  the base to remove from the party
+     * @param   gonePartyMember  the character to remove from the party
      */
-    public void removePartyMember(Base gonePartyMember)
+    public void removePartyMember(Character gonePartyMember)
     {
         recruitments.remove(gonePartyMember);
     }
 
     /*
-     * @return  The recruitment bases arraylist
+     * @return  The recruitment characters arraylist
      */
-    public ArrayList<Base> getParty()
+    public ArrayList<Character> getParty()
     {
         return recruitments;
     }
 
     /*
-     * @return  The names of every base in the recruitment list in the form of a string array
+     * @return  The names of every character in the recruitment list in the form of a string array
      */
-    public String[] getBaseNames() {
+    public String[] getCharacterNames() {
 
-        // Hold an array with the same len as the amount of bases added to the arrlist
+        // Hold an array with the same len as the amount of characters added to the arrlist
         String[] names = new String[recruitments.size()];
 
-        // Loop over every base in the list
+        // Loop over every character in the list
         for (int i = 0; i < recruitments.size(); i++) {
             names[i] = recruitments.get(i).getName(); // add the name to the array
         }

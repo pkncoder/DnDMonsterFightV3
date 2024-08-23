@@ -12,8 +12,8 @@ public class PartyColection {
     // The name of our party colection
     private String name;
 
-    // How many current bases there are in all the parties combined
-    private int totalBases;
+    // How many current characters there are in all the parties combined
+    private int totalCharacters;
 
     /* 
      * Class Constructor
@@ -25,8 +25,8 @@ public class PartyColection {
         // Set the party name
         this.name = name;
 
-        // Set total bases to 0
-        totalBases = 0;
+        // Set total characters to 0
+        totalCharacters = 0;
     }
 
     /*
@@ -53,24 +53,24 @@ public class PartyColection {
     }
     
     /*
-     * Finds a base from one of the parties by the name of it
+     * Finds a character from one of the parties by the name of it
      * 
-     * @param   baseName    The name of the party your trying to find
-     * @return              Either the found base, or nothing
+     * @param   characterName   The name of the party your trying to find
+     * @return                  Either the found character, or nothing
      */
-    public Base findBaseByName(String baseName) {
+    public Character findCharacterByName(String characterName) {
         
         // Loop over every party
         for (Party party: partyList) {
 
-            // Loop over every base
-            for (Base base: party.getParty()) {
+            // Loop over every character
+            for (Character character: party.getParty()) {
                 
                 // Test to see if the names match
-                if (base.getName().toUpperCase().equals(baseName.toUpperCase())) {
+                if (character.getName().toUpperCase().equals(characterName.toUpperCase())) {
 
                     // If they do, then return it
-                    return base;
+                    return character;
                 }
                 
             }
@@ -82,13 +82,13 @@ public class PartyColection {
 
     }
 
-    // Re-calibrates the total bases
-    public void findCurentNumBases() {
+    // Re-calibrates the total characters
+    public void findCurentNumCharacters() {
 
         // Loop over every party
         for (Party party: partyList) { // party
-            // Add the parties array list of bases size to the total bases
-            totalBases += party.getParty().size();
+            // Add the parties array list of characters size to the total characters
+            totalCharacters += party.getParty().size();
         }
     }
 
@@ -104,11 +104,11 @@ public class PartyColection {
     }
 
     /*
-     * Adds a new base to the party chosen in the method
+     * Adds a new character to the party chosen in the method
      * 
-     * @param   newBase the base that will be added
+     * @param   newCharacter    the character that will be added
      */
-    public void addBaseToParty(Base newBase) {
+    public void addCharacterToParty(Character newCharacter) {
 
         // Get our possible parties to add to
         String[] parties = getPartyNames();
@@ -118,13 +118,13 @@ public class PartyColection {
         Simple.space();
 
         // Ask which one they would like to add to
-        String chosenParty = Simple.getStringInput("Where is this base going to: ", parties, "Invalid Input", true);
+        String chosenParty = Simple.getStringInput("Where is this character going to: ", parties, "Invalid Input", true);
 
-        // Add that base based on the input
-        findPartyByName(chosenParty).getParty().add(newBase);
+        // Add that character based on the input
+        findPartyByName(chosenParty).getParty().add(newCharacter);
 
-        // Increase the total bases
-        totalBases++;
+        // Increase the total characters
+        totalCharacters++;
     }
 
     /*
@@ -148,18 +148,18 @@ public class PartyColection {
     }
 
     /*
-     * Removes a base by a party name and a base name
+     * Removes a character by a party name and a character name
      * 
-     * @param   partyName   The name of the party that the base is from
-     * @param   sadBase     The name of the base to be removed
+     * @param   partyName   The name of the party that the character is from
+     * @param   sadCharacter     The name of the character to be removed
      */
-    public void removeBase(String partyName, String sadBase) {
+    public void removeCharacter(String partyName, String sadCharacter) {
 
-        // Remove the base
-        findPartyByName(partyName).removePartyMember(findBaseByName(sadBase));
+        // Remove the character
+        findPartyByName(partyName).removePartyMember(findCharacterByName(sadCharacter));
 
-        // Decrease totalBases
-        totalBases--;
+        // Decrease totalCharacters
+        totalCharacters--;
     }
 
     /*
@@ -184,22 +184,22 @@ public class PartyColection {
     }
 
     /*
-     * Returns the name of all of the bases
+     * Returns the name of all of the characters
      * 
-     * @return  Every bases name in a string array
+     * @return  Every characters name in a string array
      */
-    public String[] getBaseNames() {
+    public String[] getCharacterNames() {
         
-        // Hold an array of the total amount of bases in the parties
-        String[] names = new String[totalBases];
+        // Hold an array of the total amount of characters in the parties
+        String[] names = new String[totalCharacters];
 
         // Loop over every party
         for (Party party: partyList) {
 
-            // Loop over every base
+            // Loop over every character
             for (int i = 0; i < party.getParty().size(); i++) {
 
-                // Set the bases name at the current index in the name array
+                // Set the characters name at the current index in the name array
                 names[i] = party.getParty().get(i).getName();
             }
         }
@@ -217,17 +217,17 @@ public class PartyColection {
     }
 
     /*
-     * Updates and returns the num of bases
+     * Updates and returns the num of characters
      * 
-     * @return  the number of bases
+     * @return  the number of characters
      */
-    public int getNumBases() {
+    public int getNumCharacters() {
 
-        // Check for the num of current bases
-        findCurentNumBases();
+        // Check for the num of current characters
+        findCurentNumCharacters();
         
         // Return the found value
-        return totalBases;
+        return totalCharacters;
     }
     
     /*
@@ -237,7 +237,7 @@ public class PartyColection {
         return partyList;
     }
 
-    // Prints every party with all the bases below
+    // Prints every party with all the characters below
     public void printFullParties() {
 
         // Loop every party
@@ -246,11 +246,11 @@ public class PartyColection {
             // Print it's name
             Simple.println(party.getName());
 
-            // Loop every base
-            for (Base base: party.getParty()) {
+            // Loop every character
+            for (Character character: party.getParty()) {
 
                 // Print it's name with a tab infront
-                Simple.println("\t" + base.getName());
+                Simple.println("\t" + character.getName());
             }
         }
     }

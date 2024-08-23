@@ -2,7 +2,7 @@ package pkner.pkncoder.Classes;
 
 import pkner.pkncoder.CustomMethods.Simple;
 
-public class PlayerCharacter extends Base {
+public class PlayerCharacter extends Character {
 
     // Hold our abilities in arrays [ability score] | [ability mod]
     private int[] strength;
@@ -54,7 +54,7 @@ public class PlayerCharacter extends Base {
         Armor armor
     ) {
         
-        // Call the Super class's constructor (base)
+        // Call the Super class's constructor (Character)
         // Hp - half of the hp die (rounded up) times one less than the level plus the con mod per level plus the hit die
         // attackStr - max of dex or strength modifier plus the proficiency bonus
         // attackDmgMod - max of dex or strength modifier

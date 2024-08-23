@@ -1,6 +1,6 @@
 package pkner.pkncoder.Classes;
 
-public class Enemy extends Base {
+public class Enemy extends Character {
 
     // Hold our abilities in arrays [ability score] | [ability mod]
     private int[] strength;

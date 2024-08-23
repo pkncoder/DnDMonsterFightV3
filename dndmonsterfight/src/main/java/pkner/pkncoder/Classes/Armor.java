@@ -21,7 +21,7 @@ public class Armor {
      * @param   name        the name of the armor
      * @param   armorClass  the base armor class of the armor
      * @param   addDex      a boolean decing if the dex is to be added or not
-     * @param   maxDexBonus the max amount of dex to be added to the base's final ac
+     * @param   maxDexBonus the max amount of dex to be added to the character's final ac
      */
     public Armor(String name, int armorClass, boolean addDex, int maxDexBonus) {
 
@@ -44,7 +44,7 @@ public class Armor {
      * @param   armorClass              the base armor class of the armor
      * @param   minimumStrengthToWear   the min amount of strength needed to wear the armor
      * @param   addDex                  a boolean decing if the dex is to be added or not
-     * @param   maxDexBonus             the max amount of dex to be added to the base's final ac
+     * @param   maxDexBonus             the max amount of dex to be added to the character's final ac
      */
     public Armor(String name, int armorClass, int minimumStrengthToWear, boolean addDex, int maxDexBonus)  {
 
@@ -61,9 +61,9 @@ public class Armor {
     }
 
     /*
-     * Returns the base's final ac
+     * Returns the character's final ac
      * 
-     * @param   strength    the bases strength score
+     * @param   strength    the characters strength score
      * @param   dexMod      the player's dexterity modifier
      */
     public int getAc(int strength, int dexMod) {   
