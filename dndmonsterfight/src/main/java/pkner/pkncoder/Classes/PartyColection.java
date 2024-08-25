@@ -85,6 +85,9 @@ public class PartyColection {
     // Re-calibrates the total characters
     public void findCurentNumCharacters() {
 
+        // Reset total characters so we can re-count them
+        totalCharacters = 0;
+
         // Loop over every party
         for (Party party: partyList) { // party
             // Add the parties array list of characters size to the total characters
@@ -122,9 +125,6 @@ public class PartyColection {
 
         // Add that character based on the input
         findPartyByName(chosenParty).getParty().add(newCharacter);
-
-        // Increase the total characters
-        totalCharacters++;
     }
 
     /*
@@ -157,9 +157,6 @@ public class PartyColection {
 
         // Remove the character
         findPartyByName(partyName).removePartyMember(findCharacterByName(sadCharacter));
-
-        // Decrease totalCharacters
-        totalCharacters--;
     }
 
     /*
@@ -189,7 +186,10 @@ public class PartyColection {
      * @return  Every characters name in a string array
      */
     public String[] getCharacterNames() {
-        
+
+        // Set the total number of characters as there is
+        findCurentNumCharacters();
+
         // Hold an array of the total amount of characters in the parties
         String[] names = new String[totalCharacters];
 

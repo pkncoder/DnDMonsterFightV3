@@ -91,7 +91,7 @@ This is a list of possible future notes on things that I may add (not necisairly
 - [x] Rewright GetPlayerCharacter.java
 - [x] Re-write GetHelperMethods.GetArmor() & GetHelperMethods.GetWeapon() to use better input validation
   - Its all in the api now and seems good
-- [ ] Don't allow name overlaps for players or enemies
+- [x] Don't allow name overlaps for players or enemies
 - [x] Don't allow name overlaps for parties
 - [ ] Check all user output and make sure it is still intuitive and makes sense (and looks good)
 - [x] Add a to hit modifier and damage modifier
@@ -116,6 +116,7 @@ This is a list of possible future notes on things that I may add (not necisairly
 - [x] Rewrite Base.java since it's old and hasn't been changed much to new terms
 - [ ] Make better error messages
 - [ ] Make the to-strings better with a return ();
+- [ ] The way that the getStringInput() with invalid words needs to cut out case sensitivity because then it will be the same overload as the previous. Find a more elegant solution
 
 ### Hypothetically major re-writing
 - [ ] Same code for players / enemies

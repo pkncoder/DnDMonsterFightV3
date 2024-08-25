@@ -21,7 +21,7 @@ public class GetPlayerCharacter {
     private static String baseUrl = "https://www.dnd5eapi.co";
 
     // Hold a list of the classes (can be retrieved through the api, however that's another call that we already know)
-    private static String[] classes = {"barbarian", "bard", "cleric", "druid", "fighter", "monk", "paladin", "ranger", "rogue", "sorcerer", "warlock", "wizard"};
+    private static String[] classes = {"Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard"};
 
     // Hold an array list of armor names as a buffer since we see them anyways
     private static ArrayList<String> armorNameBuffer = new ArrayList<String>();
@@ -31,11 +31,11 @@ public class GetPlayerCharacter {
      * 
      * @returns the final player
      */
-    public static PlayerCharacter getPlayer() throws IOException, InterruptedException {
+    public static PlayerCharacter getPlayer(String[] invalidNames) throws IOException, InterruptedException {
         json = new Api(); // Initialize our API object
 
         // Get the player's name
-        String name = Simple.getStringInput("Name: ");
+        String name = Simple.getStringInput("Name: ", invalidNames, "Name already taken.");
 
         // Get the abilities
         int[][] abilities = GetHelperMethods.getAbilityScores();

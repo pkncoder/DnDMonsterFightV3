@@ -130,7 +130,7 @@ public class GetEncounter
                         Simple.clearTerminal();
 
                         // Get our player
-                        PlayerCharacter newPlayer = GetPlayerCharacter.getPlayer();
+                        PlayerCharacter newPlayer = GetPlayerCharacter.getPlayer(getPlayerAndEnemyNames());
 
                         // Clear the terminal for party selection
                         Simple.clearTerminal();
@@ -157,7 +157,7 @@ public class GetEncounter
                         Simple.clearTerminal();
                         
                         // Get our player
-                        Enemy newEnemy = GetEnemy.getEnemy();
+                        Enemy newEnemy = GetEnemy.getEnemy(getPlayerAndEnemyNames());
                         
                         // Clear the terminal for party selection
                         Simple.clearTerminal();
@@ -442,7 +442,7 @@ public class GetEncounter
      * 
      * @return  the final party with name and type
      */
-    public static Party getParty() {
+    private static Party getParty() {
 
         // Save a variable that will exit the loop when set
         // This is used for the name of the party
@@ -471,5 +471,36 @@ public class GetEncounter
 
         // Now return our party
         return new Party(name, type);
+    }
+
+    /*
+     * Returns a list with all the player and enemy names
+     * 
+     * @return  A string array that holds all the player and enemy strings combined
+     */
+    private static String[] getPlayerAndEnemyNames() {
+
+        // Create a string array that will store all of the player and enemy names
+        String[] playerAndEnemyNames = new String[playerParties.getNumCharacters() + enemyParties.getNumCharacters()];
+
+        // Save all the player parties's names
+        String[] playerNames = playerParties.getCharacterNames();
+
+        // Save all the enemy parties's names
+        String[] enemyNames = enemyParties.getCharacterNames();
+
+        // Add all the names
+        // TODO: Try to find a better way to do this
+        for (int i = 0; i < playerNames.length; i++) {
+            // Add each player name
+            playerAndEnemyNames[i] = playerNames[i];
+        }
+        for (int i = 0; i < enemyNames.length; i++) {
+            // Add each enemy name after all the player names
+            playerAndEnemyNames[i + playerNames.length] = enemyNames[i];
+        }
+
+        // Finally return our completed list
+        return playerAndEnemyNames;
     }
 }

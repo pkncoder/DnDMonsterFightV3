@@ -25,7 +25,7 @@ public class GetEnemy {
      * 
      * @return  the final enemy object
      */
-    public static Enemy getEnemy() throws IOException, InterruptedException {
+    public static Enemy getEnemy(String[] invalidNames) throws IOException, InterruptedException {
         /*
          * Gameplan:
          * Get the name
@@ -38,7 +38,7 @@ public class GetEnemy {
         json = new Api();
 
         // Get the enemy's name
-        String name = Simple.getStringInput("Name: ");
+        String name = Simple.getStringInput("Name: ", invalidNames, "Name already taken.");
 
         // Get the enemy's hp
         // The regex states that it can only be above (or equal to) 1

@@ -17,7 +17,6 @@ public class PlayerCharacter extends Character {
 
     // Hold our character's level and proficiency bonus
     private int level;
-    private int proficiencyBonus;
 
     // Hold the armor type for the player character
     private Armor armor;

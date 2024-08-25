@@ -179,6 +179,51 @@ public class Simple
         // At the end of everything, return our input
         return input;
     }
+    
+    /*
+     * Returns a name with the dis-allowed words from a string array
+     * 
+     * @param   querry          the data to querry the user with
+     * @param   invalidWords    the array of allowed words
+     * @param   errorMessage    the error message printed when the input validation isn't met
+     * @return                  the value gotten by the user
+     */
+    public static String getStringInput(String querry, String[] invalidWords, String errorMessage) {
+        
+        // Variable that will be the final return value
+        String input = "";
+
+        // Variable that exits out of a loop
+        boolean invalid;
+
+        // Enact some code before checking invalid with a do-while loop
+        do {
+            
+            // Reset invalid to false
+            invalid = false;
+
+            // Set input with the gotten value from the user
+            input = getStringInput(querry);
+
+            // Loop every invalid word
+            for (String word: invalidWords) {
+
+                // If the word is equal to the input
+                if (word.equals(input)) {
+
+                    // Set invalid to true, print the error message, and break out
+                    invalid = true;
+                    println(errorMessage);
+                    break;
+                }
+            }
+
+        // Check invalid to see if it is ready to break out of the do-while loop
+        } while (invalid);
+        
+        // Return input
+        return input;
+    }
 
 
     /*
