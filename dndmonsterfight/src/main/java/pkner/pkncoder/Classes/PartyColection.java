@@ -121,7 +121,7 @@ public class PartyColection {
         Simple.space();
 
         // Ask which one they would like to add to
-        String chosenParty = Simple.getStringInput("Where is this character going to: ", parties, "Invalid Input", true);
+        String chosenParty = Simple.getStringInput("What party is the character going into: ", parties, "Invalid Input", true);
 
         // Add that character based on the input
         findPartyByName(chosenParty).getParty().add(newCharacter);

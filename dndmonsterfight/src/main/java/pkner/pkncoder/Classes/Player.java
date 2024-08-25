@@ -98,7 +98,7 @@ public class Player extends Character {
         Simple.space();; // Empty space
 
         // Prompt the user for their choice
-        int choice = Simple.getIntInput("What would you like to do: ", "Invalid Input", "[12]");
+        int choice = Simple.getIntInput("Choice (1 or 2): ", "Invalid Input", "[12]");
 
         // If the number is simply random
         if (choice == 2) {
@@ -110,7 +110,7 @@ public class Player extends Character {
 
         // Else, set the initiative as the user's input
         Simple.clearTerminal();
-        super.setInitiative(Simple.getIntInput("Rolled Initiative: ", "Invalid Input", "[1-9][0-9]*"));
+        super.setInitiative(Simple.getIntInput("Rolled Initiative (ex. 15): ", "Invalid Input", "[1-9][0-9]*"));
     }
 
     /*

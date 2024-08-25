@@ -91,7 +91,7 @@ This is a list of possible future notes on things that I may add (not necisairly
   - Its all in the api now and seems good
 - [x] Don't allow name overlaps for players or enemies
 - [x] Don't allow name overlaps for parties
-- [ ] Check all user output and make sure it is still intuitive and makes sense (and looks good)
+- [x] Check all user output and make sure it is still intuitive and makes sense (and looks good)
 - [x] Add a to hit modifier and damage modifier
   - [x] Actually calculate the correct value
   - Everything is a finnesse weapon in the idea of to hit and damage mods bc I can't tell the difference if there is one
@@ -110,10 +110,10 @@ This is a list of possible future notes on things that I may add (not necisairly
 - [x] Check Encounter.java for re-initializing variables that can be put to a larger scope
   - Wasn't really that bad so I just left it alone
 - [x] Rewrite Base.java since it's old and hasn't been changed much to new terms
-- [ ] Make better error messages
 - [x] Make the to-strings better with a return ();
 - [ ] Re-make the getStringInput(String, String[], String, boolean) / getStringInput(String, String[], String) to use a better system for swaping if you match with or against the array
   - Possibly add a variable that will just say if the string[] is matched or not matched (probbally a boolean)
+- [ ] Make a welcome message to give users info such as usual terminology
 
 ### Hypothetically major re-writing
 - [ ] Same code for players / enemies

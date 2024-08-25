@@ -76,7 +76,7 @@ public class GetEncounter
                         // Check to see if there are enough bases (2 or more)
                         if (totalCharacters < 2) {
                             // If there aren't, then print an error message and continue
-                            Simple.println("There must be at least 2 players or enemies combined (You don't have enough).");
+                            Simple.println("You don't have enough characters made.");
                             continue;
                         }
 
@@ -94,7 +94,7 @@ public class GetEncounter
                         // Check if there is just one party
                         if (totalParties == 1) {
                             // If there is then check to see if the user is fine with having only one party (and set it to uppercase so case sensitivity doesn't matter)
-                            String choice = Simple.getStringInput("Are you ok with having only one party? Usually parties don't attack each other. If you choose yes then it will be a single character that wins.\n(y or n): ", "Invalid Input", "[yYnN]").toUpperCase();
+                            String choice = Simple.getStringInput("There is only one party made, are you ok with that?\n(y or n): ", "Invalid Input", "[yYnN]").toUpperCase();
 
                             // Check to see what the user's choice was
                             // If it was yes
@@ -249,7 +249,7 @@ public class GetEncounter
                         // Test to see if we can even remove any parties
                         if (playerParties.getPartyList().size() == 0 && enemyParties.getPartyList().size() == 0) {
                             // Print that there isn't enouph and go back to the start of the loop
-                            Simple.println("There aren't any parties made yet.");
+                            Simple.println("No parties made.");
                             continue;
                         }
 
@@ -368,7 +368,7 @@ public class GetEncounter
 
                         // Check to make sure that a party has been made in the first place
                         if (playerParties.getPartyList().size() == 0 && enemyParties.getPartyList().size() == 0) {
-                            Simple.println("No parties created.");
+                            Simple.println("No parties made.");
                             continue;
                         }
 
@@ -378,18 +378,22 @@ public class GetEncounter
                         // Test to see if there is a choice in the matter on where to view a party from
                         if (playerParties.getPartyList().size() > 0) {
                             Simple.println("-- Player Parties --");
+                            Simple.space();
                             Simple.printArray(playerParties.getPartyNames());
 
-                            Simple.println("");
+                            // Add some padding to the bottom for the enemies
+                            Simple.space();
+                            Simple.space();
                         }
 
                         if (enemyParties.getPartyList().size() > 0) {
                             Simple.println("-- Enemy Parties --");
+                            Simple.space();
                             Simple.printArray(enemyParties.getPartyNames());
-                            Simple.println("");
                         }
 
                         // Let them choose when they are done viewing
+                        Simple.space();
                         Simple.getStringInput("Press ENTER when done viewing: ");
 
                         break;
@@ -469,7 +473,7 @@ public class GetEncounter
         }
 
         // Get the type of the party (character or enemy)
-        String type = Simple.getStringInput("Will this party have Players or Enemies: ", new String[] {"players", "enemies"}, "Invalid Input", false);
+        String type = Simple.getStringInput("Will this party hold Players or Enemies: ", new String[] {"players", "enemies"}, "Invalid Input", false);
 
         // Now return our party
         return new Party(name, type);

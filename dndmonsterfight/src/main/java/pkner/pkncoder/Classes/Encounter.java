@@ -310,7 +310,7 @@ public class Encounter {
         // Seperate the party win statement and the table
         Simple.space();
 
-        // Print out the party at the turn number's slot
-        Simple.println("Party: '" + partiesInitiativeList.get(turnNum).getName() + "' wins!");
+        // Print out the winning base's name
+        Simple.println("Character: '" + initiativeList.get(turnNum).getName() + "' wins!");
     }
 }
