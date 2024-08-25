@@ -115,6 +115,7 @@ This is a list of possible future notes on things that I may add (not necisairly
 - [ ] Make better error messages
 - [x] Make the to-strings better with a return ();
 - [ ] Re-make the getStringInput(String, String[], String, boolean) / getStringInput(String, String[], String) to use a better system for swaping if you match with or against the array
+  - Possibly add a variable that will just say if the string[] is matched or not matched (probbally a boolean)
 
 ### Hypothetically major re-writing
 - [ ] Same code for players / enemies
@@ -123,6 +124,8 @@ This is a list of possible future notes on things that I may add (not necisairly
     - [ ] Or using the input like an enum
 - [ ] And basically the same for player / enemy parties (shoving them in a array like thing and using an index / enum like thing to choose which one to do magic with)
 - [x] Rename the Base class to Character (finally a good name)
+- [ ] Add viewing of weapons, armors, or classes when choosing them
+- [ ] Add viewing of characters when attacking
 
 
 ### Api Re-Writing
@@ -136,8 +139,6 @@ This is a list of possible future notes on things that I may add (not necisairly
   - [ ] After all this re-write GetEnemy and GetPlayerCharacter
     - [ ] Change GetEnemy.printAndSaveApiData() to allow negitive indexing and make 0 the null num
     - [ ] Change GetPlayerCharater.getPlayerWeapon() so it is much more effiecient in the way it makes api calls (it needs it)
-  - [ ] Add viewing of weapons, armors, or classes when choosing them
-  - [ ] Add viewing of characters when attacking
 
 
 ### Always Alive
