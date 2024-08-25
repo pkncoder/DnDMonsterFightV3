@@ -113,7 +113,7 @@ This is a list of possible future notes on things that I may add (not necisairly
   - Wasn't really that bad so I just left it alone
 - [x] Rewrite Base.java since it's old and hasn't been changed much to new terms
 - [ ] Make better error messages
-- [ ] Make the to-strings better with a return ();
+- [x] Make the to-strings better with a return ();
 - [ ] Re-make the getStringInput(String, String[], String, boolean) / getStringInput(String, String[], String) to use a better system for swaping if you match with or against the array
 
 ### Hypothetically major re-writing

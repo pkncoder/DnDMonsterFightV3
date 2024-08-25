@@ -43,6 +43,9 @@ public class PlayerClass {
      */
     @Override
     public String toString() {
-        return "Name: " + className + "\nHit Die: 1d" + hpDie; 
+        return (
+            "Name: " + className + "\n" + 
+            "Hit Die: 1d" + hpDie
+        ); 
     }
 }

@@ -110,6 +110,12 @@ public class Armor {
      */
     @Override
     public String toString() {
-        return "Name: " + name + "\nAC: " + armorClass + "\nMin Str to wear: " + minimumStrengthToWear + "\nAdd Dex? " + addDex + "\nMax Dex Bonus: " + maxDexBonus;
+        return (
+            "Name: " + name + "\n" + 
+            "AC: " + armorClass + "\n" + 
+            "Min Str to wear: " + minimumStrengthToWear + "\n" + 
+            "Add Dex? " + addDex + "\n" + 
+            "Max Dex Bonus: " + maxDexBonus
+        );
     }
 }

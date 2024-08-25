@@ -157,15 +157,15 @@ public class Character implements Comparable<Character> {
     @Override
     public String toString() {
         return (
-            "Name: " + name +
+            "Name: " + name + "\n\n" +
 
-            "\n\nHP: " + hp + 
-            "\nAC: " + ac +
+            "HP: " + hp + "\n" +
+            "AC: " + ac + "\n\n" +
             
             // If the to hit modifier is greater or equal to 0 then print it with a +, else print it with it's own minus sign
-            "\n\nTo Hit Modifier: " + (toHitMod >= 0 ? ("+" + toHitMod) : toHitMod) + 
+            "To Hit Modifier: " + (toHitMod >= 0 ? ("+" + toHitMod) : toHitMod) + "\n" +
             // If the attack damage mod is greater than or equal to 0 then print it with a +, else print the abs of it with a -
-            "\nDamage: " + damageDice[0] + "d" + damageDice[1] + (damageMod >= 0 ? (" + " + damageMod) : (" - " + Math.abs(damageMod))) + "\n\n"
+            "Damage: " + damageDice[0] + "d" + damageDice[1] + (damageMod >= 0 ? (" + " + damageMod) : (" - " + Math.abs(damageMod)))
         );
     }
 

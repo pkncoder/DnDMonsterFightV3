@@ -326,6 +326,7 @@ public class GetEncounter
                         Simple.println(playerParties.findCharacterByName(viewedPlayer));
 
                         // Wait until the user is done viewing
+                        Simple.space();
                         Simple.getStringInput("Press ENTER to continue: ");
 
                         break;
@@ -357,6 +358,7 @@ public class GetEncounter
                         Simple.println(enemyParties.findCharacterByName(viewedEnemy));
 
                         // Wait until the user is done viewing
+                        Simple.space();
                         Simple.getStringInput("Press ENTER to continue: ");
 
                         break;

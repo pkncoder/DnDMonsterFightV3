@@ -83,12 +83,13 @@ public class Enemy extends Character {
      */
     @Override
     public String toString() {
-        String finalString =
+        return (
             "Name: " + super.getName() + "\n\n" +
 
             "Hp: " + super.getHp() + "\n\n" +
 
-            "Armor: " + armor.getName() + "\nArmor Class: " + armor.getAc(strength[0], dexterity[1]) + "\n\n" +
+            "Armor: " + armor.getName() + "\n" + 
+            "Armor Class: " + armor.getAc(strength[0], dexterity[1]) + "\n\n" +
 
             "Strength: " + strength[0] + " (" + strength[1] + ")\n" +
             "Dexterity: " + dexterity[0] + " (" + dexterity[1] + ")\n" +
@@ -97,11 +98,9 @@ public class Enemy extends Character {
             "Intelligence: " + intelligence[0] + " (" + intelligence[1] + ")\n" +
             "Charisma: " + charisma[0] + " (" + charisma[1] + ")\n\n" +
             
-            "Weapon: " + weapon.getName() + "\nTo Hit Modifier: " + (super.getToHitMod() > 0 ? ("+" + super.getToHitMod()) : super.getToHitMod()) + "\nDamage Dice: " + weapon.getDice()[0] + "d" + weapon.getDice()[1] + (super.getDamageMod() > 0 ? (" + " + super.getDamageMod()) : (" - " + Math.abs(super.getDamageMod()))) + "\n\n"
-            
-            ;
-
-        return finalString;
+            "Weapon: " + weapon.getName() + "\n" + 
+            "To Hit Modifier: " + (super.getToHitMod() > 0 ? ("+" + super.getToHitMod()) : super.getToHitMod()) + "\nDamage Dice: " + weapon.getDice()[0] + "d" + weapon.getDice()[1] + (super.getDamageMod() > 0 ? (" + " + super.getDamageMod()) : (" - " + Math.abs(super.getDamageMod())))
+        );
     }
 
 }
