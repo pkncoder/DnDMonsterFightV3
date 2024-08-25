@@ -100,7 +100,7 @@ This is a list of possible future notes on things that I may add (not necisairly
 - [x] Add a random value function to simple
 - [x] Check for more things to add GetHelperMethods()
 - [x] Check ALL input validation (ex. commas in weapons)
-- [ ] Rename the PlayerCharacter class to just Player
+- [x] Rename the PlayerCharacter class to just Player
 - [x] Add more customization to Simple.java (aka. error messages)
 - [x] Check for allowed amounts of bases and parties in the 'done' command
 - [ ] Add different win conditions

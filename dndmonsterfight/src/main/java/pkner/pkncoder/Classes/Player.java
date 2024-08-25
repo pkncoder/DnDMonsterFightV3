@@ -2,7 +2,7 @@ package pkner.pkncoder.Classes;
 
 import pkner.pkncoder.CustomMethods.Simple;
 
-public class PlayerCharacter extends Character {
+public class Player extends Character {
 
     // Hold our abilities in arrays [ability score] | [ability mod]
     private int[] strength;
@@ -43,7 +43,7 @@ public class PlayerCharacter extends Character {
      * @param   weapon              The Player's weapon
      * @param   armor               The Player's armor
      */
-    public PlayerCharacter(
+    public Player(
         String name,
         int[] strength, int[] dexterity, int[] constitution, int[] wisdom, int[] intelligence, int[] charisma,
         int level,

@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import com.google.gson.JsonElement;
 
 import pkner.pkncoder.Classes.Armor;
-import pkner.pkncoder.Classes.PlayerCharacter;
+import pkner.pkncoder.Classes.Player;
 import pkner.pkncoder.Classes.PlayerClass;
 import pkner.pkncoder.Classes.Weapon;
 import pkner.pkncoder.CustomMethods.Simple;
 import pkner.pkncoder.CustomMethods.Api;
 
-public class GetPlayerCharacter {
+public class GetPlayer {
 
     // Hold our json api connection object
     private static Api json;
@@ -31,7 +31,7 @@ public class GetPlayerCharacter {
      * 
      * @returns the final player
      */
-    public static PlayerCharacter getPlayer(String[] invalidNames) throws IOException, InterruptedException {
+    public static Player getPlayer(String[] invalidNames) throws IOException, InterruptedException {
         json = new Api(); // Initialize our API object
 
         // Get the player's name
@@ -57,7 +57,7 @@ public class GetPlayerCharacter {
 
         // Create the player
         // Proficiency bonus is the players level devided by four, rounded up, plus one
-        return new PlayerCharacter(name, abilities[0], abilities[1], abilities[2], abilities[3], abilities[4], abilities[5], level, (int) Math.ceil(level / 4.0) + 1, userClass, weapon, armor);
+        return new Player(name, abilities[0], abilities[1], abilities[2], abilities[3], abilities[4], abilities[5], level, (int) Math.ceil(level / 4.0) + 1, userClass, weapon, armor);
     }
 
     /*

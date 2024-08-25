@@ -5,7 +5,7 @@ import pkner.pkncoder.Classes.Encounter;
 import pkner.pkncoder.Classes.Enemy;
 import pkner.pkncoder.Classes.Party;
 import pkner.pkncoder.Classes.PartyColection;
-import pkner.pkncoder.Classes.PlayerCharacter;
+import pkner.pkncoder.Classes.Player;
 import pkner.pkncoder.Classes.PlayerClass;
 import pkner.pkncoder.Classes.Weapon;
 
@@ -14,7 +14,7 @@ public class EncounterTest {
     public static void main(String[] args) {
 
         // Player - jhon
-        PlayerCharacter jhon = new PlayerCharacter(
+        Player jhon = new Player(
             "Jhon",
             new int[] {13, 1},
             new int[] {14, 2},

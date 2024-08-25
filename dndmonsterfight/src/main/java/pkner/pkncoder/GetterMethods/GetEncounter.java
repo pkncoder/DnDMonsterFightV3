@@ -6,7 +6,7 @@ import pkner.pkncoder.Classes.Encounter;
 import pkner.pkncoder.Classes.Enemy;
 import pkner.pkncoder.Classes.Party;
 import pkner.pkncoder.Classes.PartyColection;
-import pkner.pkncoder.Classes.PlayerCharacter;
+import pkner.pkncoder.Classes.Player;
 import pkner.pkncoder.CustomMethods.Simple;
 
 public class GetEncounter 
@@ -130,7 +130,7 @@ public class GetEncounter
                         Simple.clearTerminal();
 
                         // Get our player
-                        PlayerCharacter newPlayer = GetPlayerCharacter.getPlayer(getPlayerAndEnemyNames());
+                        Player newPlayer = GetPlayer.getPlayer(getPlayerAndEnemyNames());
 
                         // Clear the terminal for party selection
                         Simple.clearTerminal();
