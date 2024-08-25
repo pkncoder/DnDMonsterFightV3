@@ -1,6 +1,6 @@
 # Welcome to DnD Monster Fight!
 
-Hello, I am <a href="https://github.com/pkncoder/">pkncoder</a>, and this is a DnD Encounter Simulator that I have been working on for the past couple of years!
+Hello, I am <a href="https://github.com/pkncoder/">pkncoder</a>, and this is a DnD Encounter Simulator that has been my base project for multiple years!
 
 Currently this is version 3 of DnD Monster Fight, and here's the run down of the other versions:
 1. Made in python
@@ -19,21 +19,22 @@ Currently this is version 3 of DnD Monster Fight, and here's the run down of the
    3. Made as a finalle to my AP CSA class for what I have actually learned (because v2 was just embarrassing)
    4. Object Orientated I am pretty sure (still transfering from how not-very OOP python is)
    5. Tried to follow as much of java docs as I know and that I caught
-4. Next version - Made in Javascript (Probally JQuerry for ease and knowing how to read / write it)
+4. Next version - Made in Javascript (Probally JQuerry for making HTML DOM easier and knowing how to use it)
    1. Most of the data in the Future Notes will be in this version (V4), and not the current version (V3)
    2. Lots of point and click, so full UI use
    3. Lots of customization and nice save features
+   4. Possibly an online mode for battling others
 
 
 ## Current Capabilities
 
-Enables you to make as many parties as you want, each either being an enemy or player party.<br>
-Create enemies or players and add them to your parties for them to fight to a last man standing battle.
+In DnD Monster Fight V3, you can create parties that will either hold Players or Enemies. You then create these Players / Enemies to fight it out in a PvE (Player vs. Enemy) battle to see who is the last one alive!
 
 
 ## Running
 
-Running DnDMonsterFight.java will run the program
+Running DnDMonsterFight.java will run the program<br>
+Internet Connection is required
 
 
 ## Future Notes
@@ -55,15 +56,12 @@ This is a list of possible future notes on things that I may add (not necisairly
 - [x] No armor when creating enemies / players
 - [ ] Using pre-made enemies / templates
   - [ ] Pre-made enemies from the DnD Api
-  - [ ] Pre-made enemies from a homebrew
-  - [ ] Templates could work like the usual stuff for the speicies and then editing it as the user wishes
+  - [ ] Pre-made enemies from homebrew
+  - [ ] Pre-made templates that follow a main idea of an enemy type that the user will customize to their liking
 - [ ] Backstories and all that other lore stuff for characters / enemies / parties etc.
 - [ ] Don't clamp the party types to just players / enemies
   - [ ] Maybe don't even have party types
 - [ ] Name duplicates don't matter
-- [ ] More than just last-man standing win conditions
-  - [ ] Last party standing
-  - [ ] Player parties vs. Enemy parties
 
 
 ## Todo in code
@@ -143,5 +141,5 @@ This is a list of possible future notes on things that I may add (not necisairly
 
 ### Always Alive
 
-- Error testing on CRACK
+- Error testing
 - Updating comments to be true after re-writes & to have java doc
