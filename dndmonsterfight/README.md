@@ -113,7 +113,14 @@ This is a list of possible future notes on things that I may add (not necisairly
 - [x] Make the to-strings better with a return ();
 - [ ] Re-make the getStringInput(String, String[], String, boolean) / getStringInput(String, String[], String) to use a better system for swaping if you match with or against the array
   - Possibly add a variable that will just say if the string[] is matched or not matched (probbally a boolean)
-- [ ] Make a welcome message to give users info such as usual terminology
+- [ ] Make a welcome message to give users info such as usual terminology and how the commands work
+  - Hp
+  - Ac
+  - Level
+  - Party
+  - Player
+  - Enemy
+  - The commands
 
 ### Hypothetically major re-writing
 - [ ] Same code for players / enemies
