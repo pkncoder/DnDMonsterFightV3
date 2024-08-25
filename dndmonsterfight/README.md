@@ -108,15 +108,13 @@ This is a list of possible future notes on things that I may add (not necisairly
   - [ ] Last party standing
   - [ ] Last base standing
 - [x] Make the get num bases from PartyCollection only increase when we check it
-- [ ] Add viewing of weapons, armors, or classes when choosing them
-- [ ] Add viewing of characters when attacking
 - [ ] Basic custom weapon, armor, and class
 - [x] Check Encounter.java for re-initializing variables that can be put to a larger scope
   - Wasn't really that bad so I just left it alone
 - [x] Rewrite Base.java since it's old and hasn't been changed much to new terms
 - [ ] Make better error messages
 - [ ] Make the to-strings better with a return ();
-- [ ] The way that the getStringInput() with invalid words needs to cut out case sensitivity because then it will be the same overload as the previous. Find a more elegant solution
+- [ ] Re-make the getStringInput(String, String[], String, boolean) / getStringInput(String, String[], String) to use a better system for swaping if you match with or against the array
 
 ### Hypothetically major re-writing
 - [ ] Same code for players / enemies
@@ -138,6 +136,8 @@ This is a list of possible future notes on things that I may add (not necisairly
   - [ ] After all this re-write GetEnemy and GetPlayerCharacter
     - [ ] Change GetEnemy.printAndSaveApiData() to allow negitive indexing and make 0 the null num
     - [ ] Change GetPlayerCharater.getPlayerWeapon() so it is much more effiecient in the way it makes api calls (it needs it)
+  - [ ] Add viewing of weapons, armors, or classes when choosing them
+  - [ ] Add viewing of characters when attacking
 
 
 ### Always Alive
