@@ -100,12 +100,12 @@ This is a list of possible future notes on things that I may add (not necisairly
 - [x] Check ALL input validation (ex. commas in weapons)
 - [x] Rename the PlayerCharacter class to just Player
 - [x] Add more customization to Simple.java (aka. error messages)
-- [x] Check for allowed amounts of bases and parties in the 'done' command
+- [x] Check for allowed amounts of characters and parties in the 'done' command
 - [ ] Add different win conditions
   - [ ] Players or enemies
   - [ ] Last party standing
-  - [ ] Last base standing
-- [x] Make the get num bases from PartyCollection only increase when we check it
+  - [ ] Last character standing
+- [x] Make the get num characters from PartyCollection only increase when we check it
 - [ ] Basic custom weapon, armor, and class
 - [x] Check Encounter.java for re-initializing variables that can be put to a larger scope
   - Wasn't really that bad so I just left it alone
