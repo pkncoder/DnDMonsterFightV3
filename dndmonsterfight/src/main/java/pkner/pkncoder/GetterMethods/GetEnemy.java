@@ -112,7 +112,7 @@ public class GetEnemy {
 
         // Print out and save the names of the armors
         json.sendGetRequest(characterUrl + "/api/equipment-categories/armor");
-        printAndSaveApiData(armorNameBuffer, 11);
+        printAndSaveApiData(armorNameBuffer, 12);
 
         // Add a no armor option to the list and print out "No Armor" to the screen with the rest
         armorNameBuffer.add("No Armor");

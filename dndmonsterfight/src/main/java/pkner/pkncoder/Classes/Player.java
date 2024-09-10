@@ -1,5 +1,6 @@
 package pkner.pkncoder.Classes;
 
+import pkner.pkncoder.Classes.Character;
 import pkner.pkncoder.CustomMethods.Simple;
 
 public class Player extends Character {
@@ -92,10 +93,10 @@ public class Player extends Character {
 
         // Ask for what the user want's to roll their initiative
         Simple.println("How would " + super.getName() + " like to roll initiative?");
-        Simple.space();; // Empty space
+        Simple.space(); // Empty space
         Simple.println("Roll own Inititave - 1");
         Simple.println("Random Number for Inititave - 2");
-        Simple.space();; // Empty space
+        Simple.space(); // Empty space
 
         // Prompt the user for their choice
         int choice = Simple.getIntInput("Choice (1 or 2): ", "Invalid Input", "[12]");

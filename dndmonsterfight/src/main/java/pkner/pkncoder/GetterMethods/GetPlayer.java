@@ -142,9 +142,6 @@ public class GetPlayer {
                     Simple.println(json.get("name").getAsString());
                     weaponNameBuffer.add(json.get("name").getAsString());
                 }
-
-                // Continue to the next loop to stop any other tests below
-                continue;
             }
 
             // If there is a damage component
@@ -163,7 +160,7 @@ public class GetPlayer {
         String userWeapon = Simple.getStringInput("\nWhat weapon would you like: ", weaponNameBuffer.toArray(new String[weaponNameBuffer.size()]), "Invalid Input", false);
 
         // Send the request based and formatted on the user's weapon
-        json.sendGetRequest(baseUrl + "/api/equipment/" + userWeapon.toLowerCase().replaceAll(" ", "-"));
+        json.sendGetRequest(baseUrl + "/api/equipment/" + userWeapon.toLowerCase().replaceAll(",", "").replaceAll(" ", "-"));
 
         // Create and return the weapon
         return new Weapon(

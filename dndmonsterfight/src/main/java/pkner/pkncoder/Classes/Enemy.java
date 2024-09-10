@@ -75,8 +75,7 @@ public class Enemy extends Character {
      * Charisma: {score} ({modifier})
      * 
      * Weapon: {Weapon name}
-     * To Hit Modifier: +-{toHitMod}
-     * Damage Dice: {amount of dice rolled}d{dice type} +-{damageMod}
+     * Damage Dice: {amount of dice rolled}d{dice type}
      * 
      * 
      * @return  A string formatted as shown above
@@ -98,8 +97,8 @@ public class Enemy extends Character {
             "Intelligence: " + intelligence[0] + " (" + intelligence[1] + ")\n" +
             "Charisma: " + charisma[0] + " (" + charisma[1] + ")\n\n" +
             
-            "Weapon: " + weapon.getName() + "\n" + 
-            "To Hit Modifier: " + (super.getToHitMod() > 0 ? ("+" + super.getToHitMod()) : super.getToHitMod()) + "\nDamage Dice: " + weapon.getDice()[0] + "d" + weapon.getDice()[1] + (super.getDamageMod() > 0 ? (" + " + super.getDamageMod()) : (" - " + Math.abs(super.getDamageMod())))
+            "Weapon: " + weapon.getName() + "\n" +
+            "Damage Dice: " + weapon.getDice()[0] + "d" + weapon.getDice()[1]
         );
     }
 
